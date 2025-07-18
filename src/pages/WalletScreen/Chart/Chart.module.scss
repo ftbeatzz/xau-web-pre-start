@@ -1,0 +1,100 @@
+.chartSection {
+	background: #0d1623;
+	border-radius: 16px;
+	padding: 12px;
+	padding-bottom: 0;
+	padding-right: 0;
+	margin: 0px 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+
+	@media (max-width: 767px) {
+		max-width: 100%;
+	}
+}
+
+.paxgIconChart {
+	display: flex;
+	justify-content: flex-end;
+	padding: 6px;
+	padding-top: 0;
+}
+
+.chartContainer {
+	flex: 1;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.periods {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 16px;
+}
+
+.periodBtn {
+	background: transparent;
+	color: #fff;
+	font-family: Unbounded;
+	border: none;
+	border-radius: 6px;
+	padding: 6px 12px;
+	font-weight: 600;
+	font-size: 10px;
+	cursor: pointer;
+	transition: background 0.2s, color 0.2s;
+}
+
+.periodBtnActive {
+	background: #ffe34b;
+	color: #222;
+}
+
+.loading {
+	color: #fff;
+}
+
+.error {
+	color: red;
+}
+
+.yAxisTick {
+	margin-right: 5px !important;
+	fill: #9db2ce !important;
+	font-size: 10px !important;
+	font-family: 'Unbounded', sans-serif !important;
+	font-weight: 300 !important;
+	text-shadow: 0 1px 2px #0008;
+}
+
+.xAxisTick {
+	margin-top: 5px !important;
+	fill: #9db2ce !important;
+	font-size: 12px !important;
+	font-family: 'Unbounded', sans-serif !important;
+	font-weight: 700 !important;
+	text-shadow: 0 1px 2px #0008;
+}
+
+.tooltipBox {
+	background: #ffe34b;
+	border-radius: 12px;
+	color: #222;
+	padding: 10px;
+	font-weight: 700;
+	font-family: 'Unbounded', sans-serif;
+	font-size: 10px;
+	box-shadow: 0 2px 12px #0002;
+	border: none;
+	text-align: center;
+}
+
+.chartSection :global(svg),
+.chartSection :global(svg *) {
+	outline: none !important;
+	box-shadow: none !important;
+}

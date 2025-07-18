@@ -1,0 +1,108 @@
+@font-face {
+	font-family: 'Unbounded';
+	src: url('./assets/fonts/Unbounded-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Unbounded';
+	src: url('./assets/fonts/Unbounded-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Noto Sans';
+	src: url('./assets/fonts/NotoSans-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Noto Sans';
+	src: url('./assets/fonts/NotoSans-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	font-family: Unbounded, sans-serif;
+	line-height: 1;
+	color-scheme: light dark;
+	color: #fff;
+	background-color: #090F1A;
+	font-synthesis: none;
+	text-rendering: optimizelegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-wrap: pretty;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	scrollbar-color: #404041 transparent;
+	scrollbar-width: thin;
+	scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar {
+	width: 4px;
+	height: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: #0d7bf9;
+	border-radius: 2px;
+}
+
+*::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+button{
+  border: none;
+	cursor: pointer;
+}
+
+a {
+	/* background: linear-gradient(89deg, #e8e2c9 32.19%, #ffe34b 91.01%); */
+	/* background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent; */
+	text-decoration: none;
+}
+
+/* a:hover {
+	color: oklch(from #0d7bf9 calc(l * 0.8) c h);
+} */
+
+body {
+	margin: 0;
+	padding: 0;
+	height: 100dvh;
+	overflow: auto;
+	/* touch-action: none !important; */
+}
+
+#root {
+	height: 100%;
+}
+
+h1,
+h2,
+p,
+ul,
+ol,
+h3 {
+	margin: 0;
+	padding: 0;
+}
+
+ol,
+ul {
+	list-style: none;
+}

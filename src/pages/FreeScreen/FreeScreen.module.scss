@@ -1,0 +1,301 @@
+.container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80vh;
+}
+
+.wrapper {
+	max-width: 450px;
+	margin: 0 auto;
+}
+
+.freeXaut,
+.freePaxg {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+
+	.gradientLine {
+		background: linear-gradient(
+			90deg,
+			rgba(225, 220, 195, 0.1) 0%,
+			#e1dcc3 50%,
+			rgba(239, 233, 207, 0.1) 97.12%
+		);
+		width: 100%;
+		height: 1px;
+	}
+
+	.topTxtBlock {
+		margin-top: 22px;
+		position: relative;
+		border-radius: 16px;
+		background: rgba(9, 10, 22, 0.6);
+		padding: 14px 12px;
+		z-index: 1;
+		box-shadow: 0px 4px 12px 0px rgba(255, 243, 176, 0.12);
+		h2 {
+			color: #fff;
+			font-family: Unbounded;
+			font-size: 14px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 22px; /* 157.143% */
+			letter-spacing: -0.4px;
+			padding-bottom: 10px;
+		}
+		p {
+			color: #fff;
+			font-feature-settings: 'liga' off, 'clig' off;
+			font-family: 'Noto Sans';
+			font-size: 14px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 22px; /* 157.143% */
+			letter-spacing: -0.4px;
+		}
+	}
+	.topTxtBlock::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: 16px;
+		padding: 1px;
+		background: rgba(255, 255, 255, 0.6);
+		-webkit-mask: linear-gradient(#fff 0 0) content-box,
+			linear-gradient(#fff 0 0);
+		mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+		-webkit-mask-composite: xor;
+		mask-composite: exclude;
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.socialsBlock {
+		position: relative;
+		background: linear-gradient(
+			270deg,
+			rgba(9, 10, 22, 0.6) 49.91%,
+			rgba(232, 226, 201, 0.07) 159.89%
+		);
+		box-shadow: 0px 4px 12px 0px rgba(255, 243, 176, 0.12);
+		backdrop-filter: blur(2px);
+		padding: 14px 12px;
+		border-radius: 10px;
+
+		&::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			border-radius: 10px;
+			padding: 1px;
+			background: linear-gradient(
+				90deg,
+				rgba(225, 220, 195, 0),
+				rgba(225, 220, 195, 0.6),
+				rgba(225, 220, 195, 0)
+			);
+			-webkit-mask: linear-gradient(#fff 0 0) content-box,
+				linear-gradient(#fff 0 0);
+			mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+			-webkit-mask-composite: xor;
+			mask-composite: exclude;
+			pointer-events: none;
+			z-index: 2;
+		}
+
+		.socialsLine {
+			margin-bottom: 12px;
+		}
+
+		.socialsHeader {
+			display: flex;
+			justify-content: space-between;
+			padding-bottom: 12px;
+
+			p {
+				color: #fff;
+				font-family: 'Noto Sans';
+				font-size: 15px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 22px; /* 146.667% */
+				letter-spacing: -0.4px;
+			}
+
+			& :nth-last-child(1) {
+				background: linear-gradient(89deg, #e8e2c9 32.19%, #ffe34b 91.01%);
+				background-clip: text;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+		}
+
+		.socialsContent {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			position: relative;
+
+			.socialsLeft,
+			.socialsRight {
+				display: flex;
+				flex-direction: column;
+				gap: 12px;
+				width: 100%;
+
+				p {
+					display: flex;
+					align-items: center;
+					gap: 10px;
+
+					.socialsIcon {
+						border-radius: 10px;
+						border: 0.5px solid var(--divider, rgba(225, 220, 195, 0.1));
+						background: #0d1c2b;
+						width: 40px;
+						height: 40px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+					}
+				}
+
+				button {
+					border-radius: 16px;
+					background: #ffe34b;
+					border: none;
+					color: #000;
+					text-align: center;
+					text-shadow: 0px 4px 15px rgba(10, 124, 255, 0.25);
+					font-family: Unbounded;
+					font-size: 14px;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 140%; /* 19.6px */
+					height: 40px;
+					width: 100%;
+				}
+			}
+
+			.socialsRight {
+				p {
+					justify-content: end;
+				}
+			}
+
+			.socialsLine {
+				background: linear-gradient(
+					90deg,
+					rgba(225, 220, 195, 0.1) 0%,
+					#e1dcc3 50%,
+					rgba(239, 233, 207, 0.1) 97.12%
+				);
+				height: 1px;
+				width: 100%;
+				max-width: 80px;
+				transform: rotate(90deg);
+			}
+		}
+	}
+}
+
+.backBtn {
+	background: transparent;
+	color: #ffe34b;
+	text-align: center;
+	text-shadow: 0px 4px 15px rgba(10, 124, 255, 0.25);
+	font-family: Unbounded;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 140%; /* 19.6px */
+	text-decoration-line: underline;
+	text-decoration-style: solid;
+	text-decoration-skip-ink: none;
+	text-decoration-thickness: auto;
+	text-underline-offset: auto;
+	text-underline-position: from-font;
+	display: flex;
+	width: 100%;
+	align-items: center;
+	border: none;
+	gap: 15px;
+}
+
+.btns1Step {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	margin-top: 20px;
+}
+
+.doneBtn {
+	flex: 1;
+	border-radius: 16px;
+	border: 1px solid #fff;
+	background: transparent;
+	padding: 16px;
+	color: #fff;
+	text-align: center;
+	text-shadow: 0px 4px 15px rgba(10, 124, 255, 0.25);
+	font-family: Unbounded;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 140%; /* 19.6px */
+}
+
+.btns2Step {
+	display: flex;
+	width: 100%;
+	gap: 20px;
+}
+
+.tokenBtn {
+	border-radius: 16px;
+	background: rgba(13, 22, 35, 0.4);
+	border: none;
+	color: var(--Primary-color, #ffe34b);
+	text-align: center;
+	text-shadow: 0px 4px 15px rgba(10, 124, 255, 0.25);
+	font-family: Unbounded;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 140%;
+	width: 100%;
+	height: 52px; /* 19.6px */
+}
+
+.backBtn2 {
+	border-radius: 16px;
+	border: 1px solid #fff;
+	background: transparent;
+	width: 100%;
+	color: #fff;
+	text-align: center;
+	text-shadow: 0px 4px 15px rgba(10, 124, 255, 0.25);
+	font-family: Unbounded;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 140%; /* 19.6px */
+	height: 52px;
+}
+
+.socialBtn {
+	background: #ffe34b;
+	color: #181c23;
+	border: none;
+	border-radius: 8px;
+	font-family: Unbounded;
+	font-size: 15px;
+	font-weight: 500;
+	padding: 8px 0;
+	width: 100%;
+	margin-top: 10px;
+	cursor: pointer;
+	transition: background 0.2s, color 0.2s;
+}

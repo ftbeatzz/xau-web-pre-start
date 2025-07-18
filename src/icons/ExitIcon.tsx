@@ -1,0 +1,18 @@
+import React from 'react'
+
+const ExitIcon: React.FC = () => (
+	<svg
+		xmlns='http://www.w3.org/2000/svg'
+		width='16'
+		height='16'
+		viewBox='0 0 16 16'
+		fill='none'
+	>
+		<path
+			d='M0 16V0H8.02V1H1V15H8.02V16H0ZM12.462 11.539L11.76 10.819L14.079 8.5H5.192V7.5H14.079L11.759 5.18L12.461 4.462L16 8L12.462 11.539Z'
+			fill='#D32E4C'
+		/>
+	</svg>
+)
+
+export default ExitIcon
