@@ -1,0 +1,138 @@
+.emptyState {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	height: 340px;
+
+	.emptyIcon {
+		border-radius: 8px;
+		border: 1px solid var(--block-stoke, rgba(255, 255, 255, 0.4));
+		background: rgba(9, 10, 22, 0.6);
+		box-shadow: 0px 4px 12px 0px rgba(255, 243, 176, 0.12);
+		padding: 12px;
+	}
+
+	.emptyText {
+		color: #fff;
+		text-align: center;
+		font-feature-settings: 'liga' off, 'clig' off;
+		font-family: Unbounded;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 200;
+		line-height: normal;
+		letter-spacing: -0.4px;
+	}
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	max-height: 195px;
+	overflow-y: auto;
+	padding-right: 15px;
+}
+
+.profitItem {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 12px;
+	border-bottom: 1px solid rgba(157, 178, 206, 0.1);
+	width: 100%;
+
+	&:last-child {
+		border-bottom: none;
+	}
+
+	.leftColumn {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+
+		.partnerName {
+			color: #fff;
+			font-family: 'Noto Sans';
+			font-size: 15px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 22px;
+			letter-spacing: -0.4px;
+		}
+
+		.dateTime {
+			color: var(--grey, #9db2ce);
+			font-family: 'Noto Sans';
+			font-size: 15px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 22px; /* 146.667% */
+			letter-spacing: -0.4px;
+		}
+	}
+
+	.rightColumn {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		align-items: flex-end;
+
+		.volume {
+			display: flex;
+			align-items: center;
+			gap: 4px;
+
+			span {
+				color: #fff;
+				font-family: 'Noto Sans';
+				font-size: 15px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 22px;
+				letter-spacing: -0.4px;
+			}
+		}
+
+		.profit {
+			color: var(--grey, #9db2ce);
+			font-family: 'Noto Sans';
+			font-size: 15px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 22px; /* 146.667% */
+			letter-spacing: -0.4px;
+		}
+	}
+}
+
+// Адаптивность для мобильных устройств
+@media (max-width: 768px) {
+	.profitItem {
+		padding: 12px 0;
+
+		.leftColumn {
+			.partnerName {
+				font-size: 14px;
+			}
+
+			.dateTime {
+				font-size: 12px;
+			}
+		}
+
+		.rightColumn {
+			.volume {
+				span {
+					font-size: 14px;
+				}
+			}
+
+			.profit {
+				font-size: 12px;
+			}
+		}
+	}
+}

@@ -10,7 +10,7 @@ const SendIcon: React.FC = () => (
 	>
 		<path
 			d='M1.75 10.5672L11.1263 1M11.1263 1L20.75 10.5672M11.1263 1V19'
-			stroke='url(#pattern0_137_16998)'
+			stroke='currentColor'
 			stroke-width='2'
 			stroke-linecap='round'
 			stroke-linejoin='round'

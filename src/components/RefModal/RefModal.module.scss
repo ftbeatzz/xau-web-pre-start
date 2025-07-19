@@ -1,0 +1,115 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.gradientLineTop {
+	background: linear-gradient(
+		90deg,
+		rgba(225, 220, 195, 0.1) 0%,
+		#e1dcc3 50%,
+		rgba(239, 233, 207, 0.1) 97.12%
+	);
+	height: 1px;
+	width: 100%;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.referralLink {
+	color: var(--grey, #9db2ce);
+	text-align: center;
+	font-family: 'Noto Sans';
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 22px; /* 137.5% */
+	letter-spacing: -0.4px;
+	word-break: break-all;
+	padding-top: 12px;
+}
+
+.buttons {
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+	width: 100%;
+
+	button {
+		width: 100%;
+	}
+}
+
+.copyButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 14px 24px;
+	border-radius: 12px;
+	border: none;
+	background: var(--Primary-color, #ffe34b);
+	color: #000;
+	font-family: Unbounded;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 22px;
+	letter-spacing: -0.4px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	min-width: 140px;
+
+	&:hover {
+		background: #e6d142;
+	}
+
+	&:active {
+		transform: translateY(0);
+	}
+
+	span {
+		font-family: Unbounded;
+		font-size: 14px;
+		font-weight: 400;
+	}
+}
+
+.shareButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 14px 24px;
+	border-radius: 12px;
+	border: 1px solid #fff;
+	background: transparent;
+	color: #fff;
+	font-family: Unbounded;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 22px;
+	letter-spacing: -0.4px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	min-width: 140px;
+
+	&:hover {
+		background: rgba(255, 255, 255, 0.1);
+	}
+
+	&:active {
+		transform: translateY(0);
+	}
+
+	span {
+		font-family: Unbounded;
+		font-size: 14px;
+		font-weight: 400;
+	}
+}
