@@ -35,7 +35,7 @@ const PartnerProfitTable: React.FC<PartnerProfitTableProps> = ({
 
 	return (
 		<div className={styles.container}>
-			{data.map((item, index) => (
+			{data.map((item) => (
 				<div key={item.id} className={styles.profitItem}>
 					<div className={styles.leftColumn}>
 						<div className={styles.partnerName}>{item.partnerName} - объем</div>

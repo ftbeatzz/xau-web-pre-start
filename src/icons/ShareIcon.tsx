@@ -1,10 +1,6 @@
 import React from 'react'
 
-interface ShareIconProps {
-	className?: string
-}
-
-const ShareIcon: React.FC<ShareIconProps> = ({ className }) => {
+const ShareIcon: React.FC = () => {
 	return (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
