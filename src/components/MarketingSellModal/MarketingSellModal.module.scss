@@ -224,6 +224,7 @@
 		justify-content: center;
 		gap: 8px;
 		cursor: pointer;
+		margin-bottom: 20px;
 	}
 
 	.historyBtnWrapper {
@@ -307,26 +308,33 @@
 
 	.networks {
 		display: flex;
-		gap: 8px;
-		margin-bottom: 20px;
-
+		justify-content: space-around;
+		gap: 12px;
+		margin-bottom: 12px;
+		width: 100%;
+		border-radius: 18px;
+		background: #0d1c2b;
+		padding: 8px 14px;
 		button {
-			flex: 1;
-			padding: 12px;
-			border-radius: 8px;
-			border: 1px solid var(--divider, rgba(225, 220, 195, 0.1));
-			background: rgba(13, 22, 35, 0.6);
-			color: #9db2ce;
+			color: #fff;
+			text-align: center;
+			text-shadow: 0px 4px 15px rgba(10, 124, 255, 0.25);
 			font-family: Unbounded;
 			font-size: 14px;
-			font-weight: 400;
+			font-style: normal;
+			font-weight: 300;
+			line-height: 140%; /* 19.6px */
+			padding: 8px 18px;
+			border-radius: 10px;
+			border: none;
 			cursor: pointer;
-			transition: all 0.2s ease;
-
+			width: 100%;
+			background: transparent;
 			&.activeNetwork {
-				border-color: var(--Primary-color, #ffe34b);
-				background: rgba(255, 227, 75, 0.1);
-				color: #ffe34b;
+				background: #ffe34b;
+				color: #23243a;
+				border-color: #ffe34b;
+				font-weight: 400;
 			}
 		}
 	}

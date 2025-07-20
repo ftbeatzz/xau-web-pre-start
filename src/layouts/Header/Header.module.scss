@@ -14,6 +14,28 @@
 		justify-content: space-between;
 		align-items: center;
 		padding: 12px 30px;
+		position: relative;
+
+		// &::before {
+		// 	content: '';
+		// 	position: absolute;
+		// 	inset: 0;
+		// 	border-radius: 10px;
+		// 	padding: 1px;
+		// 	background: linear-gradient(
+		// 		90deg,
+		// 		rgba(225, 220, 195, 0.1) 0%,
+		// 		#e1dcc3 50%,
+		// 		rgba(239, 233, 207, 0.1) 97.12%
+		// 	);
+		// 	-webkit-mask: linear-gradient(#fff 0 0) content-box,
+		// 		linear-gradient(#fff 0 0);
+		// 	mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+		// 	-webkit-mask-composite: xor;
+		// 	mask-composite: exclude;
+		// 	pointer-events: none;
+		// 	z-index: 2;
+		// }
 
 		@media (max-width: 1023px) {
 			padding: 12px 24px;

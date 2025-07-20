@@ -1,3 +1,120 @@
-.commerceLoan {
-	padding: 20px;
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 0 30px;
+	padding-top: 25px;
+	max-height: 960px;
+	height: 100vh;
+}
+
+.sectionTitle {
+	color: #fff;
+	font-family: Unbounded;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: 22px; /* 122.222% */
+	letter-spacing: -0.4px;
+	padding-bottom: 8px;
+}
+
+.tabsWrapper {
+	border-radius: 12px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	background: var(
+		--card,
+		linear-gradient(
+			270deg,
+			rgba(9, 10, 22, 0.6) 49.91%,
+			rgba(232, 226, 201, 0.07) 159.89%
+		)
+	);
+	box-shadow: 0px 4px 12px 0px rgba(255, 243, 176, 0.12);
+	backdrop-filter: blur(2px);
+	padding: 14px 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	flex-shrink: 0;
+}
+
+.cryptoSection {
+	.cryptoTabs {
+		width: 100%;
+	}
+}
+
+.loanHistorySection {
+	border-radius: 12px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	background: var(
+		--card,
+		linear-gradient(
+			270deg,
+			rgba(9, 10, 22, 0.6) 49.91%,
+			rgba(232, 226, 201, 0.07) 159.89%
+		)
+	);
+	box-shadow: 0px 4px 12px 0px rgba(255, 243, 176, 0.12);
+	backdrop-filter: blur(2px);
+	padding: 14px 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	flex: 1;
+	min-height: 0;
+}
+
+.loanHistoryTitle {
+	color: #fff;
+	font-family: Unbounded;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: 22px; /* 122.222% */
+	letter-spacing: -0.4px;
+	margin: 0;
+	flex-shrink: 0;
+}
+
+.gradientLine {
+	background: linear-gradient(
+		90deg,
+		rgba(225, 220, 195, 0.1) 0%,
+		#e1dcc3 50%,
+		rgba(239, 233, 207, 0.1) 97.12%
+	);
+	width: 100%;
+	height: 1px;
+	margin-top: 12px;
+}
+
+.loanHistoryWrapper {
+	flex: 1;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+// Адаптивность для мобильных устройств
+@media (max-width: 768px) {
+	.container {
+		padding: 16px;
+		gap: 16px;
+		max-height: none;
+		height: auto;
+	}
+
+	.tabsWrapper,
+	.loanHistorySection {
+		padding: 16px;
+	}
+
+	.sectionTitle,
+	.loanHistoryTitle {
+		font-size: 16px;
+	}
 }
