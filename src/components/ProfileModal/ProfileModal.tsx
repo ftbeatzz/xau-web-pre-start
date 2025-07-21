@@ -1,12 +1,14 @@
 import React from 'react'
 import styles from './ProfileModal.module.scss'
 import ExitIcon from '../../icons/ExitIcon'
+import { useNavigate } from 'react-router-dom'
 
 interface ProfileModalProps {
 	isOpen: boolean
 }
 
 export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen }) => {
+	const navigate = useNavigate()
 	if (!isOpen) return null
 
 	return (
@@ -40,7 +42,10 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen }) => {
 				<div className={styles.section}>
 					<h3 className={styles.sectionTitle}>Информация</h3>
 					<div className={styles.menuItems}>
-						<button className={styles.menuItem}>
+						<button
+							className={styles.menuItem}
+							onClick={() => navigate('/faq')}
+						>
 							<span>FAQ</span>
 							<span className={styles.arrow}>›</span>
 						</button>

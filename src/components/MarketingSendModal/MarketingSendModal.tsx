@@ -4,20 +4,41 @@ import Modal from '../Modal/Modal'
 import LimitsIcon from '../../icons/LimitsIcon'
 import SendIcon from '../../icons/SendIcon'
 import SmallXaut from '../../icons/SmallXaut'
+import OperationsModal from '../OperationsModal'
+import type { OperationRow } from '../OperationsTable'
 
 interface MarketingSendModalProps {
 	isOpen: boolean
 	onClose: () => void
 	tokenBalance: string
+	onOpenOperationsModal?: () => void
 }
 
 const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 	isOpen,
 	onClose,
+	onOpenOperationsModal,
 }) => {
 	const [amount, setAmount] = useState('')
 	const [address, setAddress] = useState('')
 	const [code] = useState('')
+	const [operationsModalOpen, setOperationsModalOpen] = useState(false)
+	const [history] = useState<{ [key: string]: OperationRow[] }>([
+		{
+			id: '1',
+			type: 'Вывод',
+			amount: '- 0.00000017',
+			date: '05.05.2025 02:57:36',
+			txId: 'i4...jd',
+		},
+		{
+			id: '2',
+			type: 'Вывод',
+			amount: '- 0.00000017',
+			date: '05.05.2025 02:57:36',
+			txId: 'i4...jd',
+		},
+	])
 
 	// Примерные данные, заменить на реальные при интеграции
 	const available = '0.00000000'
@@ -32,7 +53,11 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 	}
 
 	return (
-		<Modal isOpen={isOpen} onClose={onClose} title={`Отправка криптовалюты Xaut`}>
+		<Modal
+			isOpen={isOpen}
+			onClose={onClose}
+			title={`Отправка криптовалюты Xaut`}
+		>
 			<div className={styles.gradientLineTop}></div>
 			<div className={styles.wrapper}>
 				<div className={styles.tabContent}>
@@ -117,11 +142,9 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 						</button>
 						<div className={styles.historyBtnWrapper}>
 							<button
+								type='button'
 								className={styles.historyBtn}
-								onClick={() => {
-									// Логика истории
-									console.log('История выводов')
-								}}
+								onClick={onOpenOperationsModal}
 							>
 								<div className={styles.gradientLine}></div>
 								<span>История выводов</span>
@@ -131,6 +154,13 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 					</form>
 				</div>
 			</div>
+			<OperationsModal
+				isOpen={operationsModalOpen}
+				onClose={() => setOperationsModalOpen(false)}
+				type={'withdraw'}
+				data={{ xaut: history }}
+				initialToken={'xaut'}
+			/>
 		</Modal>
 	)
 }

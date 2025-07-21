@@ -7,6 +7,8 @@ import BuyIcon from '../../../icons/BuyIcon'
 import LimitsIcon from '../../../icons/LimitsIcon'
 import ShareIcon from '../../../icons/ShareIcon'
 import CopyIcon from '../../../icons/CopyIcon'
+import OperationsModal from '../../../components/OperationsModal'
+import type { OperationRow } from '../../../components/OperationsTable'
 
 const NETWORKS = [
 	{ key: 'trc20', label: 'Trc20' },
@@ -39,6 +41,27 @@ const BuyModal: React.FC<BuyModalProps> = ({ isOpen, onClose, tokenName }) => {
 	const [cryptoAmount, setCryptoAmount] = useState('')
 	const [selectedNetwork, setSelectedNetwork] = useState('erc20')
 	const [isSwapped, setIsSwapped] = useState(false)
+	const [operationsModalOpen, setOperationsModalOpen] = useState(false)
+	// Пример истории для каждой валюты
+	const [history] = useState<{ [key: string]: OperationRow[] }>({
+		xaut: [],
+		paxg: [
+			{
+				id: '1',
+				type: 'Покупка',
+				amount: '+ 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
+			{
+				id: '2',
+				type: 'Покупка',
+				amount: '+ 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
+		],
+	})
 
 	// Пример курса
 	const price = prices[activeTab as keyof typeof prices]
@@ -181,11 +204,9 @@ const BuyModal: React.FC<BuyModalProps> = ({ isOpen, onClose, tokenName }) => {
 							</button>
 							<div className={styles.historyBtnWrapper}>
 								<button
+									type='button'
 									className={styles.historyBtn}
-									onClick={() => {
-										// Логика истории
-										console.log('История покупки')
-									}}
+									onClick={() => setOperationsModalOpen(true)}
 								>
 									<div className={styles.gradientLine}></div>
 									<span>История покупки</span>
@@ -243,10 +264,7 @@ const BuyModal: React.FC<BuyModalProps> = ({ isOpen, onClose, tokenName }) => {
 							<div className={styles.historyBtnWrapper}>
 								<button
 									className={styles.historyBtn}
-									onClick={() => {
-										// Логика истории
-										console.log('История покупки')
-									}}
+									onClick={() => setOperationsModalOpen(true)}
 								>
 									<div className={styles.gradientLine}></div>
 									<span>История покупки</span>
@@ -257,6 +275,13 @@ const BuyModal: React.FC<BuyModalProps> = ({ isOpen, onClose, tokenName }) => {
 					)}
 				</div>
 			</div>
+			<OperationsModal
+				isOpen={operationsModalOpen}
+				onClose={() => setOperationsModalOpen(false)}
+				type={'buy'}
+				data={history}
+				initialToken={activeTab}
+			/>
 		</Modal>
 	)
 }

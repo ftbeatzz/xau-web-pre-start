@@ -6,6 +6,8 @@ import { useTabs } from '../../../hooks/useTabs'
 import LimitsIcon from '../../../icons/LimitsIcon'
 import CopyIcon from '../../../icons/CopyIcon'
 import ShareIcon from '../../../icons/ShareIcon'
+import OperationsModal from '../../../components/OperationsModal'
+import type { OperationRow } from '../../../components/OperationsTable'
 
 interface GetModalProps {
 	isOpen: boolean
@@ -32,6 +34,26 @@ const GetModal: React.FC<GetModalProps> = ({ isOpen, onClose, tokenName }) => {
 		tokenName.toLowerCase()
 	)
 	const current = addresses[activeTab as 'xaut' | 'paxg']
+	const [operationsModalOpen, setOperationsModalOpen] = React.useState(false)
+	const [history] = React.useState<{ [key: string]: OperationRow[] }>({
+		xaut: [],
+		paxg: [
+			{
+				id: '1',
+				type: 'Пополнение',
+				amount: '+ 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
+			{
+				id: '2',
+				type: 'Пополнение',
+				amount: '+ 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
+		],
+	})
 
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} title={`Выбор криптовалюты`}>
@@ -91,7 +113,10 @@ const GetModal: React.FC<GetModalProps> = ({ isOpen, onClose, tokenName }) => {
 						</div>
 					</div>
 					<div className={styles.historyBtnWrapper}>
-						<button className={styles.historyBtn} onClick={onClose}>
+						<button
+							className={styles.historyBtn}
+							onClick={() => setOperationsModalOpen(true)}
+						>
 							<div className={styles.gradientLine}></div>
 							<span>История Пополнений</span>
 							<div className={styles.gradientLine}></div>
@@ -99,6 +124,13 @@ const GetModal: React.FC<GetModalProps> = ({ isOpen, onClose, tokenName }) => {
 					</div>
 				</div>
 			</div>
+			<OperationsModal
+				isOpen={operationsModalOpen}
+				onClose={() => setOperationsModalOpen(false)}
+				type={'deposit'}
+				data={history}
+				initialToken={activeTab}
+			/>
 		</Modal>
 	)
 }

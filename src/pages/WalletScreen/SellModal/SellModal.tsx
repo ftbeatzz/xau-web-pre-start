@@ -7,6 +7,8 @@ import LimitsIcon from '../../../icons/LimitsIcon'
 import SellIcon from '../../../icons/SellIcon'
 import SmallXaut from '../../../icons/SmallXaut'
 import SmallPaxg from '../../../icons/SmallPaxg'
+import OperationsModal from '../../../components/OperationsModal'
+import type { OperationRow } from '../../../components/OperationsTable'
 
 const NETWORKS = [
 	{ key: 'trc20', label: 'Trc20' },
@@ -45,6 +47,26 @@ const SellModal: React.FC<SellModalProps> = ({
 	const [selectedNetwork, setSelectedNetwork] = useState('trc20')
 	const [walletAddress, setWalletAddress] = useState('')
 	const [code, setCode] = useState('')
+	const [operationsModalOpen, setOperationsModalOpen] = useState(false)
+	const [history] = useState<{ [key: string]: OperationRow[] }>({
+		xaut: [],
+		paxg: [
+			{
+				id: '1',
+				type: 'Продажа',
+				amount: '- 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
+			{
+				id: '2',
+				type: 'Продажа',
+				amount: '- 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
+		],
+	})
 
 	// Пример курса
 	const price = prices[activeTab as keyof typeof prices]
@@ -147,11 +169,9 @@ const SellModal: React.FC<SellModalProps> = ({
 							</button>
 							<div className={styles.historyBtnWrapper}>
 								<button
+									type='button'
 									className={styles.historyBtn}
-									onClick={() => {
-										// Логика истории
-										console.log('История продаж')
-									}}
+									onClick={() => setOperationsModalOpen(true)}
 								>
 									<div className={styles.gradientLine}></div>
 									<span>История продаж</span>
@@ -218,10 +238,7 @@ const SellModal: React.FC<SellModalProps> = ({
 							<div className={styles.historyBtnWrapper}>
 								<button
 									className={styles.historyBtn}
-									onClick={() => {
-										// Логика истории
-										console.log('История продаж')
-									}}
+									onClick={() => setOperationsModalOpen(true)}
 								>
 									<div className={styles.gradientLine}></div>
 									<span>История продаж</span>
@@ -232,6 +249,13 @@ const SellModal: React.FC<SellModalProps> = ({
 					)}
 				</div>
 			</div>
+			<OperationsModal
+				isOpen={operationsModalOpen}
+				onClose={() => setOperationsModalOpen(false)}
+				type={'sell'}
+				data={history}
+				initialToken={activeTab}
+			/>
 		</Modal>
 	)
 }

@@ -7,6 +7,8 @@ import LimitsIcon from '../../../icons/LimitsIcon'
 import SendIcon from '../../../icons/SendIcon'
 import SmallXaut from '../../../icons/SmallXaut'
 import SmallPaxg from '../../../icons/SmallPaxg'
+import OperationsModal from '../../../components/OperationsModal'
+import type { OperationRow } from '../../../components/OperationsTable'
 
 interface SendModalProps {
 	isOpen: boolean
@@ -32,6 +34,26 @@ const SendModal: React.FC<SendModalProps> = ({
 	const [amount, setAmount] = useState('')
 	const [address, setAddress] = useState('')
 	const [code, setCode] = useState('')
+	const [operationsModalOpen, setOperationsModalOpen] = useState(false)
+	const [history] = useState<{ [key: string]: OperationRow[] }>({
+		xaut: [],
+		paxg: [
+			{
+				id: '1',
+				type: 'Вывод',
+				amount: '- 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
+			{
+				id: '2',
+				type: 'Вывод',
+				amount: '- 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
+		],
+	})
 
 	// Примерные данные, заменить на реальные при интеграции
 	const inWork = activeTab === 'xaut' ? '1,857,757.0035' : '2,157,757.0035'
@@ -41,8 +63,6 @@ const SendModal: React.FC<SendModalProps> = ({
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
-		// TODO: логика отправки
-		console.log('Отправка', amount, currency, address, code)
 		onClose()
 	}
 
@@ -139,11 +159,9 @@ const SendModal: React.FC<SendModalProps> = ({
 						</button>
 						<div className={styles.historyBtnWrapper}>
 							<button
+								type='button'
 								className={styles.historyBtn}
-								onClick={() => {
-									// Логика истории
-									console.log('История выводов')
-								}}
+								onClick={() => setOperationsModalOpen(true)}
 							>
 								<div className={styles.gradientLine}></div>
 								<span>История выводов</span>
@@ -153,6 +171,13 @@ const SendModal: React.FC<SendModalProps> = ({
 					</form>
 				</div>
 			</div>
+			<OperationsModal
+				isOpen={operationsModalOpen}
+				onClose={() => setOperationsModalOpen(false)}
+				type={'withdraw'}
+				data={history}
+				initialToken={activeTab}
+			/>
 		</Modal>
 	)
 }

@@ -4,6 +4,7 @@ import Modal from '../Modal/Modal'
 import LimitsIcon from '../../icons/LimitsIcon'
 import SellIcon from '../../icons/SellIcon'
 import SmallXaut from '../../icons/SmallXaut'
+import OperationsModal from '../OperationsModal'
 
 const NETWORKS = [
 	{ key: 'trc20', label: 'Trc20' },
@@ -14,11 +15,13 @@ interface MarketingSellModalProps {
 	isOpen: boolean
 	onClose: () => void
 	tokenBalance: string
+	onOpenOperationsModal?: () => void
 }
 
 const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 	isOpen,
 	onClose,
+	onOpenOperationsModal,
 }) => {
 	const [step, setStep] = useState(1)
 	const [cryptoAmount, setCryptoAmount] = useState('')
@@ -116,11 +119,9 @@ const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 							</button>
 							<div className={styles.historyBtnWrapper}>
 								<button
+									type='button'
 									className={styles.historyBtn}
-									onClick={() => {
-										// Логика истории
-										console.log('История продаж')
-									}}
+									onClick={onOpenOperationsModal}
 								>
 									<div className={styles.gradientLine}></div>
 									<span>История продаж</span>
@@ -173,11 +174,9 @@ const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 							</button>
 							<div className={styles.historyBtnWrapper}>
 								<button
+									type='button'
 									className={styles.historyBtn}
-									onClick={() => {
-										// Логика истории
-										console.log('История продаж')
-									}}
+									onClick={onOpenOperationsModal}
 								>
 									<div className={styles.gradientLine}></div>
 									<span>История продаж</span>
@@ -188,6 +187,13 @@ const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 					)}
 				</div>
 			</div>
+			<OperationsModal
+				isOpen={false} // This state is now managed by the parent
+				onClose={() => {}} // This state is now managed by the parent
+				type={'sell'}
+				data={{ xaut: [] }} // This state is now managed by the parent
+				initialToken={'xaut'}
+			/>
 		</Modal>
 	)
 }

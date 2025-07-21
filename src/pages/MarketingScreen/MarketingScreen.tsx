@@ -21,6 +21,8 @@ import QualificationTable from '../../components/QualificationTable/Qualificatio
 import MarketingSendModal from '../../components/MarketingSendModal/MarketingSendModal'
 import MarketingSellModal from '../../components/MarketingSellModal/MarketingSellModal'
 import RefModal from '../../components/RefModal/RefModal'
+import OperationsModal from '../../components/OperationsModal'
+import type { OperationRow } from '../../components/OperationsTable'
 
 const MarketingScreen: React.FC = () => {
 	const marketingTabs: TabItem[] = [
@@ -37,6 +39,11 @@ const MarketingScreen: React.FC = () => {
 	const [isMarketingSendOpen, setIsMarketingSendOpen] = React.useState(false)
 	const [isMarketingSellOpen, setIsMarketingSellOpen] = React.useState(false)
 	const [isRefModalOpen, setIsRefModalOpen] = React.useState(false)
+	const [operationsModal, setOperationsModal] = React.useState<{
+		open: boolean
+		type: 'sell' | 'withdraw' | null
+		data: { [key: string]: OperationRow[] }
+	}>({ open: false, type: null, data: {} })
 
 	// Обработчики для информационных модальных окон
 	const openInfoModal = () => {
@@ -343,6 +350,22 @@ const MarketingScreen: React.FC = () => {
 		},
 	]
 
+	const handleOpenSellHistory = (history: OperationRow[]) => {
+		setIsMarketingSellOpen(false)
+		setOperationsModal({ open: true, type: 'sell', data: { xaut: history } })
+	}
+	const handleOpenSendHistory = (history: OperationRow[]) => {
+		setIsMarketingSendOpen(false)
+		setOperationsModal({
+			open: true,
+			type: 'withdraw',
+			data: { xaut: history },
+		})
+	}
+	const handleCloseOperationsModal = () => {
+		setOperationsModal({ open: false, type: null, data: {} })
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.top}>
@@ -530,15 +553,58 @@ const MarketingScreen: React.FC = () => {
 				isOpen={isMarketingSendOpen}
 				onClose={() => setIsMarketingSendOpen(false)}
 				tokenBalance={currentContent.balanceXAUT}
+				onOpenOperationsModal={() =>
+					handleOpenSendHistory([
+						{
+							id: '1',
+							type: 'Вывод',
+							amount: '- 0.00000017',
+							date: '05.05.2025 02:57:36',
+							txId: 'i4...jd',
+						},
+						{
+							id: '2',
+							type: 'Вывод',
+							amount: '- 0.00000017',
+							date: '05.05.2025 02:57:36',
+							txId: 'i4...jd',
+						},
+					])
+				}
 			/>
 			<MarketingSellModal
 				isOpen={isMarketingSellOpen}
 				onClose={() => setIsMarketingSellOpen(false)}
 				tokenBalance={currentContent.balanceXAUT}
+				onOpenOperationsModal={() =>
+					handleOpenSellHistory([
+						{
+							id: '1',
+							type: 'Продажа',
+							amount: '- 0.00000017',
+							date: '05.05.2025 02:57:36',
+							txId: 'i4...jd',
+						},
+						{
+							id: '2',
+							type: 'Продажа',
+							amount: '- 0.00000017',
+							date: '05.05.2025 02:57:36',
+							txId: 'i4...jd',
+						},
+					])
+				}
 			/>
 			<RefModal
 				isOpen={isRefModalOpen}
 				onClose={() => setIsRefModalOpen(false)}
+			/>
+			<OperationsModal
+				isOpen={operationsModal.open}
+				onClose={handleCloseOperationsModal}
+				type={operationsModal.type || 'sell'}
+				data={operationsModal.data}
+				initialToken={'xaut'}
 			/>
 		</div>
 	)
