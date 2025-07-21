@@ -10,7 +10,8 @@ import GetIcon from '../../icons/GetIcon'
 import BuyIcon from '../../icons/BuyIcon'
 import SellIcon from '../../icons/SellIcon'
 import SendIcon from '../../icons/SendIcon'
-import Chart from './Chart/Chart'
+import XautChart from './Chart/XautChart'
+import PaxgChart from './Chart/PaxgChart'
 import HistoryTable, {
 	type TransactionData,
 } from '../../components/HistoryTable/HistoryTable'
@@ -285,9 +286,8 @@ const WalletScreen: React.FC = () => {
 						<h2 className={styles.blockTitle}>График онлайн</h2>
 						<div className={styles.chart}>
 							{/* Контент графика - изменяется в зависимости от таба */}
-							<div className={styles.chart}>
-								<Chart />
-							</div>
+							{activeTab === 'xaut' && <XautChart />}
+							{activeTab === 'paxg' && <PaxgChart />}
 						</div>
 					</div>
 				</div>

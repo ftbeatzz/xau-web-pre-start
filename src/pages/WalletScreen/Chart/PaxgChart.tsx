@@ -10,6 +10,8 @@ import {
 	Area,
 } from 'recharts'
 import styles from './Chart.module.scss'
+import SmallPaxg from '../../../icons/SmallPaxg'
+import Preloader from '../../../components/Preloader'
 // import PaxgIconChart from '../../../icons/PaxgIconChart'
 
 const PERIODS = [
@@ -71,7 +73,7 @@ const CustomTooltip = ({
 	return null
 }
 
-const Chart: React.FC = () => {
+const PaxgChart: React.FC = () => {
 	const [periodIdx, setPeriodIdx] = useState(0)
 	const [allChartData, setAllChartData] = useState<ChartPoint[][]>([])
 	const [chartLoading, setChartLoading] = useState(true)
@@ -137,7 +139,9 @@ const Chart: React.FC = () => {
 				))}
 			</div>
 			{chartLoading ? (
-				<p className={styles.loading}>Загрузка графика...</p>
+				<div className={styles.loading}>
+					<Preloader />
+				</div>
 			) : chartError ? (
 				<p className={styles.error}>{chartError}</p>
 			) : (
@@ -159,7 +163,6 @@ const Chart: React.FC = () => {
 									fontSize: 10,
 									className: styles.xAxisTick,
 								}}
-								
 							/>
 							<YAxis
 								orientation='right'
@@ -197,9 +200,9 @@ const Chart: React.FC = () => {
 					</ResponsiveContainer>
 				</div>
 			)}
-			<div className={styles.paxgIconChart}>{/* <PaxgIconChart /> */}</div>
+			<div className={styles.paxgIconChart}><SmallPaxg /></div>
 		</section>
 	)
 }
 
-export default Chart
+export default PaxgChart
