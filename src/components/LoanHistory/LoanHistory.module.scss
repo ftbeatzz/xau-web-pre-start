@@ -73,6 +73,7 @@
 			display: flex;
 			justify-content: space-between;
 			width: 100%;
+			gap: 20px;
 
 			th {
 				color: #7e7c7c;
@@ -110,6 +111,7 @@
 			display: flex;
 			justify-content: space-between;
 			width: 100%;
+			gap: 32px;
 
 			&:hover {
 				background: rgba(157, 178, 206, 0.02);

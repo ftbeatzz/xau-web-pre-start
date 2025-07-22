@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import styles from './Header.module.scss'
 import LogoHeader from '../../icons/LogoHeader'
@@ -11,6 +11,7 @@ import { ProfileModal } from '../../components/ProfileModal/ProfileModal'
 
 const Header: React.FC = () => {
 	const { t } = useTranslation()
+	const location = useLocation()
 	const [scrolled, setScrolled] = useState(false)
 	const [menuOpen, setMenuOpen] = useState(false)
 	const [menuVisible, setMenuVisible] = useState(false)
@@ -175,7 +176,12 @@ const Header: React.FC = () => {
 								}`}
 							>
 								<button
-									className={styles.dropdownButton}
+									className={
+										`${styles.dropdownButton} ` +
+										(location.pathname.startsWith('/trade')
+											? styles.active
+											: '')
+									}
 									onClick={toggleTradeDropdown}
 								>
 									{t('trade')}
@@ -192,21 +198,27 @@ const Header: React.FC = () => {
 										<NavLink
 											to='/trade/statistics'
 											className={styles.dropdownItem}
-											onClick={() => setTradeDropdownOpen(false)}
+											onClick={() => {
+												setTimeout(() => setTradeDropdownOpen(false), 0)
+											}}
 										>
 											{t('companyStatistics')}
 										</NavLink>
 										<NavLink
 											to='/trade/loan'
 											className={styles.dropdownItem}
-											onClick={() => setTradeDropdownOpen(false)}
+											onClick={() => {
+												setTimeout(() => setTradeDropdownOpen(false), 0)
+											}}
 										>
 											{t('tradeLoan')}
 										</NavLink>
 										<NavLink
 											to='/trade/hft'
 											className={styles.dropdownItem}
-											onClick={() => setTradeDropdownOpen(false)}
+											onClick={() => {
+												setTimeout(() => setTradeDropdownOpen(false), 0)
+											}}
 										>
 											{t('hftTrading')}
 										</NavLink>
@@ -221,7 +233,12 @@ const Header: React.FC = () => {
 								}`}
 							>
 								<button
-									className={styles.dropdownButton}
+									className={
+										`${styles.dropdownButton} ` +
+										(location.pathname.startsWith('/commerce')
+											? styles.active
+											: '')
+									}
 									onClick={toggleCommerceDropdown}
 								>
 									{t('commerce')}
@@ -238,21 +255,27 @@ const Header: React.FC = () => {
 										<NavLink
 											to='/commerce/statistics'
 											className={styles.dropdownItem}
-											onClick={() => setCommerceDropdownOpen(false)}
+											onClick={() => {
+												setTimeout(() => setCommerceDropdownOpen(false), 0)
+											}}
 										>
 											{t('companyStatistics')}
 										</NavLink>
 										<NavLink
 											to='/commerce/loan'
 											className={styles.dropdownItem}
-											onClick={() => setCommerceDropdownOpen(false)}
+											onClick={() => {
+												setTimeout(() => setCommerceDropdownOpen(false), 0)
+											}}
 										>
 											{t('commerceLoan')}
 										</NavLink>
 										<NavLink
 											to='/commerce/model'
 											className={styles.dropdownItem}
-											onClick={() => setCommerceDropdownOpen(false)}
+											onClick={() => {
+												setTimeout(() => setCommerceDropdownOpen(false), 0)
+											}}
 										>
 											{t('proceduralModel')}
 										</NavLink>

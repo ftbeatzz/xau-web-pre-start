@@ -148,6 +148,19 @@
 					}
 				}
 
+				.dropdownButton.active {
+					color: #ffe34b;
+					font-family: Unbounded;
+					font-size: 16px;
+					font-style: normal;
+					font-weight: 300;
+					line-height: normal;
+
+					@media (max-width: 1240px) {
+						font-size: 12px;
+					}
+				}
+
 				.dropdownArrow {
 					color: #fff;
 					font-size: 10px;
