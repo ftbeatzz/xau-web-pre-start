@@ -26,7 +26,7 @@ const SellIcon: React.FC = () => (
 			x2='3.61364'
 			y2='3.2002'
 			stroke='currentColor'
-			stroke-width='1.5'
+			strokeWidth='1.5'
 			stroke-linecap='round'
 		/>
 	</svg>

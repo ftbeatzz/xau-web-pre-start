@@ -325,7 +325,7 @@ const cexExchanges = [
 	{ id: 'whitebit', label: 'WhiteBIT' },
 	{ id: 'ourbit', label: 'Ourbit' },
 	{ id: 'okx', label: 'OKX' },
-	{ id: 'Gate', label: 'Gate' },
+	{ id: 'gate', label: 'Gate' },
 ]
 
 const TradeStatistics: React.FC = () => {

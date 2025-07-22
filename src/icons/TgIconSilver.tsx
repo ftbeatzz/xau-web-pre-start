@@ -22,9 +22,9 @@ const TgIconSilver: React.FC = () => {
 					y2='9.99975'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop stop-color='#E1DCC3' stop-opacity='0.1' />
-					<stop offset='0.5' stop-color='#E1DCC3' />
-					<stop offset='0.971154' stop-color='#EFE9CF' stop-opacity='0.1' />
+					<stop stopColor='#E1DCC3' stopOpacity='0.1' />
+					<stop offset='0.5' stopColor='#E1DCC3' />
+					<stop offset='0.971154' stopColor='#EFE9CF' stopOpacity='0.1' />
 				</linearGradient>
 			</defs>
 		</svg>
