@@ -32,7 +32,131 @@
 	overflow-x: auto;
 	min-height: 340px;
 	max-height: 340px;
+	padding-right: 15px;
+}
 
+// Десктопная таблица
+.desktopTable {
+	display: block;
+
+	@media (max-width: 1024px) {
+		display: none;
+	}
+}
+
+// Мобильные карточки
+.mobileCards {
+	display: none;
+	flex-direction: column;
+	gap: 0;
+	background: transparent;
+	border-radius: 0;
+	overflow: visible;
+
+	@media (max-width: 1024px) {
+		display: flex;
+	}
+}
+
+.card {
+	background: transparent;
+
+	&:not(:last-child) {
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	}
+}
+
+.cardContent {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 12px 0;
+	gap: 16px;
+}
+
+.cardLeft {
+	flex: 1;
+}
+
+.transactionInfo {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.transactionType {
+	color: #fff;
+	font-family: 'Noto Sans';
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 22px; /* 137.5% */
+	letter-spacing: -0.4px;
+}
+
+.transactionDate {
+	color: #7e7c7c;
+	font-family: 'Noto Sans';
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 22px; /* 137.5% */
+	letter-spacing: -0.4px;
+}
+
+.cardRight {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 8px;
+}
+
+.valueContainer {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.value {
+	color: #fff;
+	font-family: 'Noto Sans';
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 22px; /* 137.5% */
+	letter-spacing: -0.4px;
+}
+
+.valueIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.profitContainer {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.profitLabel {
+	color: #7e7c7c;
+	font-family: 'Noto Sans';
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 22px; /* 137.5% */
+	letter-spacing: -0.4px;
+}
+
+.profitValue {
+	color: #7e7c7c;
+	font-family: 'Noto Sans';
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 22px; /* 137.5% */
+	letter-spacing: -0.4px;
 }
 
 .table {

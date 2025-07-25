@@ -4,10 +4,13 @@
 	gap: 20px;
 	max-width: 1440px;
 	margin: 0 auto;
-	padding: 0 30px;
-	padding-top: 25px;
+	padding: 25px 30px;
 	max-height: 960px;
 	height: 100vh;
+
+	@media (max-width: 1023px) {
+		padding: 12px 24px;
+	}
 }
 
 .sectionTitle {

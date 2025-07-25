@@ -360,55 +360,53 @@ const TradeStatistics: React.FC = () => {
 
 				{/* Real time order секция */}
 				<div className={styles.realTimeOrder}>
-					<div className={styles.orderBlocks}>
-						{/* Блок 1: Биржа */}
-						<div className={`${styles.orderBlock} ${styles.bigOne}`}>
-							<div className={styles.blockHeader}>
-								<div className={styles.blockHeaderTitle}>
-									<h3 className={styles.blockTitle}>Биржа</h3>
-									<h3 className={styles.blockTitle}>
-										{cexExchanges.find(
-											exchange => exchange.id === activeCexExchange
-										)?.label || 'Toobit'}
-									</h3>
-								</div>
-								<div className={styles.gradientLine}></div>
+					<div className={`${styles.orderBlock} ${styles.bigOne}`}>
+						<div className={styles.blockHeader}>
+							<div className={styles.blockHeaderTitle}>
+								<h3 className={styles.blockTitle}>Биржа</h3>
+								<h3 className={styles.blockTitle}>
+									{cexExchanges.find(
+										exchange => exchange.id === activeCexExchange
+									)?.label || 'Toobit'}
+								</h3>
 							</div>
-							<div className={styles.blockContent}>
-								<div className={styles.dataRow}>
-									<span className={styles.dataLabel}>
-										Объем {activeCrypto === 'xaut' ? 'Xaut:' : 'Paxg:'}
-									</span>
-									<div className={styles.dataValue}>
-										<span>121.45682912</span>
-										{activeCrypto === 'xaut' ? <XautIcon /> : <PaxgIcon />}
-									</div>
+							<div className={styles.gradientLine}></div>
+						</div>
+						<div className={styles.blockContent}>
+							<div className={styles.dataRow}>
+								<span className={styles.dataLabel}>
+									Объем {activeCrypto === 'xaut' ? 'Xaut:' : 'Paxg:'}
+								</span>
+								<div className={styles.dataValue}>
+									<span>121.45682912</span>
+									{activeCrypto === 'xaut' ? <XautIcon /> : <PaxgIcon />}
 								</div>
-								<div className={styles.dataRow}>
-									<span className={styles.dataLabel}>
-										Эффективность торговли:
-									</span>
-									<span className={styles.dataValue}>10,537</span>
-								</div>
-								<div className={styles.dataRow}>
-									<span className={styles.dataLabel}>Прибыльные сделки:</span>
-									<span className={styles.dataValue}>9,537</span>
-								</div>
-								<div className={styles.dataRow}>
-									<span className={styles.dataLabel}>Убыточные сделки:</span>
-									<span className={styles.dataValue}>1,000</span>
-								</div>
-								<div className={styles.dataRow}>
-									<span className={styles.dataLabel}>
-										Финансовый результат:
-									</span>
-									<div className={styles.dataValue}>
-										<span>31.46917468</span>
-										{activeCrypto === 'xaut' ? <XautIcon /> : <PaxgIcon />}
-									</div>
+							</div>
+							<div className={styles.dataRow}>
+								<span className={styles.dataLabel}>
+									Эффективность торговли:
+								</span>
+								<span className={styles.dataValue}>10,537</span>
+							</div>
+							<div className={styles.dataRow}>
+								<span className={styles.dataLabel}>Прибыльные сделки:</span>
+								<span className={styles.dataValue}>9,537</span>
+							</div>
+							<div className={styles.dataRow}>
+								<span className={styles.dataLabel}>Убыточные сделки:</span>
+								<span className={styles.dataValue}>1,000</span>
+							</div>
+							<div className={styles.dataRow}>
+								<span className={styles.dataLabel}>Финансовый результат:</span>
+								<div className={styles.dataValue}>
+									<span>31.46917468</span>
+									{activeCrypto === 'xaut' ? <XautIcon /> : <PaxgIcon />}
 								</div>
 							</div>
 						</div>
+					</div>
+					<div className={styles.orderBlocks}>
+						{/* Блок 1: Биржа */}
 
 						{/* Блок 2: Открытые сделки */}
 						<div className={styles.orderBlock}>

@@ -18,6 +18,9 @@ const Header: React.FC = () => {
 	const [menuAnim, setMenuAnim] = useState<'open' | 'close' | null>(null)
 	const [tradeDropdownOpen, setTradeDropdownOpen] = useState(false)
 	const [commerceDropdownOpen, setCommerceDropdownOpen] = useState(false)
+	const [mobileTradeDropdownOpen, setMobileTradeDropdownOpen] = useState(false)
+	const [mobileCommerceDropdownOpen, setMobileCommerceDropdownOpen] =
+		useState(false)
 	const [profileModalOpen, setProfileModalOpen] = useState(false)
 	const [profileIconAnim, setProfileIconAnim] = useState<
 		'profile' | 'close' | null
@@ -72,6 +75,10 @@ const Header: React.FC = () => {
 				setTradeDropdownOpen(false)
 				setCommerceDropdownOpen(false)
 			}
+			if (!target.closest(`.${styles.mobileDropdown}`)) {
+				setMobileTradeDropdownOpen(false)
+				setMobileCommerceDropdownOpen(false)
+			}
 			if (!target.closest(`.${styles.profileBtn}`)) {
 				setProfileModalOpen(false)
 				setTimeout(() => setProfileIconAnim('profile'), 300)
@@ -92,6 +99,16 @@ const Header: React.FC = () => {
 		e.preventDefault()
 		setCommerceDropdownOpen(!commerceDropdownOpen)
 		setTradeDropdownOpen(false)
+	}
+
+	const toggleMobileTradeDropdown = () => {
+		setMobileTradeDropdownOpen(!mobileTradeDropdownOpen)
+		setMobileCommerceDropdownOpen(false)
+	}
+
+	const toggleMobileCommerceDropdown = () => {
+		setMobileCommerceDropdownOpen(!mobileCommerceDropdownOpen)
+		setMobileTradeDropdownOpen(false)
 	}
 
 	const toggleProfileModal = () => {
@@ -124,38 +141,6 @@ const Header: React.FC = () => {
 				</div>
 
 				{/* Контейнер для бургер-меню и кнопки переключения языка */}
-				<div className={styles.burgerLangContainer}>
-					<LanguageSwitcher />
-					<div
-						className={
-							styles.burgerAnimContainer +
-							' ' +
-							(menuOpen
-								? styles.burgerAnimOpen
-								: menuAnim === 'close'
-								? styles.burgerAnimClose
-								: '')
-						}
-						onClick={() => setMenuOpen(!menuOpen)}
-					>
-						<span className={styles.burgerIcon}>
-							<svg
-								width='32'
-								height='32'
-								viewBox='0 0 32 32'
-								fill='none'
-								xmlns='http://www.w3.org/2000/svg'
-							>
-								<rect y='7' width='32' height='3' rx='1.5' fill='#fff' />
-								<rect y='15' width='32' height='3' rx='1.5' fill='#fff' />
-								<rect y='23' width='32' height='3' rx='1.5' fill='#fff' />
-							</svg>
-						</span>
-						<span className={styles.closeIcon}>
-							<CloseIcon />
-						</span>
-					</div>
-				</div>
 
 				<nav className={styles.navWrapper}>
 					<div className={styles.nav}>
@@ -326,6 +311,37 @@ const Header: React.FC = () => {
 						</button>
 						<ProfileModal isOpen={profileModalOpen} />
 					</div>
+					<div className={styles.burgerLangContainer}>
+						<div
+							className={
+								styles.burgerAnimContainer +
+								' ' +
+								(menuOpen
+									? styles.burgerAnimOpen
+									: menuAnim === 'close'
+									? styles.burgerAnimClose
+									: '')
+							}
+							onClick={() => setMenuOpen(!menuOpen)}
+						>
+							<span className={styles.burgerIcon}>
+								<svg
+									width='32'
+									height='32'
+									viewBox='0 0 32 32'
+									fill='none'
+									xmlns='http://www.w3.org/2000/svg'
+								>
+									<rect y='7' width='32' height='3' rx='1.5' fill='#fff' />
+									<rect y='15' width='32' height='3' rx='1.5' fill='#fff' />
+									<rect y='23' width='32' height='3' rx='1.5' fill='#fff' />
+								</svg>
+							</span>
+							<span className={styles.closeIcon}>
+								<CloseIcon />
+							</span>
+						</div>
+					</div>
 				</div>
 
 				{/* Мобильное меню с анимацией */}
@@ -350,24 +366,119 @@ const Header: React.FC = () => {
 							>
 								{t('wallet')}
 							</NavLink>
-							<NavLink
-								to='/trade'
-								onClick={() => setMenuOpen(false)}
-								className={({ isActive }) =>
-									isActive ? styles.active : styles.navLink
-								}
-							>
-								{t('trade')}
-							</NavLink>
-							<NavLink
-								to='/commerce'
-								onClick={() => setMenuOpen(false)}
-								className={({ isActive }) =>
-									isActive ? styles.active : styles.navLink
-								}
-							>
-								{t('commerce')}
-							</NavLink>
+
+							{/* Trade Dropdown в мобильном меню */}
+							<div className={styles.mobileDropdown}>
+								<button
+									onClick={toggleMobileTradeDropdown}
+									className={`${styles.mobileDropdownButton} ${
+										location.pathname.startsWith('/trade') ? styles.active : ''
+									}`}
+								>
+									{t('trade')}
+									<span
+										className={`${styles.mobileDropdownArrow} ${
+											mobileTradeDropdownOpen
+												? styles.mobileDropdownArrowUp
+												: ''
+										}`}
+									>
+										<DropDownArrow />
+									</span>
+								</button>
+								{mobileTradeDropdownOpen && (
+									<div className={styles.mobileDropdownMenu}>
+										<NavLink
+											to='/trade/statistics'
+											className={styles.mobileDropdownItem}
+											onClick={() => {
+												setMobileTradeDropdownOpen(false)
+												setMenuOpen(false)
+											}}
+										>
+											{t('companyStatistics')}
+										</NavLink>
+										<NavLink
+											to='/trade/loan'
+											className={styles.mobileDropdownItem}
+											onClick={() => {
+												setMobileTradeDropdownOpen(false)
+												setMenuOpen(false)
+											}}
+										>
+											{t('tradeLoan')}
+										</NavLink>
+										<NavLink
+											to='/trade/hft'
+											className={styles.mobileDropdownItem}
+											onClick={() => {
+												setMobileTradeDropdownOpen(false)
+												setMenuOpen(false)
+											}}
+										>
+											{t('hftTrading')}
+										</NavLink>
+									</div>
+								)}
+							</div>
+
+							{/* Commerce Dropdown в мобильном меню */}
+							<div className={styles.mobileDropdown}>
+								<button
+									onClick={toggleMobileCommerceDropdown}
+									className={`${styles.mobileDropdownButton} ${
+										location.pathname.startsWith('/commerce')
+											? styles.active
+											: ''
+									}`}
+								>
+									{t('commerce')}
+									<span
+										className={`${styles.mobileDropdownArrow} ${
+											mobileCommerceDropdownOpen
+												? styles.mobileDropdownArrowUp
+												: ''
+										}`}
+									>
+										<DropDownArrow />
+									</span>
+								</button>
+								{mobileCommerceDropdownOpen && (
+									<div className={styles.mobileDropdownMenu}>
+										<NavLink
+											to='/commerce/statistics'
+											className={styles.mobileDropdownItem}
+											onClick={() => {
+												setMobileCommerceDropdownOpen(false)
+												setMenuOpen(false)
+											}}
+										>
+											{t('companyStatistics')}
+										</NavLink>
+										<NavLink
+											to='/commerce/loan'
+											className={styles.mobileDropdownItem}
+											onClick={() => {
+												setMobileCommerceDropdownOpen(false)
+												setMenuOpen(false)
+											}}
+										>
+											{t('commerceLoan')}
+										</NavLink>
+										<NavLink
+											to='/commerce/model'
+											className={styles.mobileDropdownItem}
+											onClick={() => {
+												setMobileCommerceDropdownOpen(false)
+												setMenuOpen(false)
+											}}
+										>
+											{t('proceduralModel')}
+										</NavLink>
+									</div>
+								)}
+							</div>
+
 							<NavLink
 								to='/marketing'
 								onClick={() => setMenuOpen(false)}

@@ -4,9 +4,14 @@
 	gap: 20px;
 	max-width: 1440px;
 	margin: 0 auto;
-	padding: 0 30px;
+	padding: 25px 30px;
 	padding-top: 25px;
 	max-height: 960px;
+
+	@media (max-width: 1023px) {
+		padding: 12px 24px;
+		max-height: 100%;
+	}
 }
 
 .sectionTitle {
@@ -18,6 +23,10 @@
 	line-height: 22px; /* 122.222% */
 	letter-spacing: -0.4px;
 	padding-bottom: 8px;
+
+	@media (max-width: 1023px) {
+		font-size: 16px;
+	}
 }
 
 .tabsWrapper {
@@ -52,6 +61,14 @@
 
 	& :nth-child(1) {
 		max-width: 400px;
+
+		@media (max-width: 1023px) {
+			max-width: 100%;
+		}
+	}
+
+	@media (max-width: 1023px) {
+		flex-direction: column;
 	}
 }
 
@@ -113,6 +130,10 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	gap: 12px;
+
+	@media (max-width: 1023px) {
+		grid-template-columns: 1fr;
+	}
 }
 
 .orderColumn {
@@ -220,6 +241,10 @@
 	display: flex;
 	justify-content: space-between;
 	gap: 20px;
+
+	@media (max-width: 1023px) {
+		flex-direction: column;
+	}
 }
 
 .companyAssets {
@@ -240,6 +265,10 @@
 	flex-direction: column;
 	width: 100%;
 	max-width: 452px;
+
+	@media (max-width: 1023px) {
+		max-width: 100%;
+	}
 }
 
 .assetsWrapper {
@@ -325,6 +354,11 @@
 	background: rgba(255, 255, 255, 0.08);
 	padding: 14px 12px;
 	position: relative;
+
+	@media (max-width: 1023px) {
+		flex-direction: row;
+		justify-content: space-between;
+	}
 
 	&::before {
 		content: '';

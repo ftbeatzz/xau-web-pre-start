@@ -62,10 +62,6 @@
 				font-weight: 400;
 				line-height: 94%; /* 26.32px */
 				letter-spacing: 1.4px;
-
-				@media (max-width: 1240px) {
-					display: none;
-				}
 			}
 		}
 	}
@@ -75,7 +71,7 @@
 		max-width: 820px;
 
 		@media (max-width: 1240px) {
-			padding: 16px;
+			padding: 0 16px;
 		}
 
 		.nav {
@@ -93,7 +89,7 @@
 				transition: all 0.3s ease;
 
 				@media (max-width: 1240px) {
-					font-size: 12px;
+					font-size: 14px;
 				}
 
 				&:hover {
@@ -490,6 +486,67 @@
 	}
 }
 
+// Мобильные dropdown
+.mobileDropdown {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.mobileDropdownButton {
+	background: none;
+	border: none;
+	color: #fff;
+	font-family: Unbounded;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: normal;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #ffffff1d;
+	width: 100%;
+	justify-content: center;
+	transition: color 0.3s ease;
+}
+
+.mobileDropdownArrow {
+	color: #fff;
+	font-size: 10px;
+	transition: all 0.3s ease;
+}
+
+.mobileDropdownArrowUp {
+	transform: rotate(180deg);
+}
+
+
+.mobileDropdownMenu {
+	width: 100%;
+	margin-top: 8px;
+	overflow: hidden;
+	animation: dropdownSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.mobileDropdownItem {
+	display: block;
+	padding: 16px 20px;
+	color: #fff;
+	font-family: Unbounded;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: normal;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	text-align: center;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 @keyframes fadeIn {
 	from {
 		opacity: 0;
@@ -525,9 +582,6 @@
 	.navWrapper {
 		display: none !important;
 	}
-	.controlsWrapper {
-		display: none !important;
-	}
 }
 
 .burgerAnimContainer {
@@ -535,22 +589,16 @@
 	align-items: center;
 	justify-content: center;
 	width: 64px;
-	height: 50px;
+	height: 48px;
 	position: relative;
 	cursor: pointer;
 	transition: transform 0.3s;
 	position: relative;
 	z-index: 130;
-	border-radius: 14px;
-	border: 1px solid rgba(255, 255, 255, 0.25);
-	background: radial-gradient(
-			70.71% 70.71% at 50% 50%,
-			rgba(255, 255, 255, 0.08) 0%,
-			rgba(255, 255, 255, 0) 100%
-		),
-		rgba(255, 255, 255, 0);
-	box-shadow: 0px 4px 25px 0px rgba(255, 255, 255, 0.12),
-		0px 0px 0px 1px rgba(255, 255, 255, 0.06) inset;
+	border-radius: 4px;
+	border: 1px solid #fff;
+	background: #161923;
+	box-shadow: 0 1.661px 25px 0 rgba(214, 221, 230, 0.12);
 }
 
 .burgerIcon,

@@ -5,6 +5,7 @@
 	padding: 8px 14px;
 	width: 100%;
 	gap: 8px;
+	flex-wrap: wrap;
 }
 
 .tab {
@@ -23,7 +24,7 @@
 	line-height: 140%; /* 21px */
 	cursor: pointer;
 	transition: all 0.3s ease;
-	min-width: 80px;
+	// min-width: 80px;
 	text-align: center;
 	width: 100%;
 

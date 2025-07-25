@@ -1,11 +1,18 @@
 .container {
 	max-width: 1440px;
 	margin: 0 auto;
-	padding: 0 30px;
-	padding-top: 25px;
+	padding: 25px 30px;
 	display: flex;
 	flex-direction: column;
 	gap: 28px;
+
+	@media (max-width: 1023px) {
+		padding: 12px 24px;
+	}
+
+	@media (max-width: 1023px) {
+		gap: 20px;
+	}
 
 	.blockTitle {
 		color: #fff;
@@ -23,9 +30,17 @@
 		justify-content: space-between;
 		gap: 28px;
 
+		@media (max-width: 1023px) {
+			flex-direction: column;
+		}
+
 		.left {
 			width: 100%;
 			max-width: 450px;
+
+			@media (max-width: 1023px) {
+				max-width: 100%;
+			}
 
 			.walletTabs {
 				margin-bottom: 16px;
@@ -275,6 +290,10 @@
 						display: flex;
 						justify-content: space-between;
 
+						@media (max-width: 1023px) {
+							gap: 12px;
+						}
+
 						button {
 							position: relative;
 							display: flex;
@@ -286,6 +305,10 @@
 							background: #0d1c2b;
 							width: 100%;
 							max-width: 95px;
+
+							@media (max-width: 1023px) {
+								max-width: 100%;
+							}
 
 							&::before {
 								content: '';
@@ -324,6 +347,11 @@
 				display: flex;
 				flex-direction: column;
 				min-height: 0;
+
+				@media (max-width: 1023px) {
+					min-height: 400px;
+					height: 400px;
+				}
 			}
 		}
 	}

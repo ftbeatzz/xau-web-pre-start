@@ -468,9 +468,6 @@ const MarketingScreen: React.FC = () => {
 								<span>Заработано за все время</span>
 								<span>{currentContent.balanceUSDT}</span>
 							</div>
-							<div className={styles.right}>
-								<button>More</button>
-							</div>
 						</div>
 						<div className={styles.bottomBlock}>
 							<div className={styles.cardBottom}>
