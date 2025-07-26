@@ -24,6 +24,11 @@
 	width: 100%;
 	margin-top: 8px;
 	margin-bottom: 24px;
+
+	@media (max-width: 767px) {
+		margin-bottom: 12px;
+		margin-top: 0;
+	}
 }
 
 .getHeader {
@@ -101,6 +106,12 @@
 		line-height: 20px; /* 142.857% */
 		padding-bottom: 10px;
 		padding-top: 16px;
+
+		@media (max-width: 767px) {
+			padding-top: 12px;
+			padding-bottom: 8px;
+			font-size: 13px;
+		}
 	}
 	.row {
 		display: flex;
@@ -113,6 +124,10 @@
 			font-style: normal;
 			font-weight: 400;
 			line-height: 20px; /* 142.857% */
+
+			@media (max-width: 767px) {
+				font-size: 13px;
+			}
 		}
 	}
 
@@ -251,10 +266,14 @@
 			text-underline-position: from-font;
 			border: none;
 			background: transparent;
+			align-items: center;
 
 			span {
 				min-width: 160px;
 			}
+		}
+		.gradientLine {
+			margin: 0;
 		}
 	}
 }

@@ -27,6 +27,11 @@
 	position: relative;
 	padding: 20px 24px;
 
+	@media (max-width: 767px) {
+		padding: 12px;
+		max-height: 100vh;
+	}
+
 	// &::before {
 	// 	content: '';
 	// 	position: absolute;
@@ -50,7 +55,6 @@
 }
 
 .modalHeader {
-
 	.modalTitle {
 		color: #fff;
 		text-align: center;
@@ -62,6 +66,11 @@
 		letter-spacing: -0.4px;
 		padding-bottom: 14px;
 		text-align: center;
+
+		@media (max-width: 767px) {
+			padding-bottom: 0px;
+			font-size: 15px;
+		}
 	}
 
 	.closeButton {
@@ -80,6 +89,11 @@
 
 		&:hover {
 			background: rgba(255, 255, 255, 0.1);
+		}
+
+		@media (max-width: 767px) {
+			top: 10px;
+			right: 10px;
 		}
 	}
 }

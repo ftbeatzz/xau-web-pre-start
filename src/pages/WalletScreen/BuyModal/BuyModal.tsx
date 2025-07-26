@@ -9,6 +9,7 @@ import ShareIcon from '../../../icons/ShareIcon'
 import CopyIcon from '../../../icons/CopyIcon'
 import OperationsModal from '../../../components/OperationsModal'
 import type { OperationRow } from '../../../components/OperationsTable'
+import YellowArrowIcon from '../../../icons/YellowArrowIcon'
 
 const NETWORKS = [
 	{ key: 'trc20', label: 'Trc20' },
@@ -172,8 +173,12 @@ const BuyModal: React.FC<BuyModalProps> = ({ isOpen, onClose, tokenName }) => {
 								style={{ cursor: 'pointer' }}
 							>
 								<div>
-									<span>↑</span>
-									<span>↓</span>
+									<span>
+										<YellowArrowIcon />
+									</span>
+									<span>
+										<YellowArrowIcon />
+									</span>
 								</div>
 							</div>
 							{!isSwapped ? (
