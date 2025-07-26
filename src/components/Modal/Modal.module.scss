@@ -11,6 +11,10 @@
 	align-items: center;
 	z-index: 1000;
 	padding: 20px;
+
+	@media (max-width: 767px) {
+		padding: 0;
+	}
 }
 
 .modal {
@@ -30,6 +34,8 @@
 	@media (max-width: 767px) {
 		padding: 12px;
 		max-height: 100vh;
+		height: 100vh;
+		border-radius: 0;
 	}
 
 	// &::before {
@@ -134,10 +140,6 @@
 
 // Адаптивность
 @media (max-width: 768px) {
-	.modalOverlay {
-		padding: 16px;
-	}
-
 	.modal {
 		max-width: 100%;
 	}

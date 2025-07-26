@@ -43,6 +43,10 @@
 		justify-content: space-between;
 		padding-bottom: 20px;
 
+		@media (max-width: 767px) {
+			padding-bottom: 10px;
+		}
+
 		p {
 			color: #fff;
 			font-family: 'Noto Sans';
@@ -51,6 +55,10 @@
 			font-weight: 400;
 			line-height: 22px; /* 146.667% */
 			letter-spacing: -0.4px;
+
+			@media (max-width: 767px) {
+				font-size: 13px;
+			}
 		}
 	}
 	.limitsBtn {
@@ -83,6 +91,10 @@
 		font-weight: 400;
 		line-height: 20px; /* 142.857% */
 		margin-bottom: 6px;
+
+		@media (max-width: 767px) {
+			font-size: 12px;
+		}
 	}
 	.price {
 		display: flex;
@@ -111,6 +123,10 @@
 			font-weight: 400;
 			line-height: 22px; /* 146.667% */
 			letter-spacing: -0.4px;
+
+			@media (max-width: 767px) {
+				font-size: 13px;
+			}
 		}
 	}
 }
@@ -120,6 +136,10 @@
 	justify-content: center;
 	align-items: center;
 	margin: 16px 0px;
+
+	@media (max-width: 767px) {
+		margin: 10px 0px;
+	}
 
 	div {
 		display: flex;
@@ -155,6 +175,10 @@
 	font-weight: 400;
 	line-height: 20px; /* 142.857% */
 	margin-bottom: 10px;
+
+	@media (max-width: 767px) {
+		font-size: 12px;
+	}
 }
 
 .input {
@@ -170,6 +194,11 @@
 	font-style: normal;
 	font-weight: 300;
 	line-height: 20px; /* 133.333% */
+
+	@media (max-width: 767px) {
+		padding: 12px;
+	}
+
 	&::placeholder {
 		color: var(--grey, #9db2ce);
 		font-family: Unbounded;
