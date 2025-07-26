@@ -119,7 +119,7 @@ const PaxgChart: React.FC = () => {
 					setChartLoading(false)
 					if (results.every(arr => arr.length === 0)) {
 						// Fallback данные для демонстрации
-						const fallbackResults = PERIODS.map((period, idx) => {
+						const fallbackResults = PERIODS.map(period => {
 							const length = period.limit > 100 ? 30 : period.limit
 							return Array.from({ length }, (_, i) => ({
 								time: `${i.toString().padStart(2, '0')}:00`,
@@ -137,7 +137,7 @@ const PaxgChart: React.FC = () => {
 				console.error('Error loading PAXG chart data:', error)
 				if (isMounted) {
 					// Fallback данные для демонстрации
-					const fallbackResults = PERIODS.map((period, idx) => {
+					const fallbackResults = PERIODS.map(period => {
 						const length = period.limit > 100 ? 30 : period.limit
 						return Array.from({ length }, (_, i) => ({
 							time: `${i.toString().padStart(2, '0')}:00`,
