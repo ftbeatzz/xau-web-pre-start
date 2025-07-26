@@ -116,10 +116,6 @@
 		padding: 12px 14px;
 		margin-bottom: 16px;
 
-		@media (max-width: 767px) {
-			margin-bottom: 12px;
-		}
-
 		span {
 			color: #fff;
 			font-feature-settings: 'liga' off, 'clig' off;
@@ -159,10 +155,6 @@
 	backdrop-filter: blur(2px);
 	padding: 14px 12px;
 	margin-bottom: 20px;
-
-	@media (max-width: 767px) {
-		margin-bottom: 12px;
-	}
 
 	span {
 		display: flex;
@@ -207,10 +199,6 @@
 	font-size: 15px;
 	font-weight: 300;
 	margin-bottom: 20px;
-
-	@media (max-width: 767px) {
-		margin-bottom: 12px;
-	}
 
 	&::placeholder {
 		color: #9db2ce;
