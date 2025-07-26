@@ -38,6 +38,8 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-wrap: pretty;
+	/* CSS-переменная для корректной высоты на мобильных устройствах */
+	--vh: 1vh;
 }
 
 *,
