@@ -39,6 +39,7 @@
 
 .table {
 	width: 100%;
+	min-width: 400px;
 	border-collapse: collapse;
 	border-spacing: 0;
 	table-layout: fixed;
@@ -50,7 +51,6 @@
 	thead {
 		tr {
 			display: flex;
-			justify-content: space-between;
 			width: 100%;
 
 			th {
@@ -68,10 +68,20 @@
 
 				&:first-child {
 					padding-left: 0;
+					width: 35%;
+				}
+
+				&:nth-child(2) {
+					width: 25%;
+				}
+
+				&:nth-child(3) {
+					width: 20%;
 				}
 
 				&:last-child {
 					padding-right: 0;
+					width: 20%;
 				}
 			}
 		}
@@ -84,9 +94,7 @@
 
 		tr {
 			display: flex;
-			justify-content: space-between;
 			width: 100%;
-			gap: 14px;
 
 			&:hover {
 				background: rgba(157, 178, 206, 0.02);
@@ -110,10 +118,20 @@
 
 				&:first-child {
 					padding-left: 0;
+					width: 35%;
+				}
+
+				&:nth-child(2) {
+					width: 25%;
+				}
+
+				&:nth-child(3) {
+					width: 20%;
 				}
 
 				&:last-child {
 					padding-right: 0;
+					width: 20%;
 				}
 			}
 		}
@@ -127,14 +145,25 @@
 			tr {
 				th {
 					font-size: 12px;
-					padding: 12px 8px;
+					padding: 8px 8px;
+					flex: none;
 
 					&:first-child {
 						padding-left: 0;
+						width: 35%;
+					}
+
+					&:nth-child(2) {
+						width: 25%;
+					}
+
+					&:nth-child(3) {
+						width: 20%;
 					}
 
 					&:last-child {
 						padding-right: 0;
+						width: 20%;
 					}
 				}
 			}
@@ -143,15 +172,26 @@
 		tbody {
 			tr {
 				td {
-					font-size: 12px;
-					padding: 12px 8px;
+					font-size: 13px;
+					padding: 8px 8px;
+					flex: none;
 
 					&:first-child {
 						padding-left: 0;
+						width: 35%;
+					}
+
+					&:nth-child(2) {
+						width: 25%;
+					}
+
+					&:nth-child(3) {
+						width: 20%;
 					}
 
 					&:last-child {
 						padding-right: 0;
+						width: 20%;
 					}
 				}
 			}
