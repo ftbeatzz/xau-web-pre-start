@@ -32,7 +32,7 @@
 	line-height: 1;
 	color-scheme: light dark;
 	color: #fff;
-	background-color: #090F1A;
+	background-color: #090f1a;
 	font-synthesis: none;
 	text-rendering: optimizelegibility;
 	-webkit-font-smoothing: antialiased;
@@ -63,9 +63,21 @@
 	background-color: transparent;
 }
 
-button{
-  border: none;
+button {
+	border: none;
 	cursor: pointer;
+	/* Отключаем автоматические стили мобильных браузеров */
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	/* Отключаем синий цвет при нажатии на мобильных устройствах */
+	-webkit-appearance: none;
+	appearance: none;
+	background: transparent;
+	color: inherit;
 }
 
 a {
@@ -74,6 +86,10 @@ a {
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent; */
 	text-decoration: none;
+	/* Отключаем автоматические стили мобильных браузеров */
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	color: inherit;
 }
 
 /* a:hover {
@@ -86,6 +102,9 @@ body {
 	height: 100dvh;
 	overflow: auto;
 	/* touch-action: none !important; */
+	/* Отключаем автоматические стили мобильных браузеров */
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
 }
 
 #root {
@@ -105,4 +124,30 @@ h3 {
 ol,
 ul {
 	list-style: none;
+}
+
+/* Дополнительные правила для отключения автоматических стилей мобильных браузеров */
+input,
+textarea,
+select {
+	-webkit-tap-highlight-color: transparent;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+/* Отключаем синий цвет для всех интерактивных элементов на мобильных устройствах */
+* {
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* Специально для кнопок и ссылок */
+button,
+a,
+[role='button'] {
+	-webkit-tap-highlight-color: transparent !important;
+	-webkit-touch-callout: none !important;
+	-webkit-user-select: none !important;
+	-moz-user-select: none !important;
+	-ms-user-select: none !important;
+	user-select: none !important;
 }
