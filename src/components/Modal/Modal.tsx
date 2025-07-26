@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import styles from './Modal.module.scss'
 import CloseIcon from '../../icons/CloseIcon'
-import { useViewportHeight } from '../../hooks/useViewportHeight'
 
 interface ModalProps {
 	isOpen: boolean
@@ -11,9 +10,6 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
-	// Используем хук для динамической высоты viewport
-	useViewportHeight()
-
 	// Закрытие по Escape
 	useEffect(() => {
 		const handleEscape = (event: KeyboardEvent) => {

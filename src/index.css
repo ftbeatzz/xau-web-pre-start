@@ -38,8 +38,6 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-wrap: pretty;
-	/* CSS переменная для динамической высоты viewport */
-	--vh: 1vh;
 }
 
 *,
