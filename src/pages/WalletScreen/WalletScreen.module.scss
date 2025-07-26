@@ -24,6 +24,10 @@
 		line-height: 22px; /* 137.5% */
 		letter-spacing: -0.4px;
 		margin-bottom: 12px;
+
+		@media (max-width: 767px) {
+			font-size: 15px;
+		}
 	}
 
 	.top {
@@ -90,7 +94,7 @@
 						content: '';
 						position: absolute;
 						inset: 0;
-						border-radius: 10px;
+						border-radius: 10px 10px 0 0;
 						padding: 1px;
 						background: linear-gradient(
 							90deg,
@@ -113,6 +117,10 @@
 						flex-direction: column;
 						gap: 12px;
 
+						@media (max-width: 767px) {
+							gap: 6px;
+						}
+
 						.label {
 							display: flex;
 							justify-content: space-between;
@@ -125,6 +133,10 @@
 								font-weight: 400;
 								line-height: 22px; /* 122.222% */
 								letter-spacing: -0.4px;
+
+								@media (max-width: 767px) {
+									font-size: 15px;
+								}
 							}
 
 							.cardTitle {
@@ -152,6 +164,10 @@
 								font-weight: 400;
 								line-height: 22px; /* 146.667% */
 								letter-spacing: -0.4px;
+
+								@media (max-width: 767px) {
+									font-size: 13px;
+								}
 							}
 						}
 					}
@@ -187,6 +203,10 @@
 								font-weight: 500;
 								line-height: 22px; /* 137.5% */
 								letter-spacing: -0.4px;
+
+								@media (max-width: 767px) {
+									font-size: 15px;
+								}
 							}
 
 							div {
@@ -203,6 +223,10 @@
 									font-weight: 400;
 									line-height: 22px; /* 146.667% */
 									letter-spacing: -0.4px;
+
+									@media (max-width: 767px) {
+										font-size: 14px;
+									}
 								}
 							}
 						}
@@ -221,6 +245,18 @@
 								justify-content: center;
 								align-items: center;
 								position: relative;
+								color: #fff;
+								text-align: center;
+								font-feature-settings: 'liga' off, 'clig' off;
+								font-family: Unbounded;
+								font-size: 12px;
+								font-style: normal;
+								font-weight: 300;
+								line-height: normal;
+
+								@media (max-width: 767px) {
+									font-size: 10px;
+								}
 
 								&::before {
 									content: '';
@@ -273,6 +309,10 @@
 								font-weight: 400;
 								line-height: 22px; /* 137.5% */
 								letter-spacing: -0.4px;
+
+								@media (max-width: 767px) {
+									font-size: 14px;
+								}
 							}
 
 							span {
@@ -283,6 +323,10 @@
 								font-weight: 400;
 								line-height: 22px; /* 137.5% */
 								letter-spacing: -0.4px;
+
+								@media (max-width: 767px) {
+									font-size: 14px;
+								}
 							}
 						}
 					}
@@ -306,9 +350,21 @@
 							background: #0d1c2b;
 							width: 100%;
 							max-width: 95px;
+							color: #fff;
+							text-align: center;
+							font-feature-settings: 'liga' off, 'clig' off;
+							font-family: Unbounded;
+							font-size: 12px;
+							font-style: normal;
+							font-weight: 300;
+							line-height: normal;
 
 							@media (max-width: 1023px) {
 								max-width: 100%;
+							}
+
+							@media (max-width: 767px) {
+								font-size: 10px;
 							}
 
 							&::before {

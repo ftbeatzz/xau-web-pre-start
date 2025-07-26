@@ -6,12 +6,23 @@
 	gap: 12px;
 	height: 340px;
 
+	@media (max-width: 767px) {
+		height: 214px;
+	}
+
 	.emptyIcon {
 		border-radius: 8px;
 		border: 1px solid var(--block-stoke, rgba(255, 255, 255, 0.4));
 		background: rgba(9, 10, 22, 0.6);
 		box-shadow: 0px 4px 12px 0px rgba(255, 243, 176, 0.12);
 		padding: 12px;
+
+		@media (max-width: 767px) {
+			svg{
+				max-width: 16px;
+				max-height: 16px;
+			}
+		}
 	}
 
 	.emptyText {
@@ -24,6 +35,10 @@
 		font-weight: 200;
 		line-height: normal;
 		letter-spacing: -0.4px;
+
+		@media (max-width: 767px) {
+			font-size: 12px;
+		}
 	}
 }
 
