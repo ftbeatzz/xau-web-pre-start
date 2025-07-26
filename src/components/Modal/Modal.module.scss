@@ -14,6 +14,9 @@
 
 	@media (max-width: 767px) {
 		padding: 0;
+		/* Используем реальную высоту экрана для мобильных устройств */
+		height: 100vh; /* fallback */
+		height: calc(var(--vh, 1vh) * 100);
 	}
 }
 
@@ -33,9 +36,13 @@
 
 	@media (max-width: 767px) {
 		padding: 12px;
+		max-height: 100vh; /* fallback */
 		max-height: calc(var(--vh, 1vh) * 100);
+		height: 100vh; /* fallback */
 		height: calc(var(--vh, 1vh) * 100);
 		border-radius: 0;
+		width: 100%;
+		margin: 0;
 	}
 
 	// &::before {
