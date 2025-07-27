@@ -4,6 +4,20 @@
 	right: 0;
 	z-index: 1000;
 	margin-top: 8px;
+
+	@media (max-width: 767px) {
+		position: fixed;
+		top: 0;
+		left: 50%;
+		right: auto;
+		transform: translateX(-50%);
+		margin-top: 80px;
+		width: 100%;
+		height: auto;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+	}
 }
 
 .gradientLine {
@@ -29,6 +43,22 @@
 	backdrop-filter: blur(10px);
 	box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
 	padding: 16px;
+
+	@media (max-width: 767px) {
+		width: calc(100% - 32px);
+		max-width: 400px;
+		max-height: calc(100vh - 120px);
+		margin: 16px;
+		position: relative;
+		margin-top: 0px;
+	}
+
+	@media (max-width: 480px) {
+		width: calc(100% - 24px);
+		margin: 8px;
+		padding: 12px;
+		margin-top: 0px;
+	}
 
 	&::before {
 		content: '';
@@ -113,6 +143,11 @@
 	&:last-child {
 		margin-bottom: 0;
 	}
+
+	@media (max-width: 767px) {
+		padding: 16px 14px;
+		margin-bottom: 20px;
+	}
 }
 
 .sectionTitle {
@@ -165,6 +200,12 @@
 			background: rgba(255, 107, 107, 0.1);
 			border-color: rgba(255, 107, 107, 0.5);
 		}
+	}
+
+	@media (max-width: 767px) {
+		padding: 14px 16px;
+		font-size: 15px;
+		min-height: 48px;
 	}
 }
 
