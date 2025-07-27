@@ -17,9 +17,7 @@
 	);
 	height: 1px;
 	width: 100%;
-	margin-top: 8px;
-	margin-bottom: 24px;
-	max-width: 120px;
+	max-width: 90px;
 }
 
 .gradientLineTop {
@@ -243,6 +241,7 @@
 		.historyBtn {
 			gap: 15px;
 			display: flex;
+			align-items: center;
 			width: 100%;
 			color: #ffe34b;
 			text-align: center;
