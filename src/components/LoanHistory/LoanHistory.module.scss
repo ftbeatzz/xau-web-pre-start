@@ -7,6 +7,10 @@
 	flex: 1;
 	min-height: 340px;
 
+	@media (max-width: 767px) {
+		gap: 12px;
+	}
+
 	.emptyIcon {
 		border-radius: 8px;
 		border: 1px solid var(--block-stoke, rgba(255, 255, 255, 0.4));
@@ -14,11 +18,18 @@
 		box-shadow: 0px 4px 12px 0px rgba(255, 243, 176, 0.12);
 		padding: 12px;
 
-    svg{
-      width: 105px;
-      height: 105px;
-      
-    }
+		svg {
+			width: 105px;
+			height: 105px;
+		}
+
+		@media (max-width: 767px) {
+			padding: 20px;
+			svg {
+				width: 24px;
+				height: 24px;
+			}
+		}
 	}
 
 	.emptyText {
@@ -31,6 +42,16 @@
 		line-height: 27px; /* 96.429% */
 		letter-spacing: -0.4px;
 		max-width: 555px;
+
+		@media (max-width: 1023px) {
+			font-size: 24px;
+			max-width: 500px;
+		}
+
+		@media (max-width: 767px) {
+			font-size: 14px;
+			max-width: 288px;
+		}
 	}
 
 	.gradientLine {
@@ -40,21 +61,25 @@
 			#e1dcc3 50%,
 			rgba(239, 233, 207, 0.1) 97.12%
 		);
-    width: 100%;
-    height: 1px;
-    margin-top: 10px;
+		width: 100%;
+		height: 1px;
+		margin-top: 10px;
 	}
 }
 
 .tableContainer {
 	width: 100%;
 	overflow-x: auto;
-	overflow-y: hidden;
+	overflow-y: auto;
 	flex: 1;
 	min-height: 0;
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+
+	@media (max-width: 1023px) {
+		overflow-y: auto;
+	}
 }
 
 .table {
@@ -154,8 +179,8 @@
 		thead {
 			tr {
 				th {
-					font-size: 12px;
-					padding: 12px 8px;
+					font-size: 16px;
+					padding: 8px 8px;
 
 					&:first-child {
 						padding-left: 0;
@@ -171,8 +196,8 @@
 		tbody {
 			tr {
 				td {
-					font-size: 12px;
-					padding: 12px 8px;
+					font-size: 16px;
+					padding: 8px 8px;
 
 					&:first-child {
 						padding-left: 0;

@@ -326,6 +326,10 @@
 								@media (max-width: 767px) {
 									font-size: 14px;
 								}
+
+								@media (max-width: 390px) {
+									font-size: 10px;
+								}
 							}
 						}
 					}
@@ -568,6 +572,10 @@
 								@media (max-width: 767px) {
 									font-size: 14px;
 								}
+
+								@media (max-width: 390px) {
+									font-size: 10px;
+								}
 							}
 						}
 					}
@@ -659,9 +667,14 @@
 					gap: 16px;
 				}
 
+				@media (max-width: 402px) {
+					grid-template-columns: 1fr;
+				}
+
 				.headerItemGold {
 					display: flex;
 					gap: 4px;
+
 					& :nth-child(1) {
 						font-feature-settings: 'liga' off, 'clig' off;
 						font-family: 'Noto Sans';

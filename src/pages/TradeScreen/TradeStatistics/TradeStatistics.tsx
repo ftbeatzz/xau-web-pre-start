@@ -1,10 +1,84 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './TradeStatistics.module.scss'
 import Tabs from '../../../components/Tabs/Tabs'
 import TradeOrdersHistory from '../../../components/TradeOrdersHistory'
 import type { TradeOrderData } from '../../../components/TradeOrdersHistory'
 import XautIcon from '../../../icons/XautIcon'
 import PaxgIcon from '../../../icons/PaxgIcon'
+import DropDownArrow from '../../../icons/DropDownArrow'
+
+// Кастомный компонент для cexExchanges с переключением между табами и dropdown
+const CexExchangeSelector: React.FC<{
+	exchanges: Array<{ id: string; label: string }>
+	activeExchange: string
+	onExchangeChange: (exchangeId: string) => void
+	className?: string
+}> = ({ exchanges, activeExchange, onExchangeChange, className }) => {
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+	const [isMobile, setIsMobile] = useState(false)
+
+	// Определяем, является ли экран мобильным
+	useEffect(() => {
+		const checkIsMobile = () => {
+			setIsMobile(window.innerWidth < 1023)
+		}
+
+		checkIsMobile()
+		window.addEventListener('resize', checkIsMobile)
+
+		return () => window.removeEventListener('resize', checkIsMobile)
+	}, [])
+
+	const activeExchangeLabel =
+		exchanges.find(ex => ex.id === activeExchange)?.label || 'Toobit'
+
+	if (isMobile) {
+		return (
+			<div className={`${styles.dropdownContainer} ${className || ''}`}>
+				<button
+					className={styles.dropdownButton}
+					onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+				>
+					<span>{activeExchangeLabel}</span>
+					<div
+						className={`${styles.dropdownArrow} ${
+							isDropdownOpen ? styles.dropdownArrowUp : ''
+						}`}
+					>
+						<DropDownArrow />
+					</div>
+				</button>
+				{isDropdownOpen && (
+					<div className={styles.dropdownMenu}>
+						{exchanges.map(exchange => (
+							<button
+								key={exchange.id}
+								className={`${styles.dropdownItem} ${
+									activeExchange === exchange.id ? styles.active : ''
+								}`}
+								onClick={() => {
+									onExchangeChange(exchange.id)
+									setIsDropdownOpen(false)
+								}}
+							>
+								{exchange.label}
+							</button>
+						))}
+					</div>
+				)}
+			</div>
+		)
+	}
+
+	// На десктопе показываем обычные табы
+	return (
+		<Tabs
+			tabs={exchanges}
+			activeTab={activeExchange}
+			onTabChange={onExchangeChange}
+		/>
+	)
+}
 
 // Данные для истории торговых ордеров
 const tradeOrdersData: TradeOrderData[] = [
@@ -312,8 +386,8 @@ const tradeOrdersData: TradeOrderData[] = [
 
 // Данные для табов криптовалют
 const cryptoCurrencyTabs = [
-	{ id: 'xaut', label: 'Tether Gold (Xaut)' },
-	{ id: 'paxg', label: 'Pax Gold (PaxG)' },
+	{ id: 'xaut', label: 'Tether Gold (Xaut)', shortLabel: 'Xaut' },
+	{ id: 'paxg', label: 'Pax Gold (PaxG)', shortLabel: 'PaxG' },
 ]
 
 // Данные для CEX бирж
@@ -349,11 +423,10 @@ const TradeStatistics: React.FC = () => {
 				<div className={styles.exchangeSections}>
 					{/* CEX секция */}
 					<div className={styles.exchangeSection}>
-						<Tabs
-							tabs={cexExchanges}
-							activeTab={activeCexExchange}
-							onTabChange={setActiveCexExchange}
-							className={styles.exchangeTabs}
+						<CexExchangeSelector
+							exchanges={cexExchanges}
+							activeExchange={activeCexExchange}
+							onExchangeChange={setActiveCexExchange}
 						/>
 					</div>
 				</div>

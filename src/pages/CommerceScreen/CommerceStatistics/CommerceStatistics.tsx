@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './CommerceStatistics.module.scss'
 import Tabs from '../../../components/Tabs/Tabs'
 import OrdersHistoryXau from '../../../components/OrdersHistoryXau'
@@ -6,6 +6,7 @@ import type { OrderHistoryData } from '../../../components/OrdersHistoryXau'
 import XautIcon from '../../../icons/XautIcon'
 import PaxgIcon from '../../../icons/PaxgIcon'
 import UsdtIcon from '../../../icons/UsdtIcon'
+import DropDownArrow from '../../../icons/DropDownArrow'
 
 // Данные для блоков статистики
 const getCompanyAssetsData = (activeCrypto: string) => [
@@ -152,8 +153,8 @@ const orderHistoryData: OrderHistoryData[] = [
 
 // Данные для табов криптовалют
 const cryptoCurrencyTabs = [
-	{ id: 'xaut', label: 'Tether Gold (Xaut)' },
-	{ id: 'paxg', label: 'Pax Gold (PaxG)' },
+	{ id: 'xaut', label: 'Tether Gold (Xaut)', shortLabel: 'Xaut' },
+	{ id: 'paxg', label: 'Pax Gold (PaxG)', shortLabel: 'PaxG' },
 ]
 
 // Данные для DEX бирж
@@ -173,6 +174,152 @@ const cexExchanges = [
 	{ id: 'ourbit', label: 'Ourbit' },
 	{ id: 'okx', label: 'OKX' },
 ]
+
+// Кастомный компонент для dexExchanges с переключением между табами и dropdown
+const DexExchangeSelector: React.FC<{
+	exchanges: Array<{ id: string; label: string }>
+	activeExchange: string
+	onExchangeChange: (exchangeId: string) => void
+	className?: string
+}> = ({ exchanges, activeExchange, onExchangeChange, className }) => {
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+	const [isMobile, setIsMobile] = useState(false)
+
+	// Определяем, является ли экран мобильным
+	useEffect(() => {
+		const checkIsMobile = () => {
+			setIsMobile(window.innerWidth < 1023)
+		}
+
+		checkIsMobile()
+		window.addEventListener('resize', checkIsMobile)
+
+		return () => window.removeEventListener('resize', checkIsMobile)
+	}, [])
+
+	const activeExchangeLabel =
+		exchanges.find(ex => ex.id === activeExchange)?.label || 'Uniswap'
+
+	if (isMobile) {
+		return (
+			<div className={`${styles.dropdownContainer} ${className || ''}`}>
+				<button
+					className={styles.dropdownButton}
+					onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+				>
+					<span>{activeExchangeLabel}</span>
+					<div
+						className={`${styles.dropdownArrow} ${
+							isDropdownOpen ? styles.dropdownArrowUp : ''
+						}`}
+					>
+						<DropDownArrow />
+					</div>
+				</button>
+				{isDropdownOpen && (
+					<div className={styles.dropdownMenu}>
+						{exchanges.map(exchange => (
+							<button
+								key={exchange.id}
+								className={`${styles.dropdownItem} ${
+									activeExchange === exchange.id ? styles.active : ''
+								}`}
+								onClick={() => {
+									onExchangeChange(exchange.id)
+									setIsDropdownOpen(false)
+								}}
+							>
+								{exchange.label}
+							</button>
+						))}
+					</div>
+				)}
+			</div>
+		)
+	}
+
+	// На десктопе показываем обычные табы
+	return (
+		<Tabs
+			tabs={exchanges}
+			activeTab={activeExchange}
+			onTabChange={onExchangeChange}
+		/>
+	)
+}
+
+// Кастомный компонент для cexExchanges с переключением между табами и dropdown
+const CexExchangeSelector: React.FC<{
+	exchanges: Array<{ id: string; label: string }>
+	activeExchange: string
+	onExchangeChange: (exchangeId: string) => void
+	className?: string
+}> = ({ exchanges, activeExchange, onExchangeChange, className }) => {
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+	const [isMobile, setIsMobile] = useState(false)
+
+	// Определяем, является ли экран мобильным
+	useEffect(() => {
+		const checkIsMobile = () => {
+			setIsMobile(window.innerWidth < 1023)
+		}
+
+		checkIsMobile()
+		window.addEventListener('resize', checkIsMobile)
+
+		return () => window.removeEventListener('resize', checkIsMobile)
+	}, [])
+
+	const activeExchangeLabel =
+		exchanges.find(ex => ex.id === activeExchange)?.label || 'Toobit'
+
+	if (isMobile) {
+		return (
+			<div className={`${styles.dropdownContainer} ${className || ''}`}>
+				<button
+					className={styles.dropdownButton}
+					onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+				>
+					<span>{activeExchangeLabel}</span>
+					<div
+						className={`${styles.dropdownArrow} ${
+							isDropdownOpen ? styles.dropdownArrowUp : ''
+						}`}
+					>
+						<DropDownArrow />
+					</div>
+				</button>
+				{isDropdownOpen && (
+					<div className={styles.dropdownMenu}>
+						{exchanges.map(exchange => (
+							<button
+								key={exchange.id}
+								className={`${styles.dropdownItem} ${
+									activeExchange === exchange.id ? styles.active : ''
+								}`}
+								onClick={() => {
+									onExchangeChange(exchange.id)
+									setIsDropdownOpen(false)
+								}}
+							>
+								{exchange.label}
+							</button>
+						))}
+					</div>
+				)}
+			</div>
+		)
+	}
+
+	// На десктопе показываем обычные табы
+	return (
+		<Tabs
+			tabs={exchanges}
+			activeTab={activeExchange}
+			onTabChange={onExchangeChange}
+		/>
+	)
+}
 
 const CommerceStatistics: React.FC = () => {
 	const [activeCrypto, setActiveCrypto] = useState('xaut')
@@ -200,11 +347,10 @@ const CommerceStatistics: React.FC = () => {
 						<h3 className={styles.sectionTitle}>
 							Децентрализованная биржа (DEX)
 						</h3>
-						<Tabs
-							tabs={dexExchanges}
-							activeTab={activeDexExchange}
-							onTabChange={setActiveDexExchange}
-							className={styles.exchangeTabs}
+						<DexExchangeSelector
+							exchanges={dexExchanges}
+							activeExchange={activeDexExchange}
+							onExchangeChange={setActiveDexExchange}
 						/>
 					</div>
 
@@ -213,11 +359,10 @@ const CommerceStatistics: React.FC = () => {
 						<h3 className={styles.sectionTitle}>
 							Централизованная биржа (CEX)
 						</h3>
-						<Tabs
-							tabs={cexExchanges}
-							activeTab={activeCexExchange}
-							onTabChange={setActiveCexExchange}
-							className={styles.exchangeTabs}
+						<CexExchangeSelector
+							exchanges={cexExchanges}
+							activeExchange={activeCexExchange}
+							onExchangeChange={setActiveCexExchange}
 						/>
 					</div>
 				</div>

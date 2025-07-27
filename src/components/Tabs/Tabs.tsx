@@ -4,6 +4,7 @@ import styles from './Tabs.module.scss'
 export interface TabItem {
 	id: string
 	label: string
+	shortLabel?: string // Сокращенное название для мобильных устройств
 }
 
 interface TabsProps {
@@ -29,7 +30,14 @@ const Tabs: React.FC<TabsProps> = ({
 					}`}
 					onClick={() => onTabChange(tab.id)}
 				>
-					{tab.label}
+					{tab.shortLabel ? (
+						<>
+							<span className={styles.fullLabel}>{tab.label}</span>
+							<span className={styles.shortLabel}>{tab.shortLabel}</span>
+						</>
+					) : (
+						tab.label
+					)}
 				</button>
 			))}
 		</div>

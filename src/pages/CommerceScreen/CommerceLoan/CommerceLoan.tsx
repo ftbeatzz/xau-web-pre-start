@@ -6,8 +6,8 @@ import type { LoanHistoryData } from '../../../components/LoanHistory'
 
 // Данные для табов криптовалют
 const cryptoCurrencyTabs = [
-	{ id: 'xaut', label: 'Tether Gold (Xaut)' },
-	{ id: 'paxg', label: 'Pax Gold (PaxG)' },
+	{ id: 'xaut', label: 'Tether Gold (Xaut)', shortLabel: 'Xaut' },
+	{ id: 'paxg', label: 'Pax Gold (PaxG)', shortLabel: 'PaxG' },
 ]
 
 // Данные для истории займов PaxG

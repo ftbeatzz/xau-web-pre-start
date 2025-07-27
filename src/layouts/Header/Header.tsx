@@ -497,6 +497,11 @@ const Header: React.FC = () => {
 							>
 								{t('free')}
 							</NavLink>
+
+							{/* Language Switcher в мобильном меню */}
+							<div className={styles.mobileLangSwitcher}>
+								<LanguageSwitcher />
+							</div>
 						</nav>
 					</div>
 				)}

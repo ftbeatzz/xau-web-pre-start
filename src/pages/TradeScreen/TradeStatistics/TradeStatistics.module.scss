@@ -12,6 +12,11 @@
 		padding: 12px 24px;
 		max-height: 100%;
 	}
+
+	@media (max-width: 767px) {
+		padding: 12px 12px;
+		max-height: 100%;
+	}
 }
 
 .sectionTitle {
@@ -47,6 +52,78 @@
 .cryptoSection {
 	.cryptoTabs {
 		width: 100%;
+	}
+}
+
+// Стили для dropdown в CexExchangeSelector
+.dropdownContainer {
+	position: relative;
+	width: 100%;
+}
+
+.dropdownButton {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 12px 16px;
+	border-radius: 18px;
+	background: #0d1c2b;
+	color: #fff;
+	font-family: Unbounded;
+	font-size: 14px;
+	font-weight: 300;
+	cursor: pointer;
+	transition: all 0.3s ease;
+
+	&:hover {
+		border-color: rgba(255, 227, 75, 0.5);
+	}
+}
+
+.dropdownArrow {
+	transition: transform 0.3s ease;
+}
+
+.dropdownArrowUp {
+	transform: rotate(180deg);
+}
+
+.dropdownMenu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	background: #0d1c2b;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 12px;
+	margin-top: 4px;
+	z-index: 1000;
+	overflow: hidden;
+}
+
+.dropdownItem {
+	display: block;
+	width: 100%;
+	padding: 12px 16px;
+	border: none;
+	background: transparent;
+	color: #fff;
+	font-family: Unbounded;
+	font-size: 14px;
+	font-weight: 300;
+	text-align: left;
+	cursor: pointer;
+	transition: all 0.3s ease;
+
+	&:hover {
+		background: rgba(255, 227, 75, 0.1);
+	}
+
+	&.active {
+		background: #ffe34b;
+		color: #000;
+		font-weight: 500;
 	}
 }
 
@@ -166,7 +243,6 @@
 	font-weight: 300;
 	line-height: 22px; /* 122.222% */
 	letter-spacing: -0.4px;
-	padding-bottom: 6px;
 
 	@media (max-width: 1023px) {
 		font-size: 14px;
@@ -222,6 +298,18 @@
 	&.highlightedValue {
 		font-size: 20px;
 		font-weight: 500;
+	}
+
+	@media (max-width: 1023px) {
+		svg {
+			max-width: 23px;
+		}
+	}
+
+	@media (max-width: 767px) {
+		svg {
+			max-width: 16px;
+		}
 	}
 }
 
@@ -439,10 +527,6 @@
 		gap: 24px;
 	}
 
-	.realTimeOrder {
-		padding: 16px;
-	}
-
 	.orderBlocks {
 		grid-template-columns: 1fr;
 		gap: 16px;
@@ -461,7 +545,7 @@
 
 	.sectionTitle,
 	.blockTitle {
-		font-size: 16px;
+		font-size: 14px;
 	}
 
 	.assetTitle,

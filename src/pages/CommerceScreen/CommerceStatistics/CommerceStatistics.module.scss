@@ -12,6 +12,11 @@
 		padding: 12px 24px;
 		max-height: 100%;
 	}
+
+	@media (max-width: 767px) {
+		padding: 12px 12px;
+		max-height: 100%;
+	}
 }
 
 .sectionTitle {
@@ -26,6 +31,10 @@
 
 	@media (max-width: 1023px) {
 		font-size: 16px;
+	}
+
+	@media (max-width: 767px) {
+		font-size: 14px;
 	}
 }
 
@@ -51,6 +60,78 @@
 .cryptoSection {
 	.cryptoTabs {
 		width: 100%;
+	}
+}
+
+// Стили для dropdown в DexExchangeSelector и CexExchangeSelector
+.dropdownContainer {
+	position: relative;
+	width: 100%;
+}
+
+.dropdownButton {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 12px 16px;
+	border-radius: 18px;
+	background: #0d1c2b;
+	color: #fff;
+	font-family: Unbounded;
+	font-size: 14px;
+	font-weight: 300;
+	cursor: pointer;
+	transition: all 0.3s ease;
+
+	&:hover {
+		border-color: rgba(255, 227, 75, 0.5);
+	}
+}
+
+.dropdownArrow {
+	transition: transform 0.3s ease;
+}
+
+.dropdownArrowUp {
+	transform: rotate(180deg);
+}
+
+.dropdownMenu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	background: #0d1c2b;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 12px;
+	margin-top: 4px;
+	z-index: 1000;
+	overflow: hidden;
+}
+
+.dropdownItem {
+	display: block;
+	width: 100%;
+	padding: 12px 16px;
+	border: none;
+	background: transparent;
+	color: #fff;
+	font-family: Unbounded;
+	font-size: 14px;
+	font-weight: 300;
+	text-align: left;
+	cursor: pointer;
+	transition: all 0.3s ease;
+
+	&:hover {
+		background: rgba(255, 227, 75, 0.1);
+	}
+
+	&.active {
+		background: #ffe34b;
+		color: #000;
+		font-weight: 500;
 	}
 }
 
@@ -81,6 +162,7 @@
 
 // Real time order секция
 .realTimeOrder {
+	position: relative;
 	border-radius: 12px;
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	background: var(
@@ -101,6 +183,12 @@
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 12px;
+
+	@media (max-width: 767px) {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+	}
 }
 
 .realTimeTitle {
@@ -111,6 +199,10 @@
 	font-weight: 300;
 	line-height: 22px; /* 122.222% */
 	letter-spacing: -0.4px;
+
+	@media (max-width: 767px) {
+		font-size: 14px;
+	}
 }
 
 .profitSummary {
@@ -123,6 +215,10 @@
 		font-weight: 300;
 		line-height: 22px; /* 122.222% */
 		letter-spacing: -0.4px;
+
+		@media (max-width: 767px) {
+			font-size: 14px;
+		}
 	}
 }
 
@@ -192,6 +288,10 @@
 		font-weight: 400;
 		line-height: 22px; /* 122.222% */
 		letter-spacing: -0.4px;
+
+		@media (max-width: 767px) {
+			font-size: 14px;
+		}
 	}
 }
 
@@ -215,6 +315,12 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+
+	span {
+		@media (max-width: 767px) {
+			font-size: 14px;
+		}
+	}
 }
 
 .orderLabel {
@@ -310,6 +416,10 @@
 	line-height: 22px; /* 122.222% */
 	letter-spacing: -0.4px;
 	margin-bottom: 12px;
+
+	@media (max-width: 767px) {
+		font-size: 14px;
+	}
 }
 
 .assetsGrid {
@@ -323,6 +433,12 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+
+	@media (max-width: 767px) {
+		span {
+			font-size: 14px;
+		}
+	}
 }
 
 .assetTitle {
@@ -360,6 +476,10 @@
 		justify-content: space-between;
 	}
 
+	@media (max-width: 767px) {
+		flex-direction: column;
+	}
+
 	&::before {
 		content: '';
 		position: absolute;
@@ -395,6 +515,10 @@
 	font-weight: 400;
 	line-height: 22px; /* 146.667% */
 	letter-spacing: -0.4px;
+
+	@media (max-width: 767px) {
+		font-size: 12px;
+	}
 }
 
 .earningValueWrapper {
@@ -402,6 +526,15 @@
 	align-items: center;
 	gap: 8px;
 	padding-top: 10px;
+
+	@media (max-width: 767px) {
+		gap: 4px;
+		padding-top: 6px;
+
+		svg {
+			max-width: 25px;
+		}
+	}
 }
 
 .earningValue {
@@ -413,6 +546,10 @@
 	font-weight: 400;
 	line-height: 22px; /* 68.75% */
 	letter-spacing: -0.4px;
+
+	@media (max-width: 767px) {
+		font-size: 26px;
+	}
 }
 
 .earningIcon {
@@ -440,63 +577,4 @@
 	height: 100%;
 	width: 100%;
 	overflow: auto;
-}
-
-// Адаптивность для мобильных устройств
-@media (max-width: 768px) {
-	.commerceStatistics {
-		padding: 16px;
-		gap: 16px;
-	}
-
-	.exchangeSections {
-		grid-template-columns: 1fr;
-		gap: 24px;
-	}
-
-	.realTimeOrder {
-		padding: 16px;
-	}
-
-	.realTimeHeader {
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 12px;
-	}
-
-	.orderColumns {
-		grid-template-columns: 1fr;
-		gap: 16px;
-	}
-
-	.statsBlocks {
-		grid-template-columns: 1fr;
-		gap: 16px;
-		height: auto;
-	}
-
-	.companyAssets,
-	.orderHistory {
-		padding: 16px;
-	}
-
-	.sectionTitle,
-	.blockTitle,
-	.realTimeTitle {
-		font-size: 16px;
-	}
-
-	.assetTitle,
-	.assetValue,
-	.earningTitle,
-	.earningValue,
-	.profitLabel,
-	.profitValue {
-		font-size: 14px;
-	}
-
-	.orderLabel,
-	.orderValue {
-		font-size: 12px;
-	}
 }

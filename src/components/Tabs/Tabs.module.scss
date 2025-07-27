@@ -43,3 +43,19 @@
 		box-shadow: 0 2px 8px rgba(255, 227, 75, 0.3);
 	}
 }
+
+.fullLabel {
+	display: block;
+
+	@media (max-width: 767px) {
+		display: none;
+	}
+}
+
+.shortLabel {
+	display: none;
+
+	@media (max-width: 767px) {
+		display: block;
+	}
+}
