@@ -4,18 +4,23 @@ import Modal from '../Modal/Modal'
 import LimitsIcon from '../../icons/LimitsIcon'
 import SellIcon from '../../icons/SellIcon'
 import SmallXaut from '../../icons/SmallXaut'
-import OperationsModal from '../OperationsModal'
+import type { OperationRow } from '../OperationsTable'
 
 const NETWORKS = [
 	{ key: 'trc20', label: 'Trc20' },
 	{ key: 'erc20', label: 'Erc20' },
+	{ key: 'ton', label: 'TON' },
 ]
 
 interface MarketingSellModalProps {
 	isOpen: boolean
 	onClose: () => void
 	tokenBalance: string
-	onOpenOperationsModal?: () => void
+	onOpenOperationsModal?: (
+		data: { [key: string]: OperationRow[] },
+		initialToken: string,
+		type: 'buy' | 'sell' | 'withdraw' | 'deposit'
+	) => void
 }
 
 const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
@@ -28,6 +33,33 @@ const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 	const [usdtAmount, setUsdtAmount] = useState('')
 	const [selectedNetwork, setSelectedNetwork] = useState('trc20')
 	const [walletAddress, setWalletAddress] = useState('')
+	const [history] = useState<{ [key: string]: OperationRow[] }>({
+		xaut: [
+			{
+				id: '1',
+				type: 'Продажа',
+				amount: '- 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
+			{
+				id: '2',
+				type: 'Продажа',
+				amount: '- 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
+		],
+	})
+
+	// Обработчик открытия OperationsModal
+	const handleOpenOperationsModal = () => {
+		if (onOpenOperationsModal) {
+			onOpenOperationsModal(history, 'xaut', 'sell')
+		}
+		// Закрываем MarketingSellModal при открытии OperationsModal
+		onClose()
+	}
 
 	// Пример курса
 	const price = 3356.68
@@ -121,7 +153,7 @@ const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 								<button
 									type='button'
 									className={styles.historyBtn}
-									onClick={onOpenOperationsModal}
+									onClick={handleOpenOperationsModal}
 								>
 									<div className={styles.gradientLine}></div>
 									<span>История продаж</span>
@@ -176,7 +208,7 @@ const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 								<button
 									type='button'
 									className={styles.historyBtn}
-									onClick={onOpenOperationsModal}
+									onClick={handleOpenOperationsModal}
 								>
 									<div className={styles.gradientLine}></div>
 									<span>История продаж</span>
@@ -187,13 +219,13 @@ const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 					)}
 				</div>
 			</div>
-			<OperationsModal
+			{/* OperationsModal
 				isOpen={false} // This state is now managed by the parent
 				onClose={() => {}} // This state is now managed by the parent
 				type={'sell'}
 				data={{ xaut: [] }} // This state is now managed by the parent
 				initialToken={'xaut'}
-			/>
+			/> */}
 		</Modal>
 	)
 }

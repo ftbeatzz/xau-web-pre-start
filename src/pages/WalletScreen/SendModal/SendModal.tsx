@@ -7,7 +7,6 @@ import LimitsIcon from '../../../icons/LimitsIcon'
 import SendIcon from '../../../icons/SendIcon'
 import SmallXaut from '../../../icons/SmallXaut'
 import SmallPaxg from '../../../icons/SmallPaxg'
-import OperationsModal from '../../../components/OperationsModal'
 import type { OperationRow } from '../../../components/OperationsTable'
 
 interface SendModalProps {
@@ -15,12 +14,18 @@ interface SendModalProps {
 	onClose: () => void
 	tokenName: string
 	tokenBalance: string
+	onOpenOperationsModal?: (
+		data: { [key: string]: OperationRow[] },
+		initialToken: string,
+		type: 'buy' | 'sell' | 'withdraw' | 'deposit'
+	) => void
 }
 
 const SendModal: React.FC<SendModalProps> = ({
 	isOpen,
 	onClose,
 	tokenName,
+	onOpenOperationsModal,
 }) => {
 	const tabItems = [
 		{ id: 'xaut', label: 'Xaut' },
@@ -34,7 +39,6 @@ const SendModal: React.FC<SendModalProps> = ({
 	const [amount, setAmount] = useState('')
 	const [address, setAddress] = useState('')
 	const [code, setCode] = useState('')
-	const [operationsModalOpen, setOperationsModalOpen] = useState(false)
 	const [history] = useState<{ [key: string]: OperationRow[] }>({
 		xaut: [],
 		paxg: [
@@ -54,6 +58,15 @@ const SendModal: React.FC<SendModalProps> = ({
 			},
 		],
 	})
+
+	// Обработчик открытия OperationsModal
+	const handleOpenOperationsModal = () => {
+		if (onOpenOperationsModal) {
+			onOpenOperationsModal(history, activeTab, 'withdraw')
+		}
+		// Закрываем SendModal при открытии OperationsModal
+		onClose()
+	}
 
 	// Примерные данные, заменить на реальные при интеграции
 	const inWork = activeTab === 'xaut' ? '1,857,757.0035' : '2,157,757.0035'
@@ -161,7 +174,7 @@ const SendModal: React.FC<SendModalProps> = ({
 							<button
 								type='button'
 								className={styles.historyBtn}
-								onClick={() => setOperationsModalOpen(true)}
+								onClick={handleOpenOperationsModal}
 							>
 								<div className={styles.gradientLine}></div>
 								<span>История выводов</span>
@@ -171,13 +184,6 @@ const SendModal: React.FC<SendModalProps> = ({
 					</form>
 				</div>
 			</div>
-			<OperationsModal
-				isOpen={operationsModalOpen}
-				onClose={() => setOperationsModalOpen(false)}
-				type={'withdraw'}
-				data={history}
-				initialToken={activeTab}
-			/>
 		</Modal>
 	)
 }

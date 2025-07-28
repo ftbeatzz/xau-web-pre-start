@@ -7,9 +7,16 @@ interface ModalProps {
 	onClose: () => void
 	title: React.ReactNode
 	children: React.ReactNode
+	zIndex?: number // Добавляем поддержку кастомного z-index
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
+const Modal: React.FC<ModalProps> = ({
+	isOpen,
+	onClose,
+	title,
+	children,
+	zIndex = 1000,
+}) => {
 	// Закрытие по Escape
 	useEffect(() => {
 		const handleEscape = (event: KeyboardEvent) => {
@@ -39,7 +46,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
 	if (!isOpen) return null
 
 	return (
-		<div className={styles.modalOverlay} onClick={handleBackdropClick}>
+		<div
+			className={styles.modalOverlay}
+			onClick={handleBackdropClick}
+			style={{ zIndex }}
+		>
 			<div className={styles.modal}>
 				<div className={styles.modalHeader}>
 					<h3 className={styles.modalTitle}>{title}</h3>

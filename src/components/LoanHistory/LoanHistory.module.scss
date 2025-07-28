@@ -100,6 +100,10 @@
 			width: 100%;
 			gap: 20px;
 
+			@media (max-width: 767px) {
+				gap: 32px;
+			}
+
 			th {
 				color: #7e7c7c;
 				font-family: 'Noto Sans';
@@ -137,6 +141,7 @@
 			justify-content: space-between;
 			width: 100%;
 			gap: 32px;
+			
 
 			&:hover {
 				background: rgba(157, 178, 206, 0.02);
@@ -179,7 +184,7 @@
 		thead {
 			tr {
 				th {
-					font-size: 16px;
+					font-size: 14px;
 					padding: 8px 8px;
 
 					&:first-child {
@@ -196,7 +201,7 @@
 		tbody {
 			tr {
 				td {
-					font-size: 16px;
+					font-size: 14px;
 					padding: 8px 8px;
 
 					&:first-child {

@@ -1,9 +1,9 @@
 import React from 'react'
-import Modal from '../Modal/Modal'
 import Tabs from '../Tabs/Tabs'
 import type { OperationRow } from '../OperationsTable'
 import OperationsTable from '../OperationsTable'
 import styles from './OperationsModal.module.scss'
+import CloseIcon from '../../icons/CloseIcon'
 
 export type OperationType = 'buy' | 'sell' | 'withdraw' | 'deposit'
 
@@ -13,6 +13,7 @@ interface OperationsModalProps {
 	type: OperationType
 	data: { [key: string]: OperationRow[] } // { xaut: [...], paxg: [...] }
 	initialToken?: string // 'xaut' или 'paxg'
+	zIndex?: number
 }
 
 const TITLES: Record<OperationType, string> = {
@@ -28,6 +29,7 @@ const OperationsModal: React.FC<OperationsModalProps> = ({
 	type,
 	data,
 	initialToken = 'xaut',
+	zIndex = 1100,
 }) => {
 	const tabs = [
 		{ id: 'xaut', label: 'Xaut' },
@@ -38,27 +40,68 @@ const OperationsModal: React.FC<OperationsModalProps> = ({
 		if (isOpen) setActiveToken(initialToken)
 	}, [isOpen, initialToken])
 	const currentData = data[activeToken] || []
+
+	// Закрытие по Escape
+	React.useEffect(() => {
+		const handleEscape = (event: KeyboardEvent) => {
+			if (event.key === 'Escape') {
+				onClose()
+			}
+		}
+
+		if (isOpen) {
+			document.addEventListener('keydown', handleEscape)
+			document.body.style.overflow = 'hidden'
+		}
+
+		return () => {
+			document.removeEventListener('keydown', handleEscape)
+			document.body.style.overflow = 'unset'
+		}
+	}, [isOpen, onClose])
+
+	// Закрытие по клику вне модального окна
+	const handleBackdropClick = (event: React.MouseEvent) => {
+		if (event.target === event.currentTarget) {
+			onClose()
+		}
+	}
+
+	if (!isOpen) return null
+
 	return (
-		<Modal
-			isOpen={isOpen}
-			onClose={onClose}
-			title={`${TITLES[type]} ${
-				tabs.find(t => t.id === activeToken)?.label || ''
-			}`}
+		<div
+			className={styles.modalOverlay}
+			onClick={handleBackdropClick}
+			style={{ zIndex }}
 		>
-			<div className={styles.tabsWrapper}>
-        <div className={styles.gradientLine}></div>
-				<h3>Выбор криптовалюты</h3>
-				<Tabs
-					tabs={tabs}
-					activeTab={activeToken}
-					onTabChange={setActiveToken}
-				/>
+			<div className={styles.modal}>
+				<div className={styles.modalHeader}>
+					<h3 className={styles.modalTitle}>
+						{`${TITLES[type]} ${
+							tabs.find(t => t.id === activeToken)?.label || ''
+						}`}
+					</h3>
+					<button className={styles.closeButton} onClick={onClose}>
+						<CloseIcon />
+					</button>
+				</div>
+				<div className={styles.modalContent}>
+					<div className={styles.tabsWrapper}>
+						<div className={styles.gradientLine}></div>
+						<h3>Выбор криптовалюты</h3>
+						<Tabs
+							tabs={tabs}
+							activeTab={activeToken}
+							onTabChange={setActiveToken}
+						/>
+					</div>
+					<div className={styles.content}>
+						<OperationsTable data={currentData} />
+					</div>
+				</div>
 			</div>
-			<div className={styles.content}>
-				<OperationsTable data={currentData} />
-			</div>
-		</Modal>
+		</div>
 	)
 }
 

@@ -6,13 +6,17 @@ import { useTabs } from '../../../hooks/useTabs'
 import LimitsIcon from '../../../icons/LimitsIcon'
 import CopyIcon from '../../../icons/CopyIcon'
 import ShareIcon from '../../../icons/ShareIcon'
-import OperationsModal from '../../../components/OperationsModal'
 import type { OperationRow } from '../../../components/OperationsTable'
 
 interface GetModalProps {
 	isOpen: boolean
 	onClose: () => void
 	tokenName: string
+	onOpenOperationsModal?: (
+		data: { [key: string]: OperationRow[] },
+		initialToken: string,
+		type: 'buy' | 'sell' | 'withdraw' | 'deposit'
+	) => void
 }
 
 const addresses = {
@@ -24,7 +28,12 @@ const addresses = {
 	},
 }
 
-const GetModal: React.FC<GetModalProps> = ({ isOpen, onClose, tokenName }) => {
+const GetModal: React.FC<GetModalProps> = ({
+	isOpen,
+	onClose,
+	tokenName,
+	onOpenOperationsModal,
+}) => {
 	const tabItems = [
 		{ id: 'xaut', label: 'Xaut' },
 		{ id: 'paxg', label: 'PaxG' },
@@ -34,7 +43,6 @@ const GetModal: React.FC<GetModalProps> = ({ isOpen, onClose, tokenName }) => {
 		tokenName.toLowerCase()
 	)
 	const current = addresses[activeTab as 'xaut' | 'paxg']
-	const [operationsModalOpen, setOperationsModalOpen] = React.useState(false)
 	const [history] = React.useState<{ [key: string]: OperationRow[] }>({
 		xaut: [],
 		paxg: [
@@ -54,6 +62,15 @@ const GetModal: React.FC<GetModalProps> = ({ isOpen, onClose, tokenName }) => {
 			},
 		],
 	})
+
+	// Обработчик открытия OperationsModal
+	const handleOpenOperationsModal = () => {
+		if (onOpenOperationsModal) {
+			onOpenOperationsModal(history, activeTab, 'deposit')
+		}
+		// Закрываем GetModal при открытии OperationsModal
+		onClose()
+	}
 
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} title={`Выбор криптовалюты`}>
@@ -115,7 +132,7 @@ const GetModal: React.FC<GetModalProps> = ({ isOpen, onClose, tokenName }) => {
 					<div className={styles.historyBtnWrapper}>
 						<button
 							className={styles.historyBtn}
-							onClick={() => setOperationsModalOpen(true)}
+							onClick={handleOpenOperationsModal}
 						>
 							<div className={styles.gradientLine}></div>
 							<span>История Пополнений</span>
@@ -124,13 +141,6 @@ const GetModal: React.FC<GetModalProps> = ({ isOpen, onClose, tokenName }) => {
 					</div>
 				</div>
 			</div>
-			<OperationsModal
-				isOpen={operationsModalOpen}
-				onClose={() => setOperationsModalOpen(false)}
-				type={'deposit'}
-				data={history}
-				initialToken={activeTab}
-			/>
 		</Modal>
 	)
 }

@@ -7,12 +7,12 @@ import LimitsIcon from '../../../icons/LimitsIcon'
 import SellIcon from '../../../icons/SellIcon'
 import SmallXaut from '../../../icons/SmallXaut'
 import SmallPaxg from '../../../icons/SmallPaxg'
-import OperationsModal from '../../../components/OperationsModal'
 import type { OperationRow } from '../../../components/OperationsTable'
 
 const NETWORKS = [
 	{ key: 'trc20', label: 'Trc20' },
 	{ key: 'erc20', label: 'Erc20' },
+	{ key: 'ton', label: 'TON' },
 ]
 
 interface SellModalProps {
@@ -20,6 +20,11 @@ interface SellModalProps {
 	onClose: () => void
 	tokenName: string
 	tokenBalance: string
+	onOpenOperationsModal?: (
+		data: { [key: string]: OperationRow[] },
+		initialToken: string,
+		type: 'buy' | 'sell' | 'withdraw' | 'deposit'
+	) => void
 }
 
 const prices = {
@@ -31,6 +36,7 @@ const SellModal: React.FC<SellModalProps> = ({
 	isOpen,
 	onClose,
 	tokenName,
+	onOpenOperationsModal,
 }) => {
 	const tabItems = [
 		{ id: 'xaut', label: 'Xaut' },
@@ -47,7 +53,6 @@ const SellModal: React.FC<SellModalProps> = ({
 	const [selectedNetwork, setSelectedNetwork] = useState('trc20')
 	const [walletAddress, setWalletAddress] = useState('')
 	const [code, setCode] = useState('')
-	const [operationsModalOpen, setOperationsModalOpen] = useState(false)
 	const [history] = useState<{ [key: string]: OperationRow[] }>({
 		xaut: [],
 		paxg: [
@@ -67,6 +72,15 @@ const SellModal: React.FC<SellModalProps> = ({
 			},
 		],
 	})
+
+	// Обработчик открытия OperationsModal
+	const handleOpenOperationsModal = () => {
+		if (onOpenOperationsModal) {
+			onOpenOperationsModal(history, activeTab, 'sell')
+		}
+		// Закрываем SellModal при открытии OperationsModal
+		onClose()
+	}
 
 	// Пример курса
 	const price = prices[activeTab as keyof typeof prices]
@@ -171,7 +185,7 @@ const SellModal: React.FC<SellModalProps> = ({
 								<button
 									type='button'
 									className={styles.historyBtn}
-									onClick={() => setOperationsModalOpen(true)}
+									onClick={handleOpenOperationsModal}
 								>
 									<div className={styles.gradientLine}></div>
 									<span>История продаж</span>
@@ -238,7 +252,7 @@ const SellModal: React.FC<SellModalProps> = ({
 							<div className={styles.historyBtnWrapper}>
 								<button
 									className={styles.historyBtn}
-									onClick={() => setOperationsModalOpen(true)}
+									onClick={handleOpenOperationsModal}
 								>
 									<div className={styles.gradientLine}></div>
 									<span>История продаж</span>
@@ -249,13 +263,6 @@ const SellModal: React.FC<SellModalProps> = ({
 					)}
 				</div>
 			</div>
-			<OperationsModal
-				isOpen={operationsModalOpen}
-				onClose={() => setOperationsModalOpen(false)}
-				type={'sell'}
-				data={history}
-				initialToken={activeTab}
-			/>
 		</Modal>
 	)
 }

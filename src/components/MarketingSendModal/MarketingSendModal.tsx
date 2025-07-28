@@ -4,14 +4,17 @@ import Modal from '../Modal/Modal'
 import LimitsIcon from '../../icons/LimitsIcon'
 import SendIcon from '../../icons/SendIcon'
 import SmallXaut from '../../icons/SmallXaut'
-import OperationsModal from '../OperationsModal'
 import type { OperationRow } from '../OperationsTable'
 
 interface MarketingSendModalProps {
 	isOpen: boolean
 	onClose: () => void
 	tokenBalance: string
-	onOpenOperationsModal?: () => void
+	onOpenOperationsModal?: (
+		data: { [key: string]: OperationRow[] },
+		initialToken: string,
+		type: 'buy' | 'sell' | 'withdraw' | 'deposit'
+	) => void
 }
 
 const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
@@ -22,7 +25,6 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 	const [amount, setAmount] = useState('')
 	const [address, setAddress] = useState('')
 	const [code] = useState('')
-	const [operationsModalOpen, setOperationsModalOpen] = useState(false)
 	const [history] = useState<{ [key: string]: OperationRow[] }>({
 		xaut: [
 			{
@@ -39,8 +41,52 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 				date: '05.05.2025 02:57:36',
 				txId: 'i4...jd',
 			},
+			{
+				id: '3',
+				type: 'Вывод',
+				amount: '- 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
+			{
+				id: '4',
+				type: 'Вывод',
+				amount: '- 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
+			{
+				id: '5',
+				type: 'Вывод',
+				amount: '- 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
+			{
+				id: '6',
+				type: 'Вывод',
+				amount: '- 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
+			{
+				id: '7',
+				type: 'Вывод',
+				amount: '- 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+			},
 		],
 	})
+
+	// Обработчик открытия OperationsModal
+	const handleOpenOperationsModal = () => {
+		if (onOpenOperationsModal) {
+			onOpenOperationsModal(history, 'xaut', 'withdraw')
+		}
+		// Закрываем MarketingSendModal при открытии OperationsModal
+		onClose()
+	}
 
 	// Примерные данные, заменить на реальные при интеграции
 	const available = '0.00000000'
@@ -146,7 +192,7 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 							<button
 								type='button'
 								className={styles.historyBtn}
-								onClick={onOpenOperationsModal}
+								onClick={handleOpenOperationsModal}
 							>
 								<div className={styles.gradientLine}></div>
 								<span>История выводов</span>
@@ -156,13 +202,13 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 					</form>
 				</div>
 			</div>
-			<OperationsModal
+			{/* OperationsModal
 				isOpen={operationsModalOpen}
 				onClose={() => setOperationsModalOpen(false)}
 				type={'withdraw'}
 				data={history}
 				initialToken={'xaut'}
-			/>
+			/> */}
 		</Modal>
 	)
 }

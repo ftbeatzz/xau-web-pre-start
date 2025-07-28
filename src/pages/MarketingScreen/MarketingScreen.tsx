@@ -41,9 +41,10 @@ const MarketingScreen: React.FC = () => {
 	const [isRefModalOpen, setIsRefModalOpen] = React.useState(false)
 	const [operationsModal, setOperationsModal] = React.useState<{
 		open: boolean
-		type: 'sell' | 'withdraw' | null
+		type: 'buy' | 'sell' | 'withdraw' | 'deposit' | null
 		data: { [key: string]: OperationRow[] }
-	}>({ open: false, type: null, data: {} })
+		initialToken: string
+	}>({ open: false, type: null, data: {}, initialToken: 'xaut' })
 
 	// Обработчики для информационных модальных окон
 	const openInfoModal = () => {
@@ -350,20 +351,13 @@ const MarketingScreen: React.FC = () => {
 		},
 	]
 
-	const handleOpenSellHistory = (history: OperationRow[]) => {
-		setIsMarketingSellOpen(false)
-		setOperationsModal({ open: true, type: 'sell', data: { xaut: history } })
-	}
-	const handleOpenSendHistory = (history: OperationRow[]) => {
-		setIsMarketingSendOpen(false)
-		setOperationsModal({
-			open: true,
-			type: 'withdraw',
-			data: { xaut: history },
-		})
-	}
 	const handleCloseOperationsModal = () => {
-		setOperationsModal({ open: false, type: null, data: {} })
+		setOperationsModal({
+			open: false,
+			type: null,
+			data: {},
+			initialToken: 'xaut',
+		})
 	}
 
 	return (
@@ -550,47 +544,19 @@ const MarketingScreen: React.FC = () => {
 				isOpen={isMarketingSendOpen}
 				onClose={() => setIsMarketingSendOpen(false)}
 				tokenBalance={currentContent.balanceXAUT}
-				onOpenOperationsModal={() =>
-					handleOpenSendHistory([
-						{
-							id: '1',
-							type: 'Вывод',
-							amount: '- 0.00000017',
-							date: '05.05.2025 02:57:36',
-							txId: 'i4...jd',
-						},
-						{
-							id: '2',
-							type: 'Вывод',
-							amount: '- 0.00000017',
-							date: '05.05.2025 02:57:36',
-							txId: 'i4...jd',
-						},
-					])
-				}
+				onOpenOperationsModal={(data, initialToken, type) => {
+					setIsMarketingSendOpen(false)
+					setOperationsModal({ open: true, type, data, initialToken })
+				}}
 			/>
 			<MarketingSellModal
 				isOpen={isMarketingSellOpen}
 				onClose={() => setIsMarketingSellOpen(false)}
 				tokenBalance={currentContent.balanceXAUT}
-				onOpenOperationsModal={() =>
-					handleOpenSellHistory([
-						{
-							id: '1',
-							type: 'Продажа',
-							amount: '- 0.00000017',
-							date: '05.05.2025 02:57:36',
-							txId: 'i4...jd',
-						},
-						{
-							id: '2',
-							type: 'Продажа',
-							amount: '- 0.00000017',
-							date: '05.05.2025 02:57:36',
-							txId: 'i4...jd',
-						},
-					])
-				}
+				onOpenOperationsModal={(data, initialToken, type) => {
+					setIsMarketingSellOpen(false)
+					setOperationsModal({ open: true, type, data, initialToken })
+				}}
 			/>
 			<RefModal
 				isOpen={isRefModalOpen}
@@ -601,7 +567,7 @@ const MarketingScreen: React.FC = () => {
 				onClose={handleCloseOperationsModal}
 				type={operationsModal.type || 'sell'}
 				data={operationsModal.data}
-				initialToken={'xaut'}
+				initialToken={operationsModal.initialToken}
 			/>
 		</div>
 	)

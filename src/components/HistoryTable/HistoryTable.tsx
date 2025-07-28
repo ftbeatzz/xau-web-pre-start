@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './HistoryTable.module.scss'
 import NoDataIcon from '../../icons/NoDataIcon'
 import SmallXaut from '../../icons/SmallXaut'
+import SmallPaxg from '../../icons/SmallPaxg'
 
 export interface TransactionData {
 	id: string
@@ -16,12 +17,17 @@ export interface TransactionData {
 interface HistoryTableProps {
 	data?: TransactionData[]
 	isEmpty?: boolean
+	activeTab?: 'xaut' | 'paxg' // Добавляем информацию о текущем табе
 }
 
 const HistoryTable: React.FC<HistoryTableProps> = ({
 	data = [],
 	isEmpty = false,
+	activeTab = 'xaut', // По умолчанию Xaut
 }) => {
+	// Выбираем иконку в зависимости от активного таба
+	const IconComponent = activeTab === 'xaut' ? SmallXaut : SmallPaxg
+
 	if (isEmpty) {
 		return (
 			<div className={styles.emptyState}>
@@ -62,7 +68,7 @@ const HistoryTable: React.FC<HistoryTableProps> = ({
 						<tr>
 							<th>Дата/Время Старта</th>
 							<th>Тип</th>
-							<th>Объём Xaut</th>
+							<th>Объём {activeTab === 'xaut' ? 'Xaut' : 'PaxG'}</th>
 							<th>Профит</th>
 							<th>ID заказа</th>
 							<th>Дата/Время Завершения</th>
@@ -102,7 +108,7 @@ const HistoryTable: React.FC<HistoryTableProps> = ({
 								<div className={styles.valueContainer}>
 									<span className={styles.value}>{transaction.volumeXaut}</span>
 									<span className={styles.valueIcon}>
-										<SmallXaut />
+										<IconComponent />
 									</span>
 								</div>
 								<div className={styles.profitContainer}>

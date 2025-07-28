@@ -7,19 +7,24 @@ import BuyIcon from '../../../icons/BuyIcon'
 import LimitsIcon from '../../../icons/LimitsIcon'
 import ShareIcon from '../../../icons/ShareIcon'
 import CopyIcon from '../../../icons/CopyIcon'
-import OperationsModal from '../../../components/OperationsModal'
 import type { OperationRow } from '../../../components/OperationsTable'
 import YellowArrowIcon from '../../../icons/YellowArrowIcon'
 
 const NETWORKS = [
 	{ key: 'trc20', label: 'Trc20' },
 	{ key: 'erc20', label: 'Erc20' },
+	{ key: 'ton', label: 'TON' },
 ]
 
 interface BuyModalProps {
 	isOpen: boolean
 	onClose: () => void
 	tokenName: string
+	onOpenOperationsModal?: (
+		data: { [key: string]: OperationRow[] },
+		initialToken: string,
+		type: 'buy' | 'sell' | 'withdraw' | 'deposit'
+	) => void
 }
 
 const prices = {
@@ -27,7 +32,12 @@ const prices = {
 	paxg: 2423.45,
 }
 
-const BuyModal: React.FC<BuyModalProps> = ({ isOpen, onClose, tokenName }) => {
+const BuyModal: React.FC<BuyModalProps> = ({
+	isOpen,
+	onClose,
+	tokenName,
+	onOpenOperationsModal,
+}) => {
 	const tabItems = [
 		{ id: 'xaut', label: 'Xaut' },
 		{ id: 'paxg', label: 'PaxG' },
@@ -42,7 +52,6 @@ const BuyModal: React.FC<BuyModalProps> = ({ isOpen, onClose, tokenName }) => {
 	const [cryptoAmount, setCryptoAmount] = useState('')
 	const [selectedNetwork, setSelectedNetwork] = useState('erc20')
 	const [isSwapped, setIsSwapped] = useState(false)
-	const [operationsModalOpen, setOperationsModalOpen] = useState(false)
 	// Пример истории для каждой валюты
 	const [history] = useState<{ [key: string]: OperationRow[] }>({
 		xaut: [],
@@ -64,6 +73,15 @@ const BuyModal: React.FC<BuyModalProps> = ({ isOpen, onClose, tokenName }) => {
 		],
 	})
 
+	// Обработчик открытия OperationsModal
+	const handleOpenOperationsModal = () => {
+		if (onOpenOperationsModal) {
+			onOpenOperationsModal(history, activeTab, 'buy')
+		}
+		// Закрываем BuyModal при открытии OperationsModal
+		onClose()
+	}
+
 	// Пример курса
 	const price = prices[activeTab as keyof typeof prices]
 	const isXaut = activeTab === 'xaut'
@@ -77,6 +95,9 @@ const BuyModal: React.FC<BuyModalProps> = ({ isOpen, onClose, tokenName }) => {
 		erc20: isXaut
 			? '0x8e12aB3C4d5E6F7890aBcD1234567890eF123456' // Xaut ERC20
 			: '0x7f12bC3D4e5F6A7890bCdE2345678901fE234567', // PaxG ERC20
+		ton: isXaut
+			? '0x8e12aB3C4d5E6F7890aBcD1234567142324324324123' // Xaut TON
+			: '0x7f12bC3D4e5F6A7890bCdE2345678901fE212312331243', // PaxG TON
 	}
 	const address = addresses[selectedNetwork]
 	const qrCode = '/img/qr.png' // Можно сделать разным для каждой валюты
@@ -211,7 +232,7 @@ const BuyModal: React.FC<BuyModalProps> = ({ isOpen, onClose, tokenName }) => {
 								<button
 									type='button'
 									className={styles.historyBtn}
-									onClick={() => setOperationsModalOpen(true)}
+									onClick={handleOpenOperationsModal}
 								>
 									<div className={styles.gradientLine}></div>
 									<span>История покупки</span>
@@ -269,7 +290,7 @@ const BuyModal: React.FC<BuyModalProps> = ({ isOpen, onClose, tokenName }) => {
 							<div className={styles.historyBtnWrapper}>
 								<button
 									className={styles.historyBtn}
-									onClick={() => setOperationsModalOpen(true)}
+									onClick={handleOpenOperationsModal}
 								>
 									<div className={styles.gradientLine}></div>
 									<span>История покупки</span>
@@ -280,13 +301,6 @@ const BuyModal: React.FC<BuyModalProps> = ({ isOpen, onClose, tokenName }) => {
 					)}
 				</div>
 			</div>
-			<OperationsModal
-				isOpen={operationsModalOpen}
-				onClose={() => setOperationsModalOpen(false)}
-				type={'buy'}
-				data={history}
-				initialToken={activeTab}
-			/>
 		</Modal>
 	)
 }

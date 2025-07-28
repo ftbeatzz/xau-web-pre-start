@@ -19,6 +19,8 @@ import GetModal from './GetModal/GetModal'
 import BuyModal from './BuyModal/BuyModal'
 import SellModal from './SellModal/SellModal'
 import SendModal from './SendModal/SendModal'
+import OperationsModal from '../../components/OperationsModal'
+import type { OperationRow } from '../../components/OperationsTable'
 
 const WalletScreen: React.FC = () => {
 	const walletTabs: TabItem[] = [
@@ -36,6 +38,14 @@ const WalletScreen: React.FC = () => {
 		send: false,
 	})
 
+	// Состояние для OperationsModal
+	const [operationsModalState, setOperationsModalState] = React.useState({
+		isOpen: false,
+		data: {} as { [key: string]: OperationRow[] },
+		initialToken: 'xaut',
+		type: 'withdraw' as 'buy' | 'sell' | 'withdraw' | 'deposit',
+	})
+
 	// Обработчики для открытия/закрытия модальных окон
 	const openModal = (modalType: keyof typeof modalState) => {
 		setModalState(prev => ({ ...prev, [modalType]: true }))
@@ -45,12 +55,34 @@ const WalletScreen: React.FC = () => {
 		setModalState(prev => ({ ...prev, [modalType]: false }))
 	}
 
+	// Обработчик открытия OperationsModal из всех модальных окон
+	const handleOpenOperationsModal = (
+		data: { [key: string]: OperationRow[] },
+		initialToken: string,
+		type: 'buy' | 'sell' | 'withdraw' | 'deposit' = 'withdraw'
+	) => {
+		setOperationsModalState({
+			isOpen: true,
+			data,
+			initialToken,
+			type,
+		})
+	}
+
+	// Обработчик закрытия OperationsModal
+	const handleCloseOperationsModal = () => {
+		setOperationsModalState(prev => ({ ...prev, isOpen: false }))
+	}
+
+	// Данные для истории сделок Xaut
+	const xautTransactionData: TransactionData[] = []
+
 	// Данные для истории сделок PaxG
 	const paxgTransactionData: TransactionData[] = [
 		{
 			id: '1',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Trade',
+			type: 'PaxG Trade',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -59,7 +91,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '2',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -68,7 +100,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '3',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -77,7 +109,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '4',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -86,7 +118,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '5',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -95,7 +127,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '6',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -104,7 +136,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '7',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -113,7 +145,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '8',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -122,7 +154,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '9',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -131,7 +163,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '10',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -140,7 +172,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '11',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -149,7 +181,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '12',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -158,7 +190,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '13',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -167,7 +199,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '14',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -176,7 +208,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '15',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -185,7 +217,7 @@ const WalletScreen: React.FC = () => {
 		{
 			id: '16',
 			startDateTime: '2025-05-05 02:57:36',
-			type: 'Xau Commerce',
+			type: 'PaxG Commerce',
 			volumeXaut: '0.00000017',
 			profit: '0.00000017',
 			orderId: '67...85',
@@ -325,8 +357,15 @@ const WalletScreen: React.FC = () => {
 							<div className={styles.gradientLine}></div>
 						</div>
 						<HistoryTable
-							data={activeTab === 'paxg' ? paxgTransactionData : []}
-							isEmpty={activeTab === 'xaut'}
+							data={
+								activeTab === 'paxg' ? paxgTransactionData : xautTransactionData
+							}
+							isEmpty={
+								activeTab === 'paxg'
+									? paxgTransactionData.length === 0
+									: xautTransactionData.length === 0
+							}
+							activeTab={activeTab as 'xaut' | 'paxg'}
 						/>
 					</div>
 				</div>
@@ -335,23 +374,34 @@ const WalletScreen: React.FC = () => {
 				isOpen={modalState.get}
 				onClose={() => closeModal('get')}
 				tokenName={currentContent.title}
+				onOpenOperationsModal={handleOpenOperationsModal}
 			/>
 			<BuyModal
 				isOpen={modalState.buy}
 				onClose={() => closeModal('buy')}
 				tokenName={currentContent.title}
+				onOpenOperationsModal={handleOpenOperationsModal}
 			/>
 			<SellModal
 				isOpen={modalState.sell}
 				onClose={() => closeModal('sell')}
 				tokenName={currentContent.title}
 				tokenBalance={currentContent.balance}
+				onOpenOperationsModal={handleOpenOperationsModal}
 			/>
 			<SendModal
 				isOpen={modalState.send}
 				onClose={() => closeModal('send')}
 				tokenName={currentContent.title}
 				tokenBalance={currentContent.balance}
+				onOpenOperationsModal={handleOpenOperationsModal}
+			/>
+			<OperationsModal
+				isOpen={operationsModalState.isOpen}
+				onClose={handleCloseOperationsModal}
+				type={operationsModalState.type}
+				data={operationsModalState.data}
+				initialToken={operationsModalState.initialToken}
 			/>
 		</>
 	)
