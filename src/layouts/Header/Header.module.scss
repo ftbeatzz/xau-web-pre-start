@@ -521,6 +521,15 @@
 	width: 100%;
 	justify-content: center;
 	transition: color 0.3s ease;
+
+	&.active {
+		color: #ffe34b;
+		font-family: Unbounded;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 300;
+		line-height: normal;
+	}
 }
 
 .mobileDropdownArrow {
@@ -553,6 +562,35 @@
 	transition: all 0.3s ease;
 	text-align: center;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+// Активное состояние для ссылок в мобильном меню
+.mobileMenu {
+	nav {
+		a.active {
+			color: #ffe34b;
+			font-family: Unbounded;
+			font-size: 16px;
+			font-style: normal;
+			font-weight: 300;
+			line-height: normal;
+		}
+	}
+}
+
+// Активное состояние для элементов dropdown в мобильном меню
+.mobileDropdownMenu {
+	.active {
+		color: #ffe34b;
+		font-family: Unbounded;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 300;
+		line-height: normal;
+		background: rgba(255, 227, 75, 0.1);
+		border-radius: 8px;
+		margin: 4px 8px;
+	}
 }
 
 .mobileLangSwitcher {

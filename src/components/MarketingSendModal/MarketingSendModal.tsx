@@ -5,6 +5,7 @@ import LimitsIcon from '../../icons/LimitsIcon'
 import SendIcon from '../../icons/SendIcon'
 import SmallXaut from '../../icons/SmallXaut'
 import type { OperationRow } from '../OperationsTable'
+import WarningIcon from '../../icons/WarningIcon'
 
 interface MarketingSendModalProps {
 	isOpen: boolean
@@ -15,12 +16,14 @@ interface MarketingSendModalProps {
 		initialToken: string,
 		type: 'buy' | 'sell' | 'withdraw' | 'deposit'
 	) => void
+	onOpenLimitsModal?: (title: string, content: React.ReactNode) => void
 }
 
 const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 	isOpen,
 	onClose,
 	onOpenOperationsModal,
+	onOpenLimitsModal,
 }) => {
 	const [amount, setAmount] = useState('')
 	const [address, setAddress] = useState('')
@@ -88,6 +91,38 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 		onClose()
 	}
 
+	// Обработчик открытия LimitsModal
+	const handleOpenLimitsModal = () => {
+		if (onOpenLimitsModal) {
+			const limitsContent = (
+				<div>
+					<div className={styles.limitsSection}>
+						<div className={styles.limitsSectionHeader}>
+							<div className={styles.warningIcon}>
+								<WarningIcon />
+							</div>
+							<h4>Лимиты для вывода.</h4>
+							<div className={styles.gradientLine}></div>
+						</div>
+						<div className={styles.limitsTxt}>
+							<p>
+								Минимальный объём для обмена и снятия составляет: 100 USDT в
+								эквиваленте PAX Gold – 0.03245/100 USDT или Tether Gold.
+							</p>
+							<p>
+								Как для инвестиционных активов, так и для активов, полученных по
+								маркетинговым и другим программам.
+							</p>
+						</div>
+					</div>
+				</div>
+			)
+			onOpenLimitsModal('Лимиты для вывода', limitsContent)
+		}
+		// Закрываем MarketingSendModal при открытии LimitsModal
+		onClose()
+	}
+
 	// Примерные данные, заменить на реальные при интеграции
 	const available = '0.00000000'
 	const currency = 'XAUT'
@@ -110,12 +145,17 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 			<div className={styles.wrapper}>
 				<div className={styles.tabContent}>
 					<div className={styles.getHeader}>
+						<h2>Отправка криптовалюты {currency}</h2>
 						<div className={styles.limitsWrapper}>
 							<p>
 								Вы отправляете криптовалюту <span>{currency}</span>, убедитесь,
 								что отправка идет через сеть <span>Ethereum</span>.
 							</p>
-							<button className={styles.limitsBtn}>
+							<button
+								className={styles.limitsBtn}
+								onClick={handleOpenLimitsModal}
+								type='button'
+							>
 								<span>
 									<LimitsIcon />
 								</span>

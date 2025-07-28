@@ -22,6 +22,7 @@ import MarketingSendModal from '../../components/MarketingSendModal/MarketingSen
 import MarketingSellModal from '../../components/MarketingSellModal/MarketingSellModal'
 import RefModal from '../../components/RefModal/RefModal'
 import OperationsModal from '../../components/OperationsModal'
+import LimitsModal from '../../components/LimitsModal'
 import type { OperationRow } from '../../components/OperationsTable'
 
 const MarketingScreen: React.FC = () => {
@@ -46,6 +47,12 @@ const MarketingScreen: React.FC = () => {
 		initialToken: string
 	}>({ open: false, type: null, data: {}, initialToken: 'xaut' })
 
+	const [limitsModalState, setLimitsModalState] = React.useState({
+		isOpen: false,
+		title: '',
+		content: null as React.ReactNode,
+	})
+
 	// Обработчики для информационных модальных окон
 	const openInfoModal = () => {
 		if (activeTab === 'partner') {
@@ -53,6 +60,23 @@ const MarketingScreen: React.FC = () => {
 		} else {
 			setIsNetworkInfoOpen(true)
 		}
+	}
+
+	// Обработчики для LimitsModal
+	const handleOpenLimitsModal = (title: string, content: React.ReactNode) => {
+		setLimitsModalState({
+			isOpen: true,
+			title,
+			content,
+		})
+	}
+
+	const handleCloseLimitsModal = () => {
+		setLimitsModalState({
+			isOpen: false,
+			title: '',
+			content: null,
+		})
 	}
 
 	// Контент для разных табов
@@ -548,6 +572,7 @@ const MarketingScreen: React.FC = () => {
 					setIsMarketingSendOpen(false)
 					setOperationsModal({ open: true, type, data, initialToken })
 				}}
+				onOpenLimitsModal={handleOpenLimitsModal}
 			/>
 			<MarketingSellModal
 				isOpen={isMarketingSellOpen}
@@ -557,6 +582,7 @@ const MarketingScreen: React.FC = () => {
 					setIsMarketingSellOpen(false)
 					setOperationsModal({ open: true, type, data, initialToken })
 				}}
+				onOpenLimitsModal={handleOpenLimitsModal}
 			/>
 			<RefModal
 				isOpen={isRefModalOpen}
@@ -568,6 +594,12 @@ const MarketingScreen: React.FC = () => {
 				type={operationsModal.type || 'sell'}
 				data={operationsModal.data}
 				initialToken={operationsModal.initialToken}
+			/>
+			<LimitsModal
+				isOpen={limitsModalState.isOpen}
+				onClose={handleCloseLimitsModal}
+				title={limitsModalState.title}
+				content={limitsModalState.content}
 			/>
 		</div>
 	)

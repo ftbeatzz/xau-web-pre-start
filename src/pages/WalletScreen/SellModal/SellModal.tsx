@@ -8,6 +8,7 @@ import SellIcon from '../../../icons/SellIcon'
 import SmallXaut from '../../../icons/SmallXaut'
 import SmallPaxg from '../../../icons/SmallPaxg'
 import type { OperationRow } from '../../../components/OperationsTable'
+import WarningIcon from '../../../icons/WarningIcon'
 
 const NETWORKS = [
 	{ key: 'trc20', label: 'Trc20' },
@@ -25,6 +26,7 @@ interface SellModalProps {
 		initialToken: string,
 		type: 'buy' | 'sell' | 'withdraw' | 'deposit'
 	) => void
+	onOpenLimitsModal?: (title: string, content: React.ReactNode) => void
 }
 
 const prices = {
@@ -37,6 +39,7 @@ const SellModal: React.FC<SellModalProps> = ({
 	onClose,
 	tokenName,
 	onOpenOperationsModal,
+	onOpenLimitsModal,
 }) => {
 	const tabItems = [
 		{ id: 'xaut', label: 'Xaut' },
@@ -82,6 +85,38 @@ const SellModal: React.FC<SellModalProps> = ({
 		onClose()
 	}
 
+	// Обработчик открытия LimitsModal
+	const handleOpenLimitsModal = () => {
+		if (onOpenLimitsModal) {
+			const limitsContent = (
+				<div>
+					<div className={styles.limitsSection}>
+						<div className={styles.limitsSectionHeader}>
+							<div className={styles.warningIcon}>
+								<WarningIcon />
+							</div>
+							<h4>Лимиты для вывода.</h4>
+							<div className={styles.gradientLine}></div>
+						</div>
+						<div className={styles.limitsTxt}>
+							<p>
+								Минимальный объём для обмена и снятия составляет: 100 USDT в
+								эквиваленте PAX Gold – 0.03245/100 USDT или Tether Gold.
+							</p>
+							<p>
+								Как для инвестиционных активов, так и для активов, полученных по
+								маркетинговым и другим программам.
+							</p>
+						</div>
+					</div>
+				</div>
+			)
+			onOpenLimitsModal(`Лимиты продажи ${currency}`, limitsContent)
+		}
+		// Закрываем SellModal при открытии LimitsModal
+		onClose()
+	}
+
 	// Пример курса
 	const price = prices[activeTab as keyof typeof prices]
 	const isXaut = activeTab === 'xaut'
@@ -114,7 +149,11 @@ const SellModal: React.FC<SellModalProps> = ({
 								После продажи криптовалюты <span>{currency}</span>, USDT будет
 								отправлено на ваш адрес в течение нескольких минут.
 							</p>
-							<button className={styles.limitsBtn}>
+							<button
+								className={styles.limitsBtn}
+								onClick={handleOpenLimitsModal}
+								type='button'
+							>
 								<span>
 									<LimitsIcon />
 								</span>

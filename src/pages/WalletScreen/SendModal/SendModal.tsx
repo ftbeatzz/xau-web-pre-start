@@ -8,6 +8,7 @@ import SendIcon from '../../../icons/SendIcon'
 import SmallXaut from '../../../icons/SmallXaut'
 import SmallPaxg from '../../../icons/SmallPaxg'
 import type { OperationRow } from '../../../components/OperationsTable'
+import WarningIcon from '../../../icons/WarningIcon'
 
 interface SendModalProps {
 	isOpen: boolean
@@ -19,6 +20,7 @@ interface SendModalProps {
 		initialToken: string,
 		type: 'buy' | 'sell' | 'withdraw' | 'deposit'
 	) => void
+	onOpenLimitsModal?: (title: string, content: React.ReactNode) => void
 }
 
 const SendModal: React.FC<SendModalProps> = ({
@@ -26,6 +28,7 @@ const SendModal: React.FC<SendModalProps> = ({
 	onClose,
 	tokenName,
 	onOpenOperationsModal,
+	onOpenLimitsModal,
 }) => {
 	const tabItems = [
 		{ id: 'xaut', label: 'Xaut' },
@@ -68,6 +71,38 @@ const SendModal: React.FC<SendModalProps> = ({
 		onClose()
 	}
 
+	// Обработчик открытия LimitsModal
+	const handleOpenLimitsModal = () => {
+		if (onOpenLimitsModal) {
+			const limitsContent = (
+				<div>
+					<div className={styles.limitsSection}>
+						<div className={styles.limitsSectionHeader}>
+							<div className={styles.warningIcon}>
+								<WarningIcon />
+							</div>
+							<h4>Лимиты для вывода.</h4>
+							<div className={styles.gradientLine}></div>
+						</div>
+						<div className={styles.limitsTxt}>
+							<p>
+								Минимальный объём для обмена и снятия составляет: 100 USDT в
+								эквиваленте PAX Gold – 0.03245/100 USDT или Tether Gold.
+							</p>
+							<p>
+								Как для инвестиционных активов, так и для активов, полученных по
+								маркетинговым и другим программам.
+							</p>
+						</div>
+					</div>
+				</div>
+			)
+			onOpenLimitsModal(`Лимиты отправки ${currency}`, limitsContent)
+		}
+		// Закрываем SendModal при открытии LimitsModal
+		onClose()
+	}
+
 	// Примерные данные, заменить на реальные при интеграции
 	const inWork = activeTab === 'xaut' ? '1,857,757.0035' : '2,157,757.0035'
 	const available = activeTab === 'xaut' ? '0.00000000' : '0.00000000'
@@ -97,7 +132,11 @@ const SendModal: React.FC<SendModalProps> = ({
 								Вы отправляете криптовалюту <span>{currency}</span>, убедитесь,
 								что отправка идет через сеть <span>Ethereum</span>.
 							</p>
-							<button className={styles.limitsBtn}>
+							<button
+								className={styles.limitsBtn}
+								onClick={handleOpenLimitsModal}
+								type='button'
+							>
 								<span>
 									<LimitsIcon />
 								</span>

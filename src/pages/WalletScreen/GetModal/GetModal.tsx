@@ -7,6 +7,7 @@ import LimitsIcon from '../../../icons/LimitsIcon'
 import CopyIcon from '../../../icons/CopyIcon'
 import ShareIcon from '../../../icons/ShareIcon'
 import type { OperationRow } from '../../../components/OperationsTable'
+import WarningIcon from '../../../icons/WarningIcon'
 
 interface GetModalProps {
 	isOpen: boolean
@@ -17,6 +18,7 @@ interface GetModalProps {
 		initialToken: string,
 		type: 'buy' | 'sell' | 'withdraw' | 'deposit'
 	) => void
+	onOpenLimitsModal?: (title: string, content: React.ReactNode) => void
 }
 
 const addresses = {
@@ -33,6 +35,7 @@ const GetModal: React.FC<GetModalProps> = ({
 	onClose,
 	tokenName,
 	onOpenOperationsModal,
+	onOpenLimitsModal,
 }) => {
 	const tabItems = [
 		{ id: 'xaut', label: 'Xaut' },
@@ -72,6 +75,49 @@ const GetModal: React.FC<GetModalProps> = ({
 		onClose()
 	}
 
+	// Обработчик открытия LimitsModal
+	const handleOpenLimitsModal = () => {
+		if (onOpenLimitsModal) {
+			const limitsContent = (
+				<div>
+					<div className={styles.limitsSection}>
+						<div className={styles.limitsSectionHeader}>
+							<div className={styles.warningIcon}>
+								<WarningIcon />
+							</div>
+							<h4>Лимиты для активации коммерции XAU.</h4>
+							<div className={styles.gradientLine}></div>
+						</div>
+						<div className={styles.limitsTxt}>
+							<p>
+								Для активации коммерческого периода с компанией XAU и получения
+								прибыли в активах PAX Gold и Tether Gold, вам необходимо иметь
+								на балансе объём не менее 100 USDT в эквиваленте PAX Gold –
+								0.03245/100 USDT или Tether Gold.
+							</p>
+							<p>
+								Пополните ваш кошелек необходимым объёмом или купите золотой
+								стандарт на нашей платформе, с помощью USDT, активируйте
+								коммерческий период и получайте финансовую выгоду.
+							</p>
+							<p>
+								Исключением являются подарочные токены, если вы получили
+								подарочные токены в эквиваленте 25 USDT, то эти активы поступают
+								в коммерцию и начинают работу автоматически.
+							</p>
+						</div>
+					</div>
+				</div>
+			)
+			onOpenLimitsModal(
+				`Лимиты пополнения ${tabs.find(t => t.id === activeTab)?.label}`,
+				limitsContent
+			)
+		}
+		// Закрываем GetModal при открытии LimitsModal
+		onClose()
+	}
+
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} title={`Выбор криптовалюты`}>
 			<div className={styles.wrapper}>
@@ -95,7 +141,7 @@ const GetModal: React.FC<GetModalProps> = ({
 								предварительно убедившись, что отправка идет через сеть{' '}
 								<span>Ethereum</span>.
 							</p>
-							<button>
+							<button onClick={handleOpenLimitsModal} type='button'>
 								<span>
 									<LimitsIcon />
 								</span>

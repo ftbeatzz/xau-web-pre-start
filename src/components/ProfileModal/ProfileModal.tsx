@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './ProfileModal.module.scss'
 import ExitIcon from '../../icons/ExitIcon'
 import { useNavigate } from 'react-router-dom'
+import DropDownArrow from '../../icons/DropDownArrow'
 
 interface ProfileModalProps {
 	isOpen: boolean
@@ -55,11 +56,15 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
 					<div className={styles.menuItems}>
 						<button className={styles.menuItem} onClick={handleFaqClick}>
 							<span>FAQ</span>
-							<span className={styles.arrow}>›</span>
+							<span className={styles.arrow}>
+								<DropDownArrow />
+							</span>
 						</button>
 						<button className={styles.menuItem}>
 							<span>Презентация</span>
-							<span className={styles.arrow}>›</span>
+							<span className={styles.arrow}>
+								<DropDownArrow />
+							</span>
 						</button>
 					</div>
 				</div>
@@ -72,11 +77,15 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
 					<div className={styles.menuItems}>
 						<button className={styles.menuItem}>
 							<span>Электронная почта</span>
-							<span className={styles.arrow}>›</span>
+							<span className={styles.arrow}>
+								<DropDownArrow />
+							</span>
 						</button>
 						<button className={styles.menuItem}>
 							<span>Тикет система</span>
-							<span className={styles.arrow}>›</span>
+							<span className={styles.arrow}>
+								<DropDownArrow />
+							</span>
 						</button>
 					</div>
 				</div>

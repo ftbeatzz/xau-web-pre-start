@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import styles from './WalletScreen.module.scss'
 import Tabs from '../../components/Tabs/Tabs'
 import { useTabs } from '../../hooks/useTabs'
@@ -20,6 +20,7 @@ import BuyModal from './BuyModal/BuyModal'
 import SellModal from './SellModal/SellModal'
 import SendModal from './SendModal/SendModal'
 import OperationsModal from '../../components/OperationsModal'
+import LimitsModal from '../../components/LimitsModal'
 import type { OperationRow } from '../../components/OperationsTable'
 
 const WalletScreen: React.FC = () => {
@@ -46,33 +47,60 @@ const WalletScreen: React.FC = () => {
 		type: 'withdraw' as 'buy' | 'sell' | 'withdraw' | 'deposit',
 	})
 
-	// Обработчики для открытия/закрытия модальных окон
-	const openModal = (modalType: keyof typeof modalState) => {
-		setModalState(prev => ({ ...prev, [modalType]: true }))
-	}
+	// Состояние для LimitsModal
+	const [limitsModalState, setLimitsModalState] = React.useState({
+		isOpen: false,
+		title: '',
+		content: null as React.ReactNode,
+	})
 
-	const closeModal = (modalType: keyof typeof modalState) => {
+	// Обработчики для открытия/закрытия модальных окон
+	const openModal = useCallback((modalType: keyof typeof modalState) => {
+		setModalState(prev => ({ ...prev, [modalType]: true }))
+	}, [])
+
+	const closeModal = useCallback((modalType: keyof typeof modalState) => {
 		setModalState(prev => ({ ...prev, [modalType]: false }))
-	}
+	}, [])
 
 	// Обработчик открытия OperationsModal из всех модальных окон
-	const handleOpenOperationsModal = (
-		data: { [key: string]: OperationRow[] },
-		initialToken: string,
-		type: 'buy' | 'sell' | 'withdraw' | 'deposit' = 'withdraw'
-	) => {
-		setOperationsModalState({
-			isOpen: true,
-			data,
-			initialToken,
-			type,
-		})
-	}
+	const handleOpenOperationsModal = useCallback(
+		(
+			data: { [key: string]: OperationRow[] },
+			initialToken: string,
+			type: 'buy' | 'sell' | 'withdraw' | 'deposit' = 'withdraw'
+		) => {
+			setOperationsModalState({
+				isOpen: true,
+				data,
+				initialToken,
+				type,
+			})
+		},
+		[]
+	)
 
 	// Обработчик закрытия OperationsModal
-	const handleCloseOperationsModal = () => {
+	const handleCloseOperationsModal = useCallback(() => {
 		setOperationsModalState(prev => ({ ...prev, isOpen: false }))
-	}
+	}, [])
+
+	// Обработчик открытия LimitsModal
+	const handleOpenLimitsModal = useCallback(
+		(title: string, content: React.ReactNode) => {
+			setLimitsModalState({
+				isOpen: true,
+				title,
+				content,
+			})
+		},
+		[]
+	)
+
+	// Обработчик закрытия LimitsModal
+	const handleCloseLimitsModal = useCallback(() => {
+		setLimitsModalState(prev => ({ ...prev, isOpen: false }))
+	}, [])
 
 	// Данные для истории сделок Xaut
 	const xautTransactionData: TransactionData[] = []
@@ -375,12 +403,14 @@ const WalletScreen: React.FC = () => {
 				onClose={() => closeModal('get')}
 				tokenName={currentContent.title}
 				onOpenOperationsModal={handleOpenOperationsModal}
+				onOpenLimitsModal={handleOpenLimitsModal}
 			/>
 			<BuyModal
 				isOpen={modalState.buy}
 				onClose={() => closeModal('buy')}
 				tokenName={currentContent.title}
 				onOpenOperationsModal={handleOpenOperationsModal}
+				onOpenLimitsModal={handleOpenLimitsModal}
 			/>
 			<SellModal
 				isOpen={modalState.sell}
@@ -388,6 +418,7 @@ const WalletScreen: React.FC = () => {
 				tokenName={currentContent.title}
 				tokenBalance={currentContent.balance}
 				onOpenOperationsModal={handleOpenOperationsModal}
+				onOpenLimitsModal={handleOpenLimitsModal}
 			/>
 			<SendModal
 				isOpen={modalState.send}
@@ -395,6 +426,7 @@ const WalletScreen: React.FC = () => {
 				tokenName={currentContent.title}
 				tokenBalance={currentContent.balance}
 				onOpenOperationsModal={handleOpenOperationsModal}
+				onOpenLimitsModal={handleOpenLimitsModal}
 			/>
 			<OperationsModal
 				isOpen={operationsModalState.isOpen}
@@ -402,6 +434,12 @@ const WalletScreen: React.FC = () => {
 				type={operationsModalState.type}
 				data={operationsModalState.data}
 				initialToken={operationsModalState.initialToken}
+			/>
+			<LimitsModal
+				isOpen={limitsModalState.isOpen}
+				onClose={handleCloseLimitsModal}
+				title={limitsModalState.title}
+				content={limitsModalState.content}
 			/>
 		</>
 	)

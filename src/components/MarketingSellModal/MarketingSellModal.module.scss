@@ -21,6 +21,18 @@
 }
 
 .getHeader {
+	h2 {
+		color: #fff;
+		font-feature-settings: 'liga' off, 'clig' off;
+		font-family: Unbounded;
+		font-size: 26px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 22px;
+		letter-spacing: -0.4px;
+		max-width: 340px;
+		padding-top: 12px;
+	}
 	.limitsWrapper {
 		display: flex;
 		align-items: center;
@@ -450,4 +462,74 @@
 	height: 1px;
 	width: 100%;
 	max-width: 95px;
+}
+
+.limitsSection {
+	.gradientLine {
+		background: linear-gradient(
+			90deg,
+			rgba(225, 220, 195, 0.1) 0%,
+			#e1dcc3 50%,
+			rgba(239, 233, 207, 0.1) 97.12%
+		);
+		width: 100%;
+		height: 1px;
+		margin-top: 8px;
+		margin-bottom: 24px;
+		max-width: 100%;
+	}
+	.limitsSectionHeader {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		width: 100%;
+		.warningIcon {
+			border-radius: 10px;
+			border: 1px solid var(--block-stoke, rgba(255, 255, 255, 0.4));
+			background: #0d1c2b;
+			box-shadow: 0 4px 12px 0 rgba(255, 243, 176, 0.12);
+			padding: 18px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			max-width: 86px;
+			margin-bottom: 18px;
+			svg {
+				width: 100%;
+				max-width: 50px;
+				height: 100%;
+				max-height: 50px;
+			}
+		}
+
+		h4 {
+			color: #fff;
+			text-align: center;
+			font-family: Unbounded;
+			font-size: 22px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 27px; /* 122.727% */
+			letter-spacing: -0.4px;
+			margin: 0;
+		}
+	}
+
+	.limitsTxt {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+
+		p {
+			color: #fff;
+			font-family: 'Noto Sans';
+			font-size: 15px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 22px; /* 146.667% */
+			letter-spacing: -0.4px;
+		}
+	}
 }

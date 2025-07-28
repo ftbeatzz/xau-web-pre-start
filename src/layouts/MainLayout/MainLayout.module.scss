@@ -23,4 +23,10 @@
 		background-size: cover;
 		background-attachment: fixed;
 	}
+
+	&.noBgMobile {
+		@media (max-width: 767px) {
+			background: none !important;
+		}
+	}
 }

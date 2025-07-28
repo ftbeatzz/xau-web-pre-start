@@ -398,7 +398,9 @@ const Header: React.FC = () => {
 									<div className={styles.mobileDropdownMenu}>
 										<NavLink
 											to='/trade/statistics'
-											className={styles.mobileDropdownItem}
+											className={({ isActive }) =>
+												isActive ? styles.active : styles.mobileDropdownItem
+											}
 											onClick={() => {
 												setMobileTradeDropdownOpen(false)
 												setMenuOpen(false)
@@ -408,7 +410,9 @@ const Header: React.FC = () => {
 										</NavLink>
 										<NavLink
 											to='/trade/loan'
-											className={styles.mobileDropdownItem}
+											className={({ isActive }) =>
+												isActive ? styles.active : styles.mobileDropdownItem
+											}
 											onClick={() => {
 												setMobileTradeDropdownOpen(false)
 												setMenuOpen(false)
@@ -418,7 +422,9 @@ const Header: React.FC = () => {
 										</NavLink>
 										<NavLink
 											to='/trade/hft'
-											className={styles.mobileDropdownItem}
+											className={({ isActive }) =>
+												isActive ? styles.active : styles.mobileDropdownItem
+											}
 											onClick={() => {
 												setMobileTradeDropdownOpen(false)
 												setMenuOpen(false)
@@ -455,7 +461,9 @@ const Header: React.FC = () => {
 									<div className={styles.mobileDropdownMenu}>
 										<NavLink
 											to='/commerce/statistics'
-											className={styles.mobileDropdownItem}
+											className={({ isActive }) =>
+												isActive ? styles.active : styles.mobileDropdownItem
+											}
 											onClick={() => {
 												setMobileCommerceDropdownOpen(false)
 												setMenuOpen(false)
@@ -465,7 +473,9 @@ const Header: React.FC = () => {
 										</NavLink>
 										<NavLink
 											to='/commerce/loan'
-											className={styles.mobileDropdownItem}
+											className={({ isActive }) =>
+												isActive ? styles.active : styles.mobileDropdownItem
+											}
 											onClick={() => {
 												setMobileCommerceDropdownOpen(false)
 												setMenuOpen(false)
@@ -475,7 +485,9 @@ const Header: React.FC = () => {
 										</NavLink>
 										<NavLink
 											to='/commerce/model'
-											className={styles.mobileDropdownItem}
+											className={({ isActive }) =>
+												isActive ? styles.active : styles.mobileDropdownItem
+											}
 											onClick={() => {
 												setMobileCommerceDropdownOpen(false)
 												setMenuOpen(false)

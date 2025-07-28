@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import type { TabItem } from '../components/Tabs/Tabs'
 
 export const useTabs = (initialTabs: TabItem[], defaultActiveTab?: string) => {
@@ -7,9 +7,9 @@ export const useTabs = (initialTabs: TabItem[], defaultActiveTab?: string) => {
 		defaultActiveTab || initialTabs[0]?.id || ''
 	)
 
-	const handleTabChange = (tabId: string) => {
+	const handleTabChange = useCallback((tabId: string) => {
 		setActiveTab(tabId)
-	}
+	}, [])
 
 	return {
 		tabs,

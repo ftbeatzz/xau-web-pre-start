@@ -5,6 +5,7 @@ import LimitsIcon from '../../icons/LimitsIcon'
 import SellIcon from '../../icons/SellIcon'
 import SmallXaut from '../../icons/SmallXaut'
 import type { OperationRow } from '../OperationsTable'
+import WarningIcon from '../../icons/WarningIcon'
 
 const NETWORKS = [
 	{ key: 'trc20', label: 'Trc20' },
@@ -21,12 +22,14 @@ interface MarketingSellModalProps {
 		initialToken: string,
 		type: 'buy' | 'sell' | 'withdraw' | 'deposit'
 	) => void
+	onOpenLimitsModal?: (title: string, content: React.ReactNode) => void
 }
 
 const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 	isOpen,
 	onClose,
 	onOpenOperationsModal,
+	onOpenLimitsModal,
 }) => {
 	const [step, setStep] = useState(1)
 	const [cryptoAmount, setCryptoAmount] = useState('')
@@ -61,6 +64,38 @@ const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 		onClose()
 	}
 
+	// Обработчик открытия LimitsModal
+	const handleOpenLimitsModal = () => {
+		if (onOpenLimitsModal) {
+			const limitsContent = (
+				<div>
+					<div className={styles.limitsSection}>
+						<div className={styles.limitsSectionHeader}>
+							<div className={styles.warningIcon}>
+								<WarningIcon />
+							</div>
+							<h4>Лимиты для вывода.</h4>
+							<div className={styles.gradientLine}></div>
+						</div>
+						<div className={styles.limitsTxt}>
+							<p>
+								Минимальный объём для обмена и снятия составляет: 100 USDT в
+								эквиваленте PAX Gold – 0.03245/100 USDT или Tether Gold.
+							</p>
+							<p>
+								Как для инвестиционных активов, так и для активов, полученных по
+								маркетинговым и другим программам.
+							</p>
+						</div>
+					</div>
+				</div>
+			)
+			onOpenLimitsModal('Лимиты для вывода', limitsContent)
+		}
+		// Закрываем MarketingSellModal при открытии LimitsModal
+		onClose()
+	}
+
 	// Пример курса
 	const price = 3356.68
 	const currency = 'Xaut'
@@ -84,12 +119,17 @@ const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 			<div className={styles.wrapper}>
 				<div className={styles.tabContent}>
 					<div className={styles.getHeader}>
+						<h2>Продажа криптовалюты {currency}</h2>
 						<div className={styles.limitsWrapper}>
 							<p>
 								После продажи криптовалюты <span>{currency}</span>, USDT будет
 								отправлено на ваш адрес в течение нескольких минут.
 							</p>
-							<button className={styles.limitsBtn}>
+							<button
+								className={styles.limitsBtn}
+								onClick={handleOpenLimitsModal}
+								type='button'
+							>
 								<span>
 									<LimitsIcon />
 								</span>

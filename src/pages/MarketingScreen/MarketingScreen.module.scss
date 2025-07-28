@@ -669,7 +669,7 @@
 					gap: 16px;
 				}
 
-				@media (max-width: 402px) {
+				@media (max-width: 767px) {
 					grid-template-columns: 1fr;
 				}
 
@@ -690,9 +690,6 @@
 						-webkit-background-clip: text;
 						-webkit-text-fill-color: transparent;
 
-						@media (max-width: 767px) {
-							font-size: 11px;
-						}
 					}
 
 					& :nth-child(2) {
@@ -707,10 +704,6 @@
 						font-weight: 400;
 						line-height: 22px; /* 157.143% */
 						letter-spacing: -0.4px;
-
-						@media (max-width: 767px) {
-							font-size: 11px;
-						}
 					}
 				}
 
@@ -728,9 +721,6 @@
 						line-height: 22px; /* 157.143% */
 						letter-spacing: -0.4px;
 
-						@media (max-width: 767px) {
-							font-size: 11px;
-						}
 					}
 
 					& :nth-child(2) {
@@ -742,10 +732,6 @@
 						font-weight: 400;
 						line-height: 22px;
 						letter-spacing: -0.4px;
-
-						@media (max-width: 767px) {
-							font-size: 11px;
-						}
 					}
 				}
 			}

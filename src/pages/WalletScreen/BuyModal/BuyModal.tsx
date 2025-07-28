@@ -9,6 +9,7 @@ import ShareIcon from '../../../icons/ShareIcon'
 import CopyIcon from '../../../icons/CopyIcon'
 import type { OperationRow } from '../../../components/OperationsTable'
 import YellowArrowIcon from '../../../icons/YellowArrowIcon'
+import WarningIcon from '../../../icons/WarningIcon'
 
 const NETWORKS = [
 	{ key: 'trc20', label: 'Trc20' },
@@ -25,6 +26,7 @@ interface BuyModalProps {
 		initialToken: string,
 		type: 'buy' | 'sell' | 'withdraw' | 'deposit'
 	) => void
+	onOpenLimitsModal?: (title: string, content: React.ReactNode) => void
 }
 
 const prices = {
@@ -37,6 +39,7 @@ const BuyModal: React.FC<BuyModalProps> = ({
 	onClose,
 	tokenName,
 	onOpenOperationsModal,
+	onOpenLimitsModal,
 }) => {
 	const tabItems = [
 		{ id: 'xaut', label: 'Xaut' },
@@ -79,6 +82,46 @@ const BuyModal: React.FC<BuyModalProps> = ({
 			onOpenOperationsModal(history, activeTab, 'buy')
 		}
 		// Закрываем BuyModal при открытии OperationsModal
+		onClose()
+	}
+
+	// Обработчик открытия LimitsModal
+	const handleOpenLimitsModal = () => {
+		if (onOpenLimitsModal) {
+			const limitsContent = (
+				<div>
+					<div className={styles.limitsSection}>
+						<div className={styles.limitsSectionHeader}>
+							<div className={styles.warningIcon}>
+								<WarningIcon />
+							</div>
+							<h4>Лимиты для активации коммерции XAU.</h4>
+							<div className={styles.gradientLine}></div>
+						</div>
+						<div className={styles.limitsTxt}>
+							<p>
+								Для активации коммерческого периода с компанией XAU и получения
+								прибыли в активах PAX Gold и Tether Gold, вам необходимо иметь
+								на балансе объём не менее 100 USDT в эквиваленте PAX Gold –
+								0.03245/100 USDT или Tether Gold.
+							</p>
+							<p>
+								Пополните ваш кошелек необходимым объёмом или купите золотой
+								стандарт на нашей платформе, с помощью USDT, активируйте
+								коммерческий период и получайте финансовую выгоду.
+							</p>
+							<p>
+								Исключением являются подарочные токены, если вы получили
+								подарочные токены в эквиваленте 25 USDT, то эти активы поступают
+								в коммерцию и начинают работу автоматически.
+							</p>
+						</div>
+					</div>
+				</div>
+			)
+			onOpenLimitsModal(`Лимиты покупки ${currency}`, limitsContent)
+		}
+		// Закрываем BuyModal при открытии LimitsModal
 		onClose()
 	}
 
@@ -141,7 +184,11 @@ const BuyModal: React.FC<BuyModalProps> = ({
 								После покупки криптовалюты <span>{currency}</span>, на ваш
 								кошелек будет зачислен объем.
 							</p>
-							<button className={styles.limitsBtn}>
+							<button
+								className={styles.limitsBtn}
+								onClick={handleOpenLimitsModal}
+								type='button'
+							>
 								<span>
 									<LimitsIcon />
 								</span>

@@ -13,12 +13,20 @@
 	box-shadow: 0px 4px 12px 0px rgba(255, 243, 176, 0.12);
 	backdrop-filter: blur(2px);
 	padding: 14px 12px;
+
+	@media (max-width: 767px) {
+		margin: 28px 12px;
+	}
 }
 
 .faqTitle {
 	color: #fff;
 	font-size: 28px;
 	margin-bottom: 24px;
+
+	@media (max-width: 767px) {
+		font-size: 24px;
+	}
 }
 
 .faqBox {
