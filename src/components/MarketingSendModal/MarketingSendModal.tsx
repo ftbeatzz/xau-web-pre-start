@@ -139,9 +139,8 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 		<Modal
 			isOpen={isOpen}
 			onClose={onClose}
-			title={`Отправка криптовалюты Xaut`}
+			title={``}
 		>
-			<div className={styles.gradientLineTop}></div>
 			<div className={styles.wrapper}>
 				<div className={styles.tabContent}>
 					<div className={styles.getHeader}>

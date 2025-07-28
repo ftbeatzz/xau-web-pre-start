@@ -113,9 +113,8 @@ const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 		<Modal
 			isOpen={isOpen}
 			onClose={onClose}
-			title={`Продажа криптовалюты Xaut`}
+			title={``}
 		>
-			<div className={styles.gradientLineTop}></div>
 			<div className={styles.wrapper}>
 				<div className={styles.tabContent}>
 					<div className={styles.getHeader}>
