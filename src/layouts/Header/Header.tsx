@@ -121,6 +121,11 @@ const Header: React.FC = () => {
 		}
 	}
 
+	const closeProfileModal = () => {
+		setProfileIconAnim('profile')
+		setProfileModalOpen(false)
+	}
+
 	return (
 		<header
 			className={
@@ -309,7 +314,10 @@ const Header: React.FC = () => {
 								</span>
 							</div>
 						</button>
-						<ProfileModal isOpen={profileModalOpen} />
+						<ProfileModal
+							isOpen={profileModalOpen}
+							onClose={closeProfileModal}
+						/>
 					</div>
 					<div className={styles.burgerLangContainer}>
 						<div

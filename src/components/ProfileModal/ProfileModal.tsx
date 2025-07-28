@@ -5,11 +5,22 @@ import { useNavigate } from 'react-router-dom'
 
 interface ProfileModalProps {
 	isOpen: boolean
+	onClose?: () => void
 }
 
-export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen }) => {
+export const ProfileModal: React.FC<ProfileModalProps> = ({
+	isOpen,
+	onClose,
+}) => {
 	const navigate = useNavigate()
 	if (!isOpen) return null
+
+	const handleFaqClick = () => {
+		navigate('/faq')
+		if (onClose) {
+			onClose()
+		}
+	}
 
 	return (
 		<div className={styles.dropdown}>
@@ -42,10 +53,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen }) => {
 				<div className={styles.section}>
 					<h3 className={styles.sectionTitle}>Информация</h3>
 					<div className={styles.menuItems}>
-						<button
-							className={styles.menuItem}
-							onClick={() => navigate('/faq')}
-						>
+						<button className={styles.menuItem} onClick={handleFaqClick}>
 							<span>FAQ</span>
 							<span className={styles.arrow}>›</span>
 						</button>
