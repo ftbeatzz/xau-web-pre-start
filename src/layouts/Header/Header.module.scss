@@ -544,7 +544,6 @@
 
 .mobileDropdownMenu {
 	width: 100%;
-	margin-top: 8px;
 	overflow: hidden;
 	animation: dropdownSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
@@ -580,16 +579,13 @@
 
 // Активное состояние для элементов dropdown в мобильном меню
 .mobileDropdownMenu {
+	display: flex;	
+	flex-direction: column;
+	width: 100%;
 	.active {
 		color: #ffe34b;
-		font-family: Unbounded;
-		font-size: 14px;
-		font-style: normal;
-		font-weight: 300;
-		line-height: normal;
-		background: rgba(255, 227, 75, 0.1);
-		border-radius: 8px;
-		margin: 4px 8px;
+		width: 100%;
+		padding-top: 16px;
 	}
 }
 
