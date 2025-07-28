@@ -389,6 +389,17 @@
 								z-index: 2;
 							}
 						}
+
+						@media (max-width: 375px) {
+							display: grid;
+							grid-template-columns: 1fr 1fr;
+							gap: 8px;
+
+							button {
+								width: 100%;
+								max-width: none;
+							}
+						}
 					}
 				}
 			}
