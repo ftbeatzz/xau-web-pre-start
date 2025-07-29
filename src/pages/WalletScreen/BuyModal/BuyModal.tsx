@@ -10,6 +10,7 @@ import CopyIcon from '../../../icons/CopyIcon'
 import type { OperationRow } from '../../../components/OperationsTable'
 import YellowArrowIcon from '../../../icons/YellowArrowIcon'
 import WarningIcon from '../../../icons/WarningIcon'
+import Timer from '../../../components/Timer'
 
 const NETWORKS = [
 	{ key: 'trc20', label: 'Trc20' },
@@ -50,11 +51,23 @@ const BuyModal: React.FC<BuyModalProps> = ({
 		tokenName.toLowerCase()
 	)
 
+	// Новый таб для выбора способа оплаты
+	const paymentTabItems = [
+		{ id: 'crypto', label: 'Криптовалюта' },
+		{ id: 'card', label: 'Visa/Mastercard' },
+	]
+	const {
+		tabs: paymentTabs,
+		activeTab: activePaymentTab,
+		handleTabChange: handlePaymentTabChange,
+	} = useTabs(paymentTabItems, 'crypto')
+
 	const [step, setStep] = useState(1)
 	const [usdtAmount, setUsdtAmount] = useState('')
 	const [cryptoAmount, setCryptoAmount] = useState('')
 	const [selectedNetwork, setSelectedNetwork] = useState('erc20')
 	const [isSwapped, setIsSwapped] = useState(false)
+
 	// Пример истории для каждой валюты
 	const [history] = useState<{ [key: string]: OperationRow[] }>({
 		xaut: [],
@@ -166,37 +179,12 @@ const BuyModal: React.FC<BuyModalProps> = ({
 		}
 	}
 
-	return (
-		<Modal isOpen={isOpen} onClose={onClose} title={`Выбор криптовалюты`}>
-			<div className={styles.wrapper}>
-				<Tabs
-					tabs={tabs}
-					activeTab={activeTab}
-					onTabChange={handleTabChange}
-					className={styles.tabs}
-				/>
-				<div className={styles.gradientLine}></div>
-				<div className={styles.tabContent}>
-					<div className={styles.getHeader}>
-						<h2>Покупка криптовалюты {currency}</h2>
-						<div className={styles.limitsWrapper}>
-							<p>
-								После покупки криптовалюты <span>{currency}</span>, на ваш
-								кошелек будет зачислен объем.
-							</p>
-							<button
-								className={styles.limitsBtn}
-								onClick={handleOpenLimitsModal}
-								type='button'
-							>
-								<span>
-									<LimitsIcon />
-								</span>
-								<span>Лимиты</span>
-							</button>
-						</div>
-					</div>
-
+	// Рендер контента в зависимости от выбранного способа оплаты
+	const renderPaymentContent = () => {
+		if (activePaymentTab === 'crypto') {
+			// Криптовалютный контент (оставляем как было)
+			return (
+				<>
 					{step === 1 ? (
 						<form
 							className={styles.formCard}
@@ -346,6 +334,85 @@ const BuyModal: React.FC<BuyModalProps> = ({
 							</div>
 						</div>
 					)}
+				</>
+			)
+		} else {
+			// Контент для Visa/Mastercard
+			return (
+				<div className={styles.cardPaymentContent}>
+					<div className={styles.cardInfo}>
+						<div className={styles.cardImg}>
+							<img src='img/visa_mastercard.png' alt='' />
+						</div>
+					</div>
+					<div className={styles.cardForm}>
+						<div className={styles.timerWrapper}>
+							<p>Данная функция покупки будет доступна через:</p>
+							<Timer />
+						</div>
+						<button
+							className={styles.backBtn}
+							onClick={() => handlePaymentTabChange('crypto')}
+							type='button'
+						>
+							Назад
+						</button>
+					</div>
+				</div>
+			)
+		}
+	}
+
+	return (
+		<Modal isOpen={isOpen} onClose={onClose} title={`Выбор криптовалюты`}>
+			<div className={styles.wrapper}>
+				<Tabs
+					tabs={tabs}
+					activeTab={activeTab}
+					onTabChange={handleTabChange}
+					className={styles.tabs}
+				/>
+				<div className={styles.gradientLine}></div>
+				<div className={styles.tabContent}>
+					<div className={styles.getHeader}>
+						<h2
+							className={
+								activePaymentTab === 'card' ? styles.centeredTitle : ''
+							}
+						>
+							Покупка криптовалюты {currency}
+						</h2>
+						{activePaymentTab === 'crypto' && (
+							<div className={styles.limitsWrapper}>
+								<p>
+									После покупки криптовалюты <span>{currency}</span>, на ваш
+									кошелек будет зачислен объем.
+								</p>
+								<button
+									className={styles.limitsBtn}
+									onClick={handleOpenLimitsModal}
+									type='button'
+								>
+									<span>
+										<LimitsIcon />
+									</span>
+									<span>Лимиты</span>
+								</button>
+							</div>
+						)}
+					</div>
+
+					{/* Новый таб для выбора способа оплаты */}
+					<Tabs
+						tabs={paymentTabs}
+						activeTab={activePaymentTab}
+						onTabChange={handlePaymentTabChange}
+						className={styles.paymentTabs}
+					/>
+					{/* <div className={styles.gradientLine}></div> */}
+
+					{/* Контент в зависимости от выбранного способа оплаты */}
+					{renderPaymentContent()}
 				</div>
 			</div>
 		</Modal>

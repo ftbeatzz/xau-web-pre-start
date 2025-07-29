@@ -164,15 +164,28 @@ const dexExchanges = [
 	{ id: 'balancer', label: 'Balancer' },
 ]
 
-// Данные для CEX бирж
-const cexExchanges = [
-	{ id: 'toobit', label: 'Toobit' },
-	{ id: 'bybit', label: 'Bybit' },
-	{ id: 'bitrue', label: 'Bitrue' },
-	{ id: 'mexc', label: 'Mexc' },
-	{ id: 'whitebit', label: 'WhiteBIT' },
+// Данные для CEX бирж для Xaut (Commerce)
+const cexExchangesXaut = [
+	{ id: 'icrypex', label: 'Icrypex' },
 	{ id: 'ourbit', label: 'Ourbit' },
-	{ id: 'okx', label: 'OKX' },
+	{ id: 'bybit', label: 'Bybit' },
+	{ id: 'htx', label: 'HTX' },
+	{ id: 'gate', label: 'Gate' },
+	{ id: 'mexc', label: 'MEXC' },
+	{ id: 'bitrue', label: 'Bitrue' },
+	{ id: 'coinw', label: 'CoinW' },
+]
+
+// Данные для CEX бирж для PaxG (Commerce)
+const cexExchangesPaxg = [
+	{ id: 'binance', label: 'Binance' },
+	{ id: 'toobit', label: 'Toobit' },
+	{ id: 'mexc', label: 'MEXC' },
+	{ id: 'ourbit', label: 'Ourbit' },
+	{ id: 'lbank', label: 'LBank' },
+	{ id: 'gate', label: 'Gate' },
+	{ id: 'coinw', label: 'CoinW' },
+	{ id: 'bitrue', label: 'Bitrue' },
 ]
 
 // Кастомный компонент для dexExchanges с переключением между табами и dropdown
@@ -326,6 +339,34 @@ const CommerceStatistics: React.FC = () => {
 	const [activeDexExchange, setActiveDexExchange] = useState('uniswap')
 	const [activeCexExchange, setActiveCexExchange] = useState('toobit')
 
+	// Получаем список CEX бирж в зависимости от выбранной криптовалюты
+	const getCurrentCexExchanges = () => {
+		return activeCrypto === 'xaut' ? cexExchangesXaut : cexExchangesPaxg
+	}
+
+	// Обработчик смены криптовалюты
+	const handleCryptoChange = (cryptoId: string) => {
+		setActiveCrypto(cryptoId)
+		// Сбрасываем активную CEX биржу на первую в списке для новой криптовалюты
+		const newCexExchanges =
+			cryptoId === 'xaut' ? cexExchangesXaut : cexExchangesPaxg
+		if (newCexExchanges.length > 0 && newCexExchanges[0]) {
+			setActiveCexExchange(newCexExchanges[0].id)
+		}
+	}
+
+	const currentCexExchanges = getCurrentCexExchanges()
+
+	// Инициализация активной CEX биржи при загрузке компонента
+	useEffect(() => {
+		const currentExchanges =
+			activeCrypto === 'xaut' ? cexExchangesXaut : cexExchangesPaxg
+		const firstExchange = currentExchanges[0]
+		if (currentExchanges.length > 0 && firstExchange) {
+			setActiveCexExchange(firstExchange.id)
+		}
+	}, [activeCrypto])
+
 	return (
 		<div className={styles.container}>
 			{/* Верхний таб с криптовалютами */}
@@ -335,7 +376,7 @@ const CommerceStatistics: React.FC = () => {
 					<Tabs
 						tabs={cryptoCurrencyTabs}
 						activeTab={activeCrypto}
-						onTabChange={setActiveCrypto}
+						onTabChange={handleCryptoChange}
 						className={styles.cryptoTabs}
 					/>
 				</div>
@@ -360,7 +401,7 @@ const CommerceStatistics: React.FC = () => {
 							Централизованная биржа (CEX)
 						</h3>
 						<CexExchangeSelector
-							exchanges={cexExchanges}
+							exchanges={currentCexExchanges}
 							activeExchange={activeCexExchange}
 							onExchangeChange={setActiveCexExchange}
 						/>

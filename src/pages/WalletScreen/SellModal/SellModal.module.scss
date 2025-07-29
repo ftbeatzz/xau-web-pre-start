@@ -137,6 +137,7 @@
 		backdrop-filter: blur(2px);
 		padding: 12px;
 		margin-bottom: 20px;
+		margin-top: 16px;
 
 		.value {
 			color: #fff;
@@ -443,7 +444,6 @@
 .tabContent {
 	display: flex;
 	flex-direction: column;
-	gap: 24px;
 
 	@media (max-width: 767px) {
 		gap: 12px;
@@ -473,7 +473,6 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		margin-top: 16px;
 
 		p {
 			color: #fff;
@@ -531,5 +530,65 @@
 		padding-bottom: 12px;
 		margin: 0;
 		max-width: 340px;
+
+		&.centeredTitle {
+			text-align: center;
+			max-width: 100%;
+		}
+	}
+}
+
+// Стили для нового таба способов продажи
+.paymentTabs {
+	margin-top: 16px;
+	margin-bottom: 8px;
+}
+
+// Стили для контента карточной оплаты
+.cardPaymentContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	.cardImg {
+		margin: 12px 0px;
+
+		img {
+			width: 100%;
+			max-width: 255px;
+		}
+	}
+
+	.cardForm {
+		width: 100%;
+		.timerWrapper {
+			p {
+				color: #fff;
+				text-align: center;
+				font-family: 'Noto Sans';
+				font-size: 15px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 22px; /* 146.667% */
+				letter-spacing: -0.4px;
+				padding-bottom: 10px;
+			}
+		}
+
+		.backBtn {
+			border-radius: 16px;
+			border: 1px solid #fff;
+			color: #fff;
+			text-align: center;
+			text-shadow: 0 4px 15px rgba(10, 124, 255, 0.25);
+			font-family: Unbounded;
+			font-size: 14px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 140%; /* 19.6px */
+			width: 100%;
+			height: 54px;
+		}
 	}
 }

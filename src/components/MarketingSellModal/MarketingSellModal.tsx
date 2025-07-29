@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import styles from './MarketingSellModal.module.scss'
 import Modal from '../Modal/Modal'
+import Tabs from '../Tabs/Tabs'
+import { useTabs } from '../../hooks/useTabs'
 import LimitsIcon from '../../icons/LimitsIcon'
 import SellIcon from '../../icons/SellIcon'
 import SmallXaut from '../../icons/SmallXaut'
 import type { OperationRow } from '../OperationsTable'
 import WarningIcon from '../../icons/WarningIcon'
+import Timer from '../Timer'
 
 const NETWORKS = [
 	{ key: 'trc20', label: 'Trc20' },
@@ -31,6 +34,17 @@ const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 	onOpenOperationsModal,
 	onOpenLimitsModal,
 }) => {
+	// Новый таб для выбора способа продажи
+	const sellTabItems = [
+		{ id: 'crypto', label: 'Криптовалюта' },
+		{ id: 'card', label: 'Visa/Mastercard' },
+	]
+	const {
+		tabs: sellTabs,
+		activeTab: activeSellTab,
+		handleTabChange: handleSellTabChange,
+	} = useTabs(sellTabItems, 'crypto')
+
 	const [step, setStep] = useState(1)
 	const [cryptoAmount, setCryptoAmount] = useState('')
 	const [usdtAmount, setUsdtAmount] = useState('')
@@ -109,34 +123,13 @@ const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 		setUsdtAmount(value ? (parseFloat(value) * price).toFixed(2) : '')
 	}
 
-	return (
-		<Modal
-			isOpen={isOpen}
-			onClose={onClose}
-			title={``}
-		>
-			<div className={styles.wrapper}>
-				<div className={styles.tabContent}>
-					<div className={styles.getHeader}>
-						<h2>Продажа криптовалюты {currency}</h2>
-						<div className={styles.limitsWrapper}>
-							<p>
-								После продажи криптовалюты <span>{currency}</span>, USDT будет
-								отправлено на ваш адрес в течение нескольких минут.
-							</p>
-							<button
-								className={styles.limitsBtn}
-								onClick={handleOpenLimitsModal}
-								type='button'
-							>
-								<span>
-									<LimitsIcon />
-								</span>
-								<span>Лимиты</span>
-							</button>
-						</div>
-					</div>
-
+	// Рендер контента в зависимости от выбранного способа продажи
+	const renderSellContent = () => {
+		// Во втором шаге всегда показываем криптовалютный контент
+		if (step === 2 || activeSellTab === 'crypto') {
+			// Криптовалютный контент (оставляем как было)
+			return (
+				<>
 					{step === 1 ? (
 						<form
 							className={styles.formCard}
@@ -256,6 +249,77 @@ const MarketingSellModal: React.FC<MarketingSellModalProps> = ({
 							</div>
 						</div>
 					)}
+				</>
+			)
+		} else {
+			// Контент для Visa/Mastercard
+			return (
+				<div className={styles.cardPaymentContent}>
+					<div className={styles.cardInfo}>
+						<div className={styles.cardImg}>
+							<img src='img/visa_mastercard.png' alt='' />
+						</div>
+					</div>
+					<div className={styles.cardForm}>
+						<div className={styles.timerWrapper}>
+							<p>Данная функция продажи будет доступна через:</p>
+							<Timer />
+						</div>
+						<button
+							className={styles.backBtn}
+							onClick={() => handleSellTabChange('crypto')}
+							type='button'
+						>
+							Назад
+						</button>
+					</div>
+				</div>
+			)
+		}
+	}
+
+	return (
+		<Modal isOpen={isOpen} onClose={onClose} title={``}>
+			<div className={styles.wrapper}>
+				<div className={styles.tabContent}>
+					<div className={styles.getHeader}>
+						<h2
+							className={activeSellTab === 'card' ? styles.centeredTitle : ''}
+						>
+							Продажа криптовалюты {currency}
+						</h2>
+						{activeSellTab === 'crypto' && (
+							<div className={styles.limitsWrapper}>
+								<p>
+									После продажи криптовалюты <span>{currency}</span>, USDT будет
+									отправлено на ваш адрес в течение нескольких минут.
+								</p>
+								<button
+									className={styles.limitsBtn}
+									onClick={handleOpenLimitsModal}
+									type='button'
+								>
+									<span>
+										<LimitsIcon />
+									</span>
+									<span>Лимиты</span>
+								</button>
+							</div>
+						)}
+					</div>
+
+					{/* Новый таб для выбора способа продажи (только на первом шаге) */}
+					{step === 1 && (
+						<Tabs
+							tabs={sellTabs}
+							activeTab={activeSellTab}
+							onTabChange={handleSellTabChange}
+							className={styles.paymentTabs}
+						/>
+					)}
+
+					{/* Контент в зависимости от выбранного способа продажи */}
+					{renderSellContent()}
 				</div>
 			</div>
 			{/* OperationsModal

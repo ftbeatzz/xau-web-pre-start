@@ -390,21 +390,61 @@ const cryptoCurrencyTabs = [
 	{ id: 'paxg', label: 'Pax Gold (PaxG)', shortLabel: 'PaxG' },
 ]
 
-// Данные для CEX бирж
-const cexExchanges = [
-	{ id: 'toobit', label: 'Toobit' },
-	{ id: 'bybit', label: 'Bybit' },
-	{ id: 'bitrue', label: 'Bitrue' },
-	{ id: 'mexc', label: 'Mexc' },
-	{ id: 'whitebit', label: 'WhiteBIT' },
+// Данные для CEX бирж для Xaut
+const cexExchangesXaut = [
+	{ id: 'icrypex', label: 'Icrypex' },
 	{ id: 'ourbit', label: 'Ourbit' },
-	{ id: 'okx', label: 'OKX' },
+	{ id: 'bybit', label: 'Bybit' },
+	{ id: 'htx', label: 'HTX' },
 	{ id: 'gate', label: 'Gate' },
+	{ id: 'mexc', label: 'MEXC' },
+	{ id: 'bitrue', label: 'Bitrue' },
+	{ id: 'okx', label: 'OKX' },
+]
+
+// Данные для CEX бирж для PaxG
+const cexExchangesPaxg = [
+	{ id: 'binance', label: 'Binance' },
+	{ id: 'toobit', label: 'Toobit' },
+	{ id: 'mexc', label: 'MEXC' },
+	{ id: 'ourbit', label: 'Ourbit' },
+	{ id: 'lbank', label: 'LBank' },
+	{ id: 'gate', label: 'Gate' },
+	{ id: 'coinw', label: 'CoinW' },
+	{ id: 'bitrue', label: 'Bitrue' },
 ]
 
 const TradeStatistics: React.FC = () => {
 	const [activeCrypto, setActiveCrypto] = useState('xaut')
-	const [activeCexExchange, setActiveCexExchange] = useState('toobit')
+	const [activeCexExchange, setActiveCexExchange] = useState('icrypex')
+
+	// Получаем список бирж в зависимости от выбранной криптовалюты
+	const getCurrentExchanges = () => {
+		return activeCrypto === 'xaut' ? cexExchangesXaut : cexExchangesPaxg
+	}
+
+	// Инициализация активной биржи при загрузке компонента
+	useEffect(() => {
+		const currentExchanges =
+			activeCrypto === 'xaut' ? cexExchangesXaut : cexExchangesPaxg
+		const firstExchange = currentExchanges[0]
+		if (currentExchanges.length > 0 && firstExchange) {
+			setActiveCexExchange(firstExchange.id)
+		}
+	}, [activeCrypto])
+
+	// Обработчик смены криптовалюты
+	const handleCryptoChange = (cryptoId: string) => {
+		setActiveCrypto(cryptoId)
+		// Сбрасываем активную биржу на первую в списке для новой криптовалюты
+		const newExchanges =
+			cryptoId === 'xaut' ? cexExchangesXaut : cexExchangesPaxg
+		if (newExchanges.length > 0 && newExchanges[0]) {
+			setActiveCexExchange(newExchanges[0].id)
+		}
+	}
+
+	const currentExchanges = getCurrentExchanges()
 
 	return (
 		<div className={styles.container}>
@@ -414,7 +454,7 @@ const TradeStatistics: React.FC = () => {
 					<Tabs
 						tabs={cryptoCurrencyTabs}
 						activeTab={activeCrypto}
-						onTabChange={setActiveCrypto}
+						onTabChange={handleCryptoChange}
 						className={styles.cryptoTabs}
 					/>
 				</div>
@@ -424,7 +464,7 @@ const TradeStatistics: React.FC = () => {
 					{/* CEX секция */}
 					<div className={styles.exchangeSection}>
 						<CexExchangeSelector
-							exchanges={cexExchanges}
+							exchanges={currentExchanges}
 							activeExchange={activeCexExchange}
 							onExchangeChange={setActiveCexExchange}
 						/>
@@ -438,9 +478,9 @@ const TradeStatistics: React.FC = () => {
 							<div className={styles.blockHeaderTitle}>
 								<h3 className={styles.blockTitle}>Биржа</h3>
 								<h3 className={styles.blockTitle}>
-									{cexExchanges.find(
+									{currentExchanges.find(
 										exchange => exchange.id === activeCexExchange
-									)?.label || 'Toobit'}
+									)?.label || 'Icrypex'}
 								</h3>
 							</div>
 							<div className={styles.gradientLine}></div>
