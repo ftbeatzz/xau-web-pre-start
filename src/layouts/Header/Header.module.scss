@@ -72,7 +72,7 @@
 
 	.navWrapper {
 		width: 100%;
-		max-width: 820px;
+		max-width: 1000px;
 
 		@media (max-width: 1240px) {
 			padding: 0 16px;
@@ -80,7 +80,7 @@
 
 		.nav {
 			display: flex;
-			justify-content: space-between;
+			justify-content: space-around;
 			align-items: center;
 
 			.navLink {
@@ -127,7 +127,7 @@
 					border: none;
 					color: #fff;
 					font-family: Unbounded;
-					font-size: 16px;
+					font-size: 14px;
 					font-style: normal;
 					font-weight: 300;
 					line-height: normal;
@@ -151,7 +151,7 @@
 				.dropdownButton.active {
 					color: #ffe34b;
 					font-family: Unbounded;
-					font-size: 16px;
+					font-size: 14px;
 					font-style: normal;
 					font-weight: 300;
 					line-height: normal;
@@ -334,7 +334,6 @@
 
 .nav {
 	display: flex;
-	gap: 32px;
 
 	@media (max-width: 1240px) {
 		gap: 0;
@@ -579,7 +578,7 @@
 
 // Активное состояние для элементов dropdown в мобильном меню
 .mobileDropdownMenu {
-	display: flex;	
+	display: flex;
 	flex-direction: column;
 	width: 100%;
 	.active {

@@ -18,9 +18,11 @@ const Header: React.FC = () => {
 	const [menuAnim, setMenuAnim] = useState<'open' | 'close' | null>(null)
 	const [tradeDropdownOpen, setTradeDropdownOpen] = useState(false)
 	const [commerceDropdownOpen, setCommerceDropdownOpen] = useState(false)
+	const [arbDropdownOpen, setArbDropdownOpen] = useState(false)
 	const [mobileTradeDropdownOpen, setMobileTradeDropdownOpen] = useState(false)
 	const [mobileCommerceDropdownOpen, setMobileCommerceDropdownOpen] =
 		useState(false)
+	const [mobileArbDropdownOpen, setMobileArbDropdownOpen] = useState(false)
 	const [profileModalOpen, setProfileModalOpen] = useState(false)
 	const [profileIconAnim, setProfileIconAnim] = useState<
 		'profile' | 'close' | null
@@ -74,10 +76,12 @@ const Header: React.FC = () => {
 			if (!target.closest(`.${styles.dropdown}`)) {
 				setTradeDropdownOpen(false)
 				setCommerceDropdownOpen(false)
+				setArbDropdownOpen(false)
 			}
 			if (!target.closest(`.${styles.mobileDropdown}`)) {
 				setMobileTradeDropdownOpen(false)
 				setMobileCommerceDropdownOpen(false)
+				setMobileArbDropdownOpen(false)
 			}
 			if (!target.closest(`.${styles.profileBtn}`)) {
 				setProfileModalOpen(false)
@@ -99,6 +103,14 @@ const Header: React.FC = () => {
 		e.preventDefault()
 		setCommerceDropdownOpen(!commerceDropdownOpen)
 		setTradeDropdownOpen(false)
+		setArbDropdownOpen(false)
+	}
+
+	const toggleArbDropdown = (e: React.MouseEvent) => {
+		e.preventDefault()
+		setArbDropdownOpen(!arbDropdownOpen)
+		setTradeDropdownOpen(false)
+		setCommerceDropdownOpen(false)
 	}
 
 	const toggleMobileTradeDropdown = () => {
@@ -109,6 +121,13 @@ const Header: React.FC = () => {
 	const toggleMobileCommerceDropdown = () => {
 		setMobileCommerceDropdownOpen(!mobileCommerceDropdownOpen)
 		setMobileTradeDropdownOpen(false)
+		setMobileArbDropdownOpen(false)
+	}
+
+	const toggleMobileArbDropdown = () => {
+		setMobileArbDropdownOpen(!mobileArbDropdownOpen)
+		setMobileTradeDropdownOpen(false)
+		setMobileCommerceDropdownOpen(false)
 	}
 
 	const toggleProfileModal = () => {
@@ -272,6 +291,61 @@ const Header: React.FC = () => {
 									</div>
 								)}
 							</div>
+
+							{/* ARB Dropdown */}
+							<div
+								className={`${styles.dropdown} ${
+									arbDropdownOpen ? styles.dropdownOpen : ''
+								}`}
+							>
+								<button
+									className={
+										`${styles.dropdownButton} ` +
+										(location.pathname.startsWith('/arb') ? styles.active : '')
+									}
+									onClick={toggleArbDropdown}
+								>
+									XAU ARB
+									<span
+										className={`${styles.dropdownArrow} ${
+											arbDropdownOpen ? styles.dropdownArrowUp : ''
+										}`}
+									>
+										<DropDownArrow />
+									</span>
+								</button>
+								{arbDropdownOpen && (
+									<div className={styles.dropdownMenu}>
+										<NavLink
+											to='/arb/statistics'
+											className={styles.dropdownItem}
+											onClick={() => {
+												setTimeout(() => setArbDropdownOpen(false), 0)
+											}}
+										>
+											{t('companyStatistics')}
+										</NavLink>
+										<NavLink
+											to='/arb/loan'
+											className={styles.dropdownItem}
+											onClick={() => {
+												setTimeout(() => setArbDropdownOpen(false), 0)
+											}}
+										>
+											{t('commerceLoan')}
+										</NavLink>
+										<NavLink
+											to='/arb/model'
+											className={styles.dropdownItem}
+											onClick={() => {
+												setTimeout(() => setArbDropdownOpen(false), 0)
+											}}
+										>
+											{t('proceduralModel')}
+										</NavLink>
+									</div>
+								)}
+							</div>
 						</div>
 
 						<NavLink
@@ -282,13 +356,14 @@ const Header: React.FC = () => {
 						>
 							{t('marketing')}
 						</NavLink>
+
 						<NavLink
-							to='/free'
+							to='/roadmap'
 							className={({ isActive }) =>
 								isActive ? styles.active : styles.navLink
 							}
 						>
-							{t('free')}
+							{t('Дорожная карта')}
 						</NavLink>
 					</div>
 				</nav>
@@ -499,6 +574,65 @@ const Header: React.FC = () => {
 								)}
 							</div>
 
+							{/* ARB Dropdown в мобильном меню */}
+							<div className={styles.mobileDropdown}>
+								<button
+									onClick={toggleMobileArbDropdown}
+									className={`${styles.mobileDropdownButton} ${
+										location.pathname.startsWith('/arb') ? styles.active : ''
+									}`}
+								>
+									XAU ARB
+									<span
+										className={`${styles.mobileDropdownArrow} ${
+											mobileArbDropdownOpen ? styles.mobileDropdownArrowUp : ''
+										}`}
+									>
+										<DropDownArrow />
+									</span>
+								</button>
+								{mobileArbDropdownOpen && (
+									<div className={styles.mobileDropdownMenu}>
+										<NavLink
+											to='/arb/statistics'
+											className={({ isActive }) =>
+												isActive ? styles.active : styles.mobileDropdownItem
+											}
+											onClick={() => {
+												setMobileArbDropdownOpen(false)
+												setMenuOpen(false)
+											}}
+										>
+											{t('companyStatistics')}
+										</NavLink>
+										<NavLink
+											to='/arb/loan'
+											className={({ isActive }) =>
+												isActive ? styles.active : styles.mobileDropdownItem
+											}
+											onClick={() => {
+												setMobileArbDropdownOpen(false)
+												setMenuOpen(false)
+											}}
+										>
+											{t('commerceLoan')}
+										</NavLink>
+										<NavLink
+											to='/arb/model'
+											className={({ isActive }) =>
+												isActive ? styles.active : styles.mobileDropdownItem
+											}
+											onClick={() => {
+												setMobileArbDropdownOpen(false)
+												setMenuOpen(false)
+											}}
+										>
+											{t('proceduralModel')}
+										</NavLink>
+									</div>
+								)}
+							</div>
+
 							<NavLink
 								to='/marketing'
 								onClick={() => setMenuOpen(false)}
@@ -507,15 +641,6 @@ const Header: React.FC = () => {
 								}
 							>
 								{t('marketing')}
-							</NavLink>
-							<NavLink
-								to='/free'
-								onClick={() => setMenuOpen(false)}
-								className={({ isActive }) =>
-									isActive ? styles.active : styles.navLink
-								}
-							>
-								{t('free')}
 							</NavLink>
 
 							{/* Language Switcher в мобильном меню */}

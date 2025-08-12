@@ -1,166 +1,262 @@
 import type { FC } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Tabs from '../../components/Tabs/Tabs'
 import { useTabs } from '../../hooks/useTabs'
 import type { TabItem } from '../../components/Tabs/Tabs'
 import styles from './FreeScreen.module.scss'
 import TgIconSilver from '../../icons/TgIconSilver'
+import FreeInfoModal from '../../components/FreeInfoModal/FreeInfoModal'
+import DoneIcon from '../../icons/DoneIcon'
 
 const FreeScreen: FC = () => {
 	const location = useLocation()
 	const navigate = useNavigate()
 
-	// Определяем табы
-	const freeTabs: TabItem[] = [
+	// Табы роли: Пользователь / Партнер
+	const roleTabs: TabItem[] = [
+		{ id: 'user', label: 'Пользователь' },
+		{ id: 'partner', label: 'Партнер' },
+	]
+	const {
+		tabs: activeRoleTabs,
+		activeTab: activeRoleTab,
+		handleTabChange: handleRoleTabChange,
+	} = useTabs(roleTabs, 'user')
+
+	// Табы токена (используются только для роли Пользователь)
+	const tokenTabsConfig: TabItem[] = [
 		{ id: 'xaut', label: 'Xaut' },
 		{ id: 'paxg', label: 'PaxG' },
 	]
-
-	// Используем хук useTabs с учетом состояния из location
-	const initialTab =
+	const initialTokenTab =
 		location.state && location.state.tab === 'paxg' ? 'paxg' : 'xaut'
-	const { tabs, activeTab, handleTabChange } = useTabs(freeTabs, initialTab)
+	const {
+		tabs: tokenTabs,
+		activeTab: activeTokenTab,
+		handleTabChange: handleTokenTabChange,
+	} = useTabs(tokenTabsConfig, initialTokenTab)
 
-	const [rewarded, setRewarded] = useState<boolean>(false)
-	const [done, setDone] = useState<boolean>(false)
+	const [isCompleted, setIsCompleted] = useState<boolean>(false)
+	const [infoOpen, setInfoOpen] = useState<boolean>(false)
 
-	// Синхронизируем с location.state
+	// Синхронизируем с location.state (для табов токена)
 	useEffect(() => {
 		if (
 			location.state &&
 			location.state.tab &&
-			location.state.tab !== activeTab
+			location.state.tab !== activeTokenTab
 		) {
-			handleTabChange(location.state.tab)
+			handleTokenTabChange(location.state.tab)
 		}
-	}, [location.state, activeTab, handleTabChange])
+	}, [location.state, activeTokenTab, handleTokenTabChange])
 
-	const handleDone = () => {
-		setRewarded(true)
-		setDone(true)
+	const handleDone = useCallback(() => {
+		setIsCompleted(true)
 		window.dispatchEvent(new Event('storage'))
-	}
+	}, [])
 
-	// Данные для разных табов
-	const tabContent = {
-		xaut: {
-			tokenName: 'Xaut',
-			description:
-				'Выполните подписку на наш Telegram канал и Telegram чат, получите на счет 25 USDT в эквиваленте Xaut. Подключитесь к коммерческим сделкам и получайте прибыль.',
-		},
-		paxg: {
-			tokenName: 'PaxG',
-			description:
-				'Выполните подписку на наш Telegram канал и Telegram чат, получите на счет 25 USDT в эквиваленте PaxG. Подключитесь к коммерческим сделкам и получайте прибыль.',
-		},
-	}
-
-	const currentContent = tabContent[activeTab as keyof typeof tabContent]
+	// Сброс шага при смене роли
+	useEffect(() => {
+		setIsCompleted(false)
+	}, [activeRoleTab])
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.wrapper}>
-				<Tabs
-					tabs={tabs}
-					activeTab={activeTab}
-					onTabChange={handleTabChange}
-					className={styles.freeTabs}
-				/>
-				<div className={styles.infoWrapper}>
-					<div
-						className={activeTab === 'xaut' ? styles.freeXaut : styles.freePaxg}
-					>
-						<div className={styles.topTxtBlock}>
-							<h2>Получитье подарочные токены</h2>
-							<p>{currentContent.description}</p>
-						</div>
-
-						{/* Telegram канал */}
-						<div className={styles.socialsBlock}>
-							<div className={styles.socialsHeader}>
-								<p>Telegram канал</p>
-								<p>Xau Official Channel</p>
-							</div>
-							<div className={styles.socialsLine}>
-								<div className={styles.gradientLine}></div>
-							</div>
-							<div className={styles.socialsContent}>
-								<div className={styles.socialsLeft}>
-									<p>
-										<span className={styles.socialsIcon}>
-											<TgIconSilver />
-										</span>
-										<span>Russian</span>
-									</p>
-									<button className={styles.socialBtn}>Перейти</button>
-								</div>
-								<div className={styles.socialsLine}></div>
-								<div className={styles.socialsRight}>
-									<p>
-										<span>English</span>
-										<span className={styles.socialsIcon}>
-											<TgIconSilver />
-										</span>
-									</p>
-									<button className={styles.socialBtn}>Перейти</button>
-								</div>
-							</div>
-						</div>
-
-						{/* Telegram чат */}
-						<div className={styles.socialsBlock}>
-							<div className={styles.socialsHeader}>
-								<p>Telegram чат</p>
-								<p>Xau Official Chat</p>
-							</div>
-							<div className={styles.socialsLine}>
-								<div className={styles.gradientLine}></div>
-							</div>
-							<div className={styles.socialsContent}>
-								<div className={styles.socialsLeft}>
-									<p>
-										<span className={styles.socialsIcon}>
-											<TgIconSilver />
-										</span>
-										<span>Russian</span>
-									</p>
-									<button className={styles.socialBtn}>Перейти</button>
-								</div>
-								<div className={styles.socialsLine}></div>
-								<div className={styles.socialsRight}>
-									<p>
-										<span>English</span>
-										<span className={styles.socialsIcon}>
-											<TgIconSilver />
-										</span>
-									</p>
-									<button className={styles.socialBtn}>Перейти</button>
-								</div>
-							</div>
-						</div>
+				<div className={styles.tabsWrapper}>
+					<div className={styles.tab}>
+						<p>Выбор криптовалюты</p>
+						<Tabs
+							tabs={tokenTabs}
+							activeTab={activeTokenTab}
+							onTabChange={handleTokenTabChange}
+							className={styles.freeTabs}
+						/>
 					</div>
+					<div className={styles.tab}>
+						<p>Выбор программы</p>
+						<Tabs
+							tabs={activeRoleTabs}
+							activeTab={activeRoleTab}
+							onTabChange={handleRoleTabChange}
+							className={styles.freeTabs}
+						/>
+					</div>
+				</div>
+				<div className={styles.infoWrapper}>
+					{activeRoleTab === 'user' ? (
+						<div
+							className={
+								activeTokenTab === 'xaut' ? styles.freeXaut : styles.freePaxg
+							}
+						>
+							<div className={styles.topTxtBlock}>
+								<h2>Получитье подарочные токены</h2>
+								<p>
+									Выполните подписку на наш Telegram канал и Telegram чат,
+									получите на счет 25 USDT в эквиваленте{' '}
+									{activeTokenTab === 'xaut' ? 'Xaut' : 'PaxG'}. Подключитесь к
+									коммерческим сделкам и получайте прибыль.
+								</p>
+							</div>
+
+							{/* Telegram канал */}
+							<div className={styles.socialsBlock}>
+								<div className={styles.socialsHeader}>
+									<p>Telegram канал</p>
+									<p>Xau Official Channel</p>
+								</div>
+								<div className={styles.socialsLine}>
+									<div className={styles.gradientLine}></div>
+								</div>
+								<div className={styles.socialsContent}>
+									<div className={styles.socialsLeft}>
+										<p>
+											<span className={styles.socialsIcon}>
+												<TgIconSilver />
+											</span>
+											<span>Russian</span>
+										</p>
+										<button className={styles.socialBtn}>Перейти</button>
+									</div>
+									<div className={styles.socialsLine}></div>
+									<div className={styles.socialsRight}>
+										<p>
+											<span>English</span>
+											<span className={styles.socialsIcon}>
+												<TgIconSilver />
+											</span>
+										</p>
+										<button className={styles.socialBtn}>Перейти</button>
+									</div>
+								</div>
+							</div>
+
+							{/* Telegram чат */}
+							<div className={styles.socialsBlock}>
+								<div className={styles.socialsHeader}>
+									<p>Telegram чат</p>
+									<p>Xau Official Chat</p>
+								</div>
+								<div className={styles.socialsLine}>
+									<div className={styles.gradientLine}></div>
+								</div>
+								<div className={styles.socialsContent}>
+									<div className={styles.socialsLeft}>
+										<p>
+											<span className={styles.socialsIcon}>
+												<TgIconSilver />
+											</span>
+											<span>Russian</span>
+										</p>
+										<button className={styles.socialBtn}>Перейти</button>
+									</div>
+									<div className={styles.socialsLine}></div>
+									<div className={styles.socialsRight}>
+										<p>
+											<span>English</span>
+											<span className={styles.socialsIcon}>
+												<TgIconSilver />
+											</span>
+										</p>
+										<button className={styles.socialBtn}>Перейти</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					) : (
+						// Состояние: Партнер
+						<div className={styles.freePaxg}>
+							{!isCompleted ? (
+								<>
+									<div className={styles.topTxtBlock}>
+										<h2>Получитье подарочные токены</h2>
+										<p>ТЕКСТ ТЕКСТ</p>
+										<p>ТЕКСТ ТЕКСТ</p>
+										<p>ТЕКСТ ТЕКСТ</p>
+										<p>ТЕКСТ ТЕКСТ</p>
+										<button
+											className={styles.instructionBtn}
+											onClick={() => setInfoOpen(true)}
+										>
+											Подробная инструкция
+										</button>
+									</div>
+
+									<div className={styles.inputBlock}>
+										<p>Telegram канал</p>
+										<div className={styles.gradientLine}></div>
+										<div className={styles.input}>
+											<input type='text' placeholder='Cсылка на канал' />
+										</div>
+										<FreeInfoModal
+											isOpen={infoOpen}
+											onClose={() => setInfoOpen(false)}
+										/>
+									</div>
+									<div className={styles.inputBlock}>
+										<p>YouTube канал</p>
+										<div className={styles.gradientLine}></div>
+										<div className={styles.input}>
+											<input type='text' placeholder='Cсылка на канал' />
+										</div>
+									</div>
+									<div className={styles.inputBlock}>
+										<p>Дополнительная социальная сеть</p>
+										<div className={styles.gradientLine}></div>
+										<div className={styles.input}>
+											<input type='text' placeholder='Cсылка на канал' />
+										</div>
+									</div>
+								</>
+							) : (
+								<>
+									<div className={styles.doneBlock}>
+										<div className={styles.doneIcon}>
+											<DoneIcon />
+										</div>
+										<div className={styles.doneTxt}>
+											<h2>Ваш запрос был отправлен в обработку</h2>
+											<div className={styles.gradientLine}></div>
+										</div>
+										<p>Текст</p>
+										<p>Текст</p>
+									</div>
+								</>
+							)}
+						</div>
+					)}
 					<div className={styles.btns1Step}>
-						{!rewarded && !done && (
+						{!isCompleted && (
 							<>
 								<button className={styles.doneBtn} onClick={handleDone}>
 									Выполнено
 								</button>
 							</>
 						)}
-						{(rewarded || done) && (
+						{isCompleted && (
 							<>
-								<div className={styles.btns2Step}>
+								{activeRoleTab === 'user' ? (
+									<div className={styles.btns2Step}>
+										<button
+											className={styles.backBtn2}
+											onClick={() => navigate('/wallet')}
+										>
+											Назад
+										</button>
+										<button className={styles.tokenBtn} disabled>
+											Токен зачислен
+										</button>
+									</div>
+								) : (
 									<button
-										className={styles.backBtn2}
+										className={styles.doneBtn}
 										onClick={() => navigate('/wallet')}
 									>
-										Назад
+										Вернуться в кабинет
 									</button>
-									<button className={styles.tokenBtn} disabled>
-										Токен зачислен
-									</button>
-								</div>
+								)}
 							</>
 						)}
 					</div>

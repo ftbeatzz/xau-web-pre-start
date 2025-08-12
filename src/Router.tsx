@@ -15,6 +15,10 @@ import HFTTrading from './pages/TradeScreen/HFTTrading/HFTTrading'
 import CommerceStatistics from './pages/CommerceScreen/CommerceStatistics/CommerceStatistics'
 import CommerceLoan from './pages/CommerceScreen/CommerceLoan/CommerceLoan'
 import ProceduralModel from './pages/CommerceScreen/ProceduralModel/ProceduralModel'
+// ARB dropdown pages
+import ArbStatistics from './pages/ArbScreen/ArbStatistics/ArbStatistics'
+import ArbLoan from './pages/ArbScreen/ArbLoan/ArbLoan'
+import ArbProceduralModel from './pages/ArbScreen/ProceduralModel/ProceduralModel'
 
 const Router: React.FC = () => {
 	return (
@@ -36,6 +40,11 @@ const Router: React.FC = () => {
 					<Route path='commerce/statistics' element={<CommerceStatistics />} />
 					<Route path='commerce/loan' element={<CommerceLoan />} />
 					<Route path='commerce/model' element={<ProceduralModel />} />
+
+					{/* ARB dropdown routes */}
+					<Route path='arb/statistics' element={<ArbStatistics />} />
+					<Route path='arb/loan' element={<ArbLoan />} />
+					<Route path='arb/model' element={<ArbProceduralModel />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

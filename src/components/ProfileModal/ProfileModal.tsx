@@ -23,6 +23,13 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
 		}
 	}
 
+	const handleFreeClick = () => {
+		navigate('/free')
+		if (onClose) {
+			onClose()
+		}
+	}
+
 	return (
 		<div className={styles.dropdown}>
 			<div className={styles.dropdownContent}>
@@ -56,6 +63,12 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
 					<div className={styles.menuItems}>
 						<button className={styles.menuItem} onClick={handleFaqClick}>
 							<span>FAQ</span>
+							<span className={styles.arrow}>
+								<DropDownArrow />
+							</span>
+						</button>
+						<button className={styles.menuItem} onClick={handleFreeClick}>
+							<span>Free</span>
 							<span className={styles.arrow}>
 								<DropDownArrow />
 							</span>

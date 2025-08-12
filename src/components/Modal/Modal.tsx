@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import styles from './Modal.module.scss'
 import CloseIcon from '../../icons/CloseIcon'
 
@@ -40,7 +41,7 @@ const Modal: React.FC<ModalProps> = React.memo(
 
 		if (!isOpen) return null
 
-		return (
+		return createPortal(
 			<div
 				className={styles.modalOverlay}
 				onClick={handleBackdropClick}
@@ -55,7 +56,8 @@ const Modal: React.FC<ModalProps> = React.memo(
 					</div>
 					<div className={styles.modalContent}>{children}</div>
 				</div>
-			</div>
+			</div>,
+			document.body
 		)
 	}
 )
