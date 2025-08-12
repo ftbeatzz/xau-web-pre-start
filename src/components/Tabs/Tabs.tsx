@@ -5,6 +5,7 @@ export interface TabItem {
 	id: string
 	label: string
 	shortLabel?: string // Сокращенное название для мобильных устройств
+	icon?: React.ReactNode // Необязательная иконка слева от текста
 }
 
 interface TabsProps {
@@ -30,6 +31,7 @@ const Tabs: React.FC<TabsProps> = ({
 					}`}
 					onClick={() => onTabChange(tab.id)}
 				>
+					{tab.icon && <span className={styles.icon}>{tab.icon}</span>}
 					{tab.shortLabel ? (
 						<>
 							<span className={styles.fullLabel}>{tab.label}</span>

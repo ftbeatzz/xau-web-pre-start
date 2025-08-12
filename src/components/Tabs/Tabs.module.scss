@@ -27,6 +27,10 @@
 	// min-width: 80px;
 	text-align: center;
 	width: 100%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
 
 	@media (max-width: 767px) {
 		font-size: 14px;
@@ -42,6 +46,12 @@
 		font-weight: 500;
 		box-shadow: 0 2px 8px rgba(255, 227, 75, 0.3);
 	}
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .fullLabel {
