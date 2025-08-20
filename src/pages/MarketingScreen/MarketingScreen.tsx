@@ -375,6 +375,38 @@ const MarketingScreen: React.FC = () => {
 		},
 	]
 
+	// Данные для таба "Сеть" для блока "Начисления по программе сеть"
+	const networkProfitData: PartnerProfitData[] = [
+		{
+			id: 'n1',
+			partnerName: 'Текущий уровень',
+			volume: 'Standart',
+			dateTime: 'Расчетное время',
+			profit: '05.12.2025 02:57:36',
+		},
+		{
+			id: 'n2',
+			partnerName: 'Cуммарный объем сети ',
+			volume: '0.25157592',
+			dateTime: 'Профит',
+			profit: '0.00251217',
+		},
+		{
+			id: 'n3',
+			partnerName: 'Доступный объем',
+			volume: '0.75561934',
+			dateTime: 'Профит',
+			profit: '0.00251217',
+		},
+		{
+			id: 'n4',
+			partnerName: 'Закрытый объем',
+			volume: '0.75561934',
+			dateTime: 'Недополученная прибыль',
+			profit: '0.00251217',
+		},
+	]
+
 	const handleCloseOperationsModal = () => {
 		setOperationsModal({
 			open: false,
@@ -514,7 +546,12 @@ const MarketingScreen: React.FC = () => {
 							<h2 className={styles.blockTitle}>{tabTexts.partnerProgram}</h2>
 							<div className={styles.gradientLine}></div>
 						</div>
-						<PartnerProfitTable data={partnerProfitData} />
+						<PartnerProfitTable
+							data={
+								activeTab === 'network' ? networkProfitData : partnerProfitData
+							}
+							activeTab={activeTab}
+						/>
 					</div>
 				</div>
 

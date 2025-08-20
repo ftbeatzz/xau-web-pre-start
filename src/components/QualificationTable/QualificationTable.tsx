@@ -11,73 +11,82 @@ const levels = [
 	{
 		title: { left: 'Уровень', right: 'Standard' },
 		rows: [
+			{ label: 'Рабочий объем', value: '0.5 XAUT/PaxG' },
 			{ label: 'Лично-приглашенных партнеров', value: '3' },
 			{ label: 'Объем личного партнера', value: 'от 0.25 Xaut/PaxG' },
-			{ label: 'Рабочий объем', value: '0.5 XAUT/PaxG' },
 			{ label: 'Покрытие', value: 'от 1 до 1000 партнеров' },
 		],
 	},
 	{
 		title: { left: 'Уровень', right: 'Standard +' },
 		rows: [
+			{ label: 'Рабочий объем', value: '1 XAUT/PaxG' },
 			{ label: 'Лично-приглашенных партнеров', value: '4' },
 			{ label: 'Объем личного партнера', value: 'от 0.25 Xaut/PaxG' },
-			{ label: 'Рабочий объем', value: '1 XAUT/PaxG' },
 			{ label: 'Покрытие', value: 'от 1 до 2 500 партнеров' },
 		],
 	},
 	{
 		title: { left: 'Уровень', right: 'Business' },
 		rows: [
+			{ label: 'Рабочий объем', value: '2.5 XAUT/PaxG' },
 			{ label: 'Лично-приглашенных партнеров', value: '5' },
 			{ label: 'Объем личного партнера', value: 'от 0.25 Xaut/PaxG' },
-			{ label: 'Рабочий объем', value: '2.5 XAUT/PaxG' },
 			{ label: 'Покрытие', value: 'от 1 до 5 000 партнеров' },
 		],
 	},
 	{
 		title: { left: 'Уровень', right: 'Business +' },
 		rows: [
+			{ label: 'Рабочий объем', value: '5 XAUT/PaxG' },
 			{ label: 'Лично-приглашенных партнеров', value: '6' },
 			{ label: 'Объем личного партнера', value: 'от 0.25 Xaut/PaxG' },
-			{ label: 'Рабочий объем', value: '5 XAUT/PaxG' },
 			{ label: 'Покрытие', value: 'от 1 до 10 000 партнеров' },
 		],
 	},
 	{
 		title: { left: 'Уровень', right: 'Premium' },
 		rows: [
+			{ label: 'Рабочий объем', value: '10 XAUT/PaxG' },
 			{ label: 'Лично-приглашенных партнеров', value: '7' },
 			{ label: 'Объем личного партнера', value: 'от 0.25 Xaut/PaxG' },
-			{ label: 'Рабочий объем', value: '10 XAUT/PaxG' },
 			{ label: 'Покрытие', value: 'от 1 до 25 000 партнеров' },
 		],
 	},
 	{
 		title: { left: 'Уровень', right: 'Premium +' },
 		rows: [
+			{ label: 'Рабочий объем', value: '20 XAUT/PaxG' },
 			{ label: 'Лично-приглашенных партнеров', value: '8' },
 			{ label: 'Объем личного партнера', value: 'от 20 Xaut/PaxG' },
-			{ label: 'Рабочий объем', value: '20 XAUT/PaxG' },
 			{ label: 'Покрытие', value: 'от 1 до 50 000 партнеров' },
 		],
 	},
 	{
 		title: { left: 'Уровень', right: 'Elite' },
 		rows: [
+			{ label: 'Рабочий объем', value: '40 XAUT/PaxG' },
 			{ label: 'Лично-приглашенных партнеров', value: '9' },
 			{ label: 'Объем личного партнера', value: 'от 0.25 Xaut/PaxG' },
-			{ label: 'Рабочий объем', value: '40 XAUT/PaxG' },
 			{ label: 'Покрытие', value: 'от 1 до 100 000 партнеров' },
 		],
 	},
 	{
 		title: { left: 'Уровень', right: 'Elite +' },
 		rows: [
+			{ label: 'Рабочий объем', value: '60 XAUT/PaxG' },
 			{ label: 'Лично-приглашенных партнеров', value: '10' },
 			{ label: 'Объем личного партнера', value: 'от 0.25 Xaut/PaxG' },
-			{ label: 'Рабочий объем', value: '60 XAUT/PaxG' },
 			{ label: 'Покрытие', value: 'от 1 до 250 000 партнеров' },
+		],
+	},
+	{
+		title: { left: 'Уровень', right: 'Partner' },
+		rows: [
+			{ label: 'Рабочий объем', value: '100 XAUT/PaxG' },
+			{ label: 'Лично-приглашенных партнеров', value: '11' },
+			{ label: 'Объем личного партнера', value: 'от 0.25 Xaut/PaxG' },
+			{ label: 'Покрытие', value: 'от 1 до 500 000 партнеров' },
 		],
 	},
 ]
@@ -112,11 +121,17 @@ const QualificationTable: React.FC<QualificationTableProps> = ({
 				</div>
 				<div className={styles.tableBlock}>
 					<div className={styles.tableTitle}>Таблица активации</div>
-					{levels.map(level => (
+					{levels.map((level, idx) => (
 						<div className={styles.levelCard} key={level.title.right}>
 							<div className={styles.levelCardTitleRow}>
 								<span>{level.title.left}</span>
-								<span>{level.title.right}</span>
+								<span
+									className={
+										idx === levels.length - 1 ? styles.levelRightSpecial : ''
+									}
+								>
+									{level.title.right}
+								</span>
 							</div>
 							<div className={styles.gradientLine}></div>
 							{level.rows.map((row, idx) => (

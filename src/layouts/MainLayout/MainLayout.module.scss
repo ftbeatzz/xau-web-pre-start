@@ -26,4 +26,12 @@
 			background: none !important;
 		}
 	}
+
+	&.noPaddingTop {
+		padding-top: 0;
+
+		@media (max-width: 767px) {
+			padding-top: 0;
+		}
+	}
 }

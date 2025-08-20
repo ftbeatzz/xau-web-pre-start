@@ -5,6 +5,8 @@ import WalletScreen from './pages/WalletScreen/WalletScreen'
 import MarketingScreen from './pages/MarketingScreen/MarketingScreen'
 import FreeScreen from './pages/FreeScreen/FreeScreen'
 import FaqScreen from './pages/FaqScreen/FaqScreen'
+import LoginScreen from './pages/LoginScreen/LoginScreen'
+import RegScreen from './pages/RegScreen/RegScreen'
 
 // Trade dropdown pages
 import TradeStatistics from './pages/TradeScreen/TradeStatistics/TradeStatistics'
@@ -30,6 +32,8 @@ const Router: React.FC = () => {
 					<Route path='marketing' element={<MarketingScreen />} />
 					<Route path='free' element={<FreeScreen />} />
 					<Route path='faq' element={<FaqScreen />} />
+					<Route path='login' element={<LoginScreen />} />
+					<Route path='registration' element={<RegScreen />} />
 
 					{/* Trade dropdown routes */}
 					<Route path='trade/statistics' element={<TradeStatistics />} />

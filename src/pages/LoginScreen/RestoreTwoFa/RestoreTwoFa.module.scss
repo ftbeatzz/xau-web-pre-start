@@ -1,0 +1,302 @@
+.secondStep {
+	h5 {
+		color: #ffe34b;
+		text-align: center;
+		font-family: Unbounded;
+		font-size: 38px;
+		font-weight: 600;
+		letter-spacing: 0.88px;
+		padding-bottom: 12px;
+		margin: 0;
+
+		@media (max-width: 1023px) {
+			font-size: 34px;
+		}
+
+		@media (max-width: 767px) {
+			font-size: 22px;
+		}
+	}
+	.loginSubtitle {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		gap: 12px;
+		padding-bottom: 24px;
+
+		h3 {
+			color: #fff;
+			text-align: center;
+			font-family: 'Noto Sans';
+			font-size: 20px;
+			font-style: normal;
+			font-weight: 500;
+			line-height: normal;
+			letter-spacing: 0.4px;
+
+			@media (max-width: 1023px) {
+				font-size: 18px;
+			}
+
+			@media (max-width: 767px) {
+				font-size: 16px;
+			}
+		}
+
+		.gradientLine {
+			background: linear-gradient(
+				90deg,
+				rgba(225, 220, 195, 0.1) 0%,
+				#e1dcc3 50%,
+				rgba(239, 233, 207, 0.1) 97.12%
+			);
+			height: 1px;
+			width: 100%;
+			max-width: 160px;
+		}
+	}
+
+	.webForm {
+		.formGroup {
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 16px;
+
+			label {
+				color: #fff;
+				font-family: 'Noto Sans';
+				font-size: 16px;
+				font-weight: 400;
+				margin-bottom: 8px;
+			}
+
+			.formInput {
+				width: 100%;
+				height: 54px;
+				border-radius: 12px;
+				border: 1px solid rgba(255, 255, 255, 0.8);
+				background: radial-gradient(
+						70.71% 70.71% at 50% 50%,
+						rgba(255, 255, 255, 0.08) 0%,
+						rgba(255, 255, 255, 0) 100%
+					),
+					rgba(255, 255, 255, 0);
+				color: #fff;
+				padding: 0 22px;
+				font-family: 'Noto Sans';
+				font-size: 16px;
+				transition: all 0.3s ease;
+
+				&:focus {
+					outline: none;
+					box-shadow: 0px 4px 25px 0px rgba(255, 255, 255, 0.12),
+						0px 0px 0px 1px rgba(255, 255, 255, 0.06) inset;
+				}
+			}
+		}
+	}
+
+	.loginBtn {
+		border-radius: 16px;
+		border: 1px solid #fff;
+		background: var(--Primary-color, #ffe34b);
+		color: #000;
+		text-align: center;
+		text-shadow: 0px 4px 15px rgba(10, 124, 255, 0.25);
+		font-family: Unbounded;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 140%;
+		width: 100%;
+		height: 60px;
+		margin-top: 20px;
+
+		@media (max-width: 767px) {
+			height: 50px;
+			font-size: 14px;
+		}
+	}
+
+	// Описание под заголовком на шаге 2
+	.stepNote {
+		p {
+			color: var(--grey, #9db2ce);
+			text-align: center;
+			font-family: 'Noto Sans';
+			font-size: 16px;
+			font-style: normal;
+			font-weight: 300;
+			line-height: 140%;
+			letter-spacing: 0.32px;
+			max-width: 640px;
+			margin: 0 auto 16px;
+
+			@media (max-width: 1023px) {
+				font-size: 15px;
+			}
+
+			@media (max-width: 767px) {
+				font-size: 14px;
+			}
+		}
+	}
+
+	.restoreLinks {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+
+		.restoreRow {
+			display: flex;
+			justify-content: center;
+			gap: 6px;
+			margin-top: 12px;
+
+			a {
+				color: var(--Primary-color, #ffe34b);
+				font-family: 'Noto Sans';
+				font-size: 16px;
+				font-weight: 300;
+				text-decoration: underline;
+			}
+		}
+	}
+
+	// Строка повторной отправки кода
+	.resendStroke {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		margin-top: 12px;
+
+		span {
+			color: var(--grey, #9db2ce);
+			font-family: 'Noto Sans';
+			font-size: 16px;
+			font-weight: 300;
+		}
+
+		a {
+			color: var(--Primary-color, #ffe34b);
+			font-family: 'Noto Sans';
+			font-size: 16px;
+			font-weight: 400;
+			text-decoration: underline;
+		}
+	}
+
+	// Блоки шага 3 по аналогии с WebRegistration
+	.twoFaInfo {
+		p {
+			color: var(--grey, #9db2ce);
+			text-align: center;
+			font-family: 'Noto Sans';
+			font-size: 17px;
+			font-weight: 300;
+			letter-spacing: 0.34px;
+			margin: 0 0 10px;
+		}
+	}
+
+	.authKeyGroup {
+		margin-top: 16px;
+		label {
+			display: block;
+			color: #fff;
+			font-family: Unbounded;
+			font-size: 14px;
+			font-weight: 300;
+			line-height: 20px;
+			margin-bottom: 8px;
+		}
+
+		.authKeyWrap {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			border-radius: 12px;
+			border: 1px solid rgba(255, 255, 255, 0.8);
+			background: radial-gradient(
+					70.71% 70.71% at 50% 50%,
+					rgba(255, 255, 255, 0.08) 0%,
+					rgba(255, 255, 255, 0) 100%
+				),
+				rgba(255, 255, 255, 0);
+			padding: 8px 16px;
+
+			.authKeyInput {
+				flex: 1;
+				background: transparent;
+				border: none;
+				color: #fff;
+				font-family: Unbounded;
+				font-size: 14px;
+				outline: none;
+			}
+
+			.copyBtn {
+				width: 83px;
+				height: 34px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 8px;
+				background: #ffe34b;
+			}
+		}
+	}
+
+	.qrWrapper {
+		margin-top: 18px;
+		.qrBox {
+			border-radius: 12px;
+			border: 1px solid rgba(255, 255, 255, 0.8);
+			background: radial-gradient(
+					70.71% 70.71% at 50% 50%,
+					rgba(255, 255, 255, 0.08) 0%,
+					rgba(255, 255, 255, 0) 100%
+				),
+				rgba(255, 255, 255, 0);
+			height: 180px;
+
+			@media (max-width: 767px) {
+				height: 140px;
+			}
+		}
+	}
+}
+
+.successTitle {
+	color: #ffe34b;
+	text-align: center;
+	font-family: Unbounded;
+	font-size: 28px;
+	font-weight: 600;
+	letter-spacing: 0.56px;
+	margin: 0 0 12px;
+
+	@media (max-width: 1023px) {
+		font-size: 26px;
+	}
+
+	@media (max-width: 767px) {
+		font-size: 22px;
+	}
+}
+
+.successSubtitle {
+	color: var(--grey, #9db2ce);
+	text-align: center;
+	font-family: 'Noto Sans';
+	font-size: 16px;
+	font-weight: 300;
+	letter-spacing: 0.32px;
+	max-width: 560px;
+	margin: 0 auto 20px;
+	margin-top: 25px;
+
+	@media (max-width: 767px) {
+		font-size: 14px;
+	}
+}

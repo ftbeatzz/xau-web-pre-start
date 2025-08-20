@@ -1,0 +1,566 @@
+.loginMain {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-image: url(/img/logoTxt.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 115%;
+
+	.loginWrapper {
+		border-radius: 20px;
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.05) 0%,
+			rgba(255, 255, 255, 0) 100%
+		);
+		box-shadow: 0px -2px 10px 0px rgba(255, 227, 75, 0.15),
+			0px -2px 40px 0px rgba(255, 227, 75, 0.15),
+			0px 0.5px 0px 0px rgba(255, 255, 255, 0.5) inset;
+		padding: 30px 60px;
+		margin: 0 32px;
+		max-width: 680px;
+
+		@media (max-width: 1023px) {
+			margin: 0 12px;
+			padding: 20px 12px;
+		}
+
+		@media (max-width: 767px) {
+			width: 100%;
+		}
+
+		h1 {
+			color: #ffe34b;
+			text-align: center;
+			font-family: Unbounded;
+			font-size: 44px;
+			font-style: normal;
+			font-weight: 600;
+			line-height: normal;
+			letter-spacing: 0.88px;
+			padding-bottom: 12px;
+
+			@media (max-width: 1023px) {
+				font-size: 40px;
+			}
+
+			@media (max-width: 767px) {
+				font-size: 24px;
+			}
+		}
+
+		.loginSubtitle {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			padding-bottom: 40px;
+
+			@media (max-width: 767px) {
+				padding-bottom: 20px;
+			}
+
+			h2 {
+				color: #fff;
+				text-align: center;
+				font-family: 'Noto Sans';
+				font-size: 20px;
+				font-style: normal;
+				font-weight: 500;
+				line-height: normal;
+				letter-spacing: 0.4px;
+				width: 100%;
+				max-width: 400px;
+
+				@media (max-width: 1023px) {
+					font-size: 18px;
+				}
+
+				@media (max-width: 767px) {
+					font-size: 16px;
+				}
+			}
+
+			.gradientLine {
+				background: linear-gradient(
+					90deg,
+					rgba(225, 220, 195, 0.1) 0%,
+					#e1dcc3 50%,
+					rgba(239, 233, 207, 0.1) 97.12%
+				);
+				height: 1px;
+				width: 100%;
+				max-width: 70px;
+
+				@media (max-width: 767px) {
+					display: none;
+				}
+			}
+		}
+
+		// Табы для выбора способа входа
+		.loginTabs {
+			display: flex;
+			gap: 8px;
+			margin-bottom: 40px;
+			border-radius: 18px;
+			background: #0d1c2b;
+			padding: 8px 14px;
+			gap: 8px;
+
+			@media (max-width: 767px) {
+				margin-bottom: 28px;
+			}
+
+			.tabButton {
+				flex: 1;
+				border-radius: 16px;
+				background: transparent;
+				color: #fff;
+				text-align: center;
+				text-shadow: 0px 4px 15px rgba(10, 124, 255, 0.25);
+				font-family: Unbounded;
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 300;
+				line-height: 140%; /* 22.4px */
+				height: 44px;
+				cursor: pointer;
+				transition: all 0.3s ease;
+
+				@media (max-width: 767px) {
+					font-size: 14px;
+					padding: 10px 16px;
+				}
+
+				&.activeTab {
+					background: #ffe34b;
+					color: #000;
+				}
+
+				&:hover:not(.activeTab) {
+					background: rgba(255, 255, 255, 0.1);
+				}
+			}
+		}
+
+		// Контент для Telegram
+		.telegramContent {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+
+			.telegramButton {
+				border-radius: 16px;
+				border: 1px solid #fff;
+				background: var(--Primary-color, #ffe34b);
+				width: 100%;
+				color: #000;
+				text-align: center;
+				text-shadow: 0px 4px 15px rgba(10, 124, 255, 0.25);
+				font-family: Unbounded;
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 140%;
+				height: 60px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				margin-bottom: 12px;
+
+				@media (max-width: 767px) {
+					height: 50px;
+					font-size: 14px;
+				}
+			}
+
+			.regStroke {
+				display: flex;
+				gap: 5px;
+				padding-top: 12px;
+
+				span {
+					color: var(--grey, #9db2ce);
+					text-align: center;
+					font-family: 'Noto Sans';
+					font-size: 16px;
+					font-style: normal;
+					font-weight: 300;
+					line-height: normal;
+					letter-spacing: 0.32px;
+
+					@media (max-width: 767px) {
+						font-size: 14px;
+					}
+				}
+
+				a {
+					color: var(--Primary-color, #ffe34b);
+					font-family: 'Noto Sans';
+					font-size: 16px;
+					font-style: normal;
+					font-weight: 400;
+					line-height: normal;
+					letter-spacing: 0.32px;
+					text-decoration-line: underline;
+					text-decoration-style: solid;
+					text-decoration-skip-ink: none;
+					text-decoration-thickness: auto;
+					text-underline-offset: auto;
+					text-underline-position: from-font;
+
+					@media (max-width: 767px) {
+						font-size: 14px;
+					}
+				}
+			}
+		}
+
+		.firstStep {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+
+			.loginSubtitle {
+				display: flex;
+				align-items: center;
+
+				width: 100%;
+				padding-bottom: 40px;
+
+				@media (max-width: 767px) {
+					padding-bottom: 20px;
+				}
+
+				h2 {
+					color: #fff;
+					text-align: center;
+					font-family: 'Noto Sans';
+					font-size: 20px;
+					font-style: normal;
+					font-weight: 500;
+					line-height: normal;
+					letter-spacing: 0.4px;
+					width: 100%;
+					max-width: 400px;
+
+					@media (max-width: 1023px) {
+						font-size: 18px;
+					}
+
+					@media (max-width: 767px) {
+						font-size: 16px;
+					}
+				}
+
+				.gradientLine {
+					background: linear-gradient(
+						90deg,
+						rgba(225, 220, 195, 0.1) 0%,
+						#e1dcc3 50%,
+						rgba(239, 233, 207, 0.1) 97.12%
+					);
+					height: 1px;
+					width: 100%;
+					max-width: 70px;
+
+					@media (max-width: 767px) {
+						display: none;
+					}
+				}
+			}
+
+			button {
+				border-radius: 16px;
+				border: 1px solid #fff;
+				background: var(--Primary-color, #ffe34b);
+				width: 100%;
+				color: #000;
+				text-align: center;
+				text-shadow: 0px 4px 15px rgba(10, 124, 255, 0.25);
+				font-family: Unbounded;
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 140%; /* 22.4px */
+				height: 60px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+
+				@media (max-width: 767px) {
+					height: 50px;
+					font-size: 14px;
+				}
+			}
+
+			.regStroke {
+				display: flex;
+				gap: 5px;
+				padding-top: 12px;
+
+				span {
+					color: var(--grey, #9db2ce);
+					text-align: center;
+					font-family: 'Noto Sans';
+					font-size: 16px;
+					font-style: normal;
+					font-weight: 300;
+					line-height: normal;
+					letter-spacing: 0.32px;
+
+					@media (max-width: 767px) {
+						font-size: 14px;
+					}
+				}
+
+				a {
+					color: var(--Primary-color, #ffe34b);
+					font-family: 'Noto Sans';
+					font-size: 16px;
+					font-style: normal;
+					font-weight: 400;
+					line-height: normal;
+					letter-spacing: 0.32px;
+					text-decoration-line: underline;
+					text-decoration-style: solid;
+					text-decoration-skip-ink: none;
+					text-decoration-thickness: auto;
+					text-underline-offset: auto;
+					text-underline-position: from-font;
+
+					@media (max-width: 767px) {
+						font-size: 14px;
+					}
+				}
+			}
+		}
+
+		.secondStep {
+			.loginSubtitle {
+				display: flex;
+				align-items: center;
+				width: 100%;
+				gap: 12px;
+				padding-bottom: 24px;
+
+				@media (max-width: 767px) {
+					padding-bottom: 16px;
+				}
+
+				h2 {
+					color: #fff;
+					text-align: center;
+					font-family: 'Noto Sans';
+					font-size: 20px;
+					font-style: normal;
+					font-weight: 500;
+					line-height: normal;
+					letter-spacing: 0.4px;
+					width: 100%;
+
+					@media (max-width: 1023px) {
+						font-size: 18px;
+					}
+
+					@media (max-width: 767px) {
+						font-size: 16px;
+					}
+				}
+
+				.gradientLine {
+					background: linear-gradient(
+						90deg,
+						rgba(225, 220, 195, 0.1) 0%,
+						#e1dcc3 50%,
+						rgba(239, 233, 207, 0.1) 97.12%
+					);
+					height: 1px;
+					width: 100%;
+					max-width: 160px;
+
+					@media (max-width: 767px) {
+						display: none;
+					}
+				}
+			}
+
+			.webForm {
+				.formGroup {
+					display: flex;
+					flex-direction: column;
+					margin-bottom: 16px;
+
+					&:nth-child(3) {
+						margin-bottom: 0;
+					}
+
+					label {
+						color: #fff;
+						font-family: 'Noto Sans';
+						font-size: 16px;
+						font-style: normal;
+						font-weight: 400;
+						line-height: normal;
+						margin-bottom: 8px;
+					}
+
+					.inputWrapper {
+						position: relative;
+					}
+
+					.formInput {
+						width: 100%;
+						height: 54px;
+						border-radius: 12px;
+						border: 1px solid rgba(255, 255, 255, 0.8);
+						background: radial-gradient(
+								70.71% 70.71% at 50% 50%,
+								rgba(255, 255, 255, 0.08) 0%,
+								rgba(255, 255, 255, 0) 100%
+							),
+							rgba(255, 255, 255, 0);
+
+						color: #fff;
+						padding: 0 22px;
+						font-family: 'Noto Sans';
+						font-size: 16px;
+						transition: all 0.3s ease;
+
+						&:focus {
+							outline: none;
+							box-shadow: 0px 4px 25px 0px rgba(255, 255, 255, 0.12),
+								0px 0px 0px 1px rgba(255, 255, 255, 0.06) inset;
+						}
+					}
+
+					.toggleBtn {
+						position: absolute;
+						right: 22px;
+						top: 50%;
+						transform: translateY(-50%);
+						background: transparent;
+						border: none;
+						width: 38px;
+						height: 38px;
+						display: flex;
+						align-items: center;
+						justify-content: end;
+						cursor: pointer;
+						padding: 0;
+					}
+				}
+			}
+
+			.loginBtn {
+				border-radius: 16px;
+				border: 1px solid #fff;
+				background: var(--Primary-color, #ffe34b);
+				color: #000;
+				text-align: center;
+				text-shadow: 0px 4px 15px rgba(10, 124, 255, 0.25);
+				font-family: Unbounded;
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 140%; /* 22.4px */
+				width: 100%;
+				height: 60px;
+				margin-bottom: 12px;
+				margin-top: 40px;
+
+				@media (max-width: 767px) {
+					height: 50px;
+					font-size: 14px;
+				}
+			}
+
+			.restoreLinks {
+				display: flex;
+				flex-direction: column;
+				gap: 12px;
+
+				.restoreRow {
+					display: flex;
+					justify-content: center;
+					gap: 6px;
+					margin-bottom: 6px;
+
+					span {
+						color: var(--grey, #9db2ce);
+						font-family: 'Noto Sans';
+						font-size: 16px;
+						font-style: normal;
+						font-weight: 300;
+					}
+
+					a {
+						color: var(--Primary-color, #ffe34b);
+						font-family: 'Noto Sans';
+						font-size: 16px;
+						font-style: normal;
+						font-weight: 300;
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+
+		// Web form step (email, password, 2FA)
+		.secondSte {
+			.loginSubtitle {
+				display: flex;
+				align-items: center;
+				width: 100%;
+				gap: 12px;
+				padding-bottom: 40px;
+
+				@media (max-width: 767px) {
+					padding-bottom: 16px;
+				}
+
+				h2 {
+					color: #fff;
+					text-align: center;
+					font-family: 'Noto Sans';
+					font-size: 20px;
+					font-style: normal;
+					font-weight: 500;
+					line-height: normal;
+					letter-spacing: 0.4px;
+					width: 100%;
+
+					@media (max-width: 1023px) {
+						font-size: 18px;
+					}
+
+					@media (max-width: 767px) {
+						font-size: 16px;
+					}
+				}
+
+				.gradientLine {
+					background: linear-gradient(
+						90deg,
+						rgba(225, 220, 195, 0.1) 0%,
+						#e1dcc3 50%,
+						rgba(239, 233, 207, 0.1) 97.12%
+					);
+					height: 1px;
+					width: 100%;
+					max-width: 160px;
+
+					@media (max-width: 767px) {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}

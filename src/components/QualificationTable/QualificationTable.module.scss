@@ -167,6 +167,22 @@
 		letter-spacing: -0.4px;
 	}
 
+	.levelRightSpecial {
+		font-family: Unbounded;
+		font-size: 15px;
+		font-style: normal;
+		font-weight: 700;
+		line-height: 22px; /* 146.667% */
+		letter-spacing: -0.4px;
+		background: var(
+			--golden-text,
+			linear-gradient(89deg, #e8e2c9 32.19%, #ffe34b 91.01%)
+		);
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
 	.levelCardRow {
 		color: #fff;
 		font-family: 'Noto Sans';

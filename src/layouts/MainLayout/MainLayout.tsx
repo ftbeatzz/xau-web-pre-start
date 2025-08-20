@@ -14,13 +14,19 @@ const MainLayout: React.FC = () => {
 	const isHFTTrading = location.pathname === '/trade/hft'
 	const isSpecialPage = isProceduralModel || isHFTTrading
 
+	// Скрываем шапку на страницах логина и регистрации
+	const hideHeader =
+		location.pathname === '/login' || location.pathname === '/registration'
+
 	return (
 		<div className={styles.mainLayout}>
-			<Header />
+			{!hideHeader && <Header />}
 			<main
 				className={`${styles.mainContent} ${
 					isFreeScreen ? styles.freeScreenBg : ''
-				} ${isSpecialPage ? styles.noBgMobile : ''}`}
+				} ${isSpecialPage ? styles.noBgMobile : ''} ${
+					hideHeader ? styles.noPaddingTop : ''
+				}`}
 			>
 				<Outlet />
 			</main>

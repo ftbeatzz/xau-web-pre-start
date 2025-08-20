@@ -1,0 +1,276 @@
+.regMain {
+	min-height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-image: url(/img/logoTxt.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 115%;
+	padding: 100px 0px;
+
+	.regWrapper {
+		border-radius: 20px;
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.05) 0%,
+			rgba(255, 255, 255, 0) 100%
+		);
+		box-shadow: 0px -2px 10px 0px rgba(255, 227, 75, 0.15),
+			0px -2px 40px 0px rgba(255, 227, 75, 0.15),
+			0px 0.5px 0px 0px rgba(255, 255, 255, 0.5) inset;
+		padding: 30px 60px;
+		margin: 150px 32px;
+		max-width: 680px;
+
+		@media (max-width: 1023px) {
+			margin: 0 12px;
+			padding: 20px 12px;
+		}
+
+		@media (max-width: 767px) {
+			width: 100%;
+		}
+
+		h1 {
+			color: #ffe34b;
+			text-align: center;
+			font-family: Unbounded;
+			font-size: 44px;
+			font-style: normal;
+			font-weight: 600;
+			line-height: normal;
+			letter-spacing: 0.88px;
+			padding-bottom: 12px;
+			max-width: 560px;
+
+			@media (max-width: 1023px) {
+				font-size: 40px;
+			}
+
+			@media (max-width: 767px) {
+				font-size: 24px;
+			}
+		}
+
+		h3 {
+			color: #ffe34b;
+			text-align: center;
+			font-family: Unbounded;
+			font-size: 38px;
+			font-style: normal;
+			font-weight: 600;
+			line-height: normal;
+			letter-spacing: 0.76px;
+			padding-bottom: 24px;
+		}
+
+		.regSubtitle {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			padding-bottom: 24px;
+
+			@media (max-width: 767px) {
+				padding-bottom: 20px;
+			}
+
+			h2 {
+				color: #fff;
+				text-align: center;
+				font-family: 'Noto Sans';
+				font-size: 20px;
+				font-style: normal;
+				font-weight: 500;
+				line-height: normal;
+				letter-spacing: 0.4px;
+				width: 100%;
+				max-width: 400px;
+
+				@media (max-width: 1023px) {
+					font-size: 18px;
+				}
+
+				@media (max-width: 767px) {
+					font-size: 16px;
+				}
+			}
+
+			.gradientLine {
+				background: linear-gradient(
+					90deg,
+					rgba(225, 220, 195, 0.1) 0%,
+					#e1dcc3 50%,
+					rgba(239, 233, 207, 0.1) 97.12%
+				);
+				height: 1px;
+				width: 100%;
+				max-width: 70px;
+
+				@media (max-width: 767px) {
+					display: none;
+				}
+			}
+		}
+
+		// Табы для выбора способа регистрации
+		.regTabs {
+			display: flex;
+			gap: 8px;
+			margin-bottom: 25px;
+			border-radius: 18px;
+			background: #0d1c2b;
+			padding: 8px 14px;
+
+			@media (max-width: 767px) {
+				margin-bottom: 28px;
+			}
+
+			.tabButton {
+				flex: 1;
+				padding: 12px 16px;
+				border: none;
+				background: transparent;
+				color: #fff;
+				text-align: center;
+				text-shadow: 0px 4px 15px rgba(10, 124, 255, 0.25);
+				font-family: Unbounded;
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 300;
+				line-height: 140%; /* 22.4px */
+				border-radius: 16px;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				height: 44px;
+
+				@media (max-width: 767px) {
+					font-size: 12px;
+					padding: 10px 12px;
+				}
+
+				&.activeTab {
+					background: #ffe34b;
+					color: #000;
+				}
+
+				&:hover:not(.activeTab) {
+					background: rgba(255, 255, 255, 0.1);
+				}
+			}
+		}
+
+		.telegramContent,
+		.webContent,
+		.wechatContent {
+			h4 {
+				color: #fff;
+				text-align: center;
+				font-family: 'Noto Sans';
+				font-size: 20px;
+				font-style: normal;
+				font-weight: 300;
+				line-height: normal;
+				letter-spacing: 0.4px;
+				padding-bottom: 10px;
+				margin: 0;
+
+				@media (max-width: 767px) {
+					font-size: 14px;
+				}
+			}
+
+			p {
+				color: var(--grey, #9db2ce);
+				text-align: center;
+				font-family: 'Noto Sans';
+				font-size: 20px;
+				font-style: normal;
+				font-weight: 300;
+				line-height: normal;
+				letter-spacing: 0.4px;
+
+				@media (max-width: 767px) {
+					font-size: 14px;
+				}
+			}
+
+			button {
+				width: 100%;
+				border-radius: 16px;
+				border: 1px solid #fff;
+				background: var(--Primary-color, #ffe34b);
+				height: 60px;
+				color: #000;
+				text-align: center;
+				text-shadow: 0 4px 15px rgba(10, 124, 255, 0.25);
+				font-family: Unbounded;
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 140%; /* 22.4px */
+				margin-top: 40px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				@media (max-width: 767px) {
+					height: 50px;
+					font-size: 14px;
+					margin-top: 28px;
+				}
+			}
+		}
+
+		.regStroke,
+		.conditionsSTroke {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 5px;
+			padding-top: 12px;
+
+			span {
+				color: var(--grey, #9db2ce);
+				text-align: center;
+				font-family: 'Noto Sans';
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 300;
+				line-height: normal;
+				letter-spacing: 0.32px;
+
+				@media (max-width: 767px) {
+					font-size: 14px;
+				}
+			}
+
+			a {
+				color: var(--Primary-color, #ffe34b);
+				font-family: 'Noto Sans';
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: normal;
+				letter-spacing: 0.32px;
+				text-decoration-line: underline;
+				text-decoration-style: solid;
+				text-decoration-skip-ink: none;
+				text-decoration-thickness: auto;
+				text-underline-offset: auto;
+				text-underline-position: from-font;
+
+				@media (max-width: 767px) {
+					font-size: 14px;
+				}
+			}
+		}
+
+		.conditionsSTroke {
+			flex-direction: column;
+			gap: 0;
+		}
+	}
+}
