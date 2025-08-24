@@ -47,7 +47,17 @@ const GetModal: React.FC<GetModalProps> = ({
 	)
 	const current = addresses[activeTab as 'xaut' | 'paxg']
 	const [history] = React.useState<{ [key: string]: OperationRow[] }>({
-		xaut: [],
+		xaut: [
+			{
+				id: '1',
+				type: 'Пополнение',
+				amount: '+ 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+				price: '3356.68 USDT',
+				autoValue: 'Success',
+			},
+		],
 		paxg: [
 			{
 				id: '1',
@@ -55,6 +65,8 @@ const GetModal: React.FC<GetModalProps> = ({
 				amount: '+ 0.00000017',
 				date: '05.05.2025 02:57:36',
 				txId: 'i4...jd',
+				price: '2423.45 USDT',
+				autoValue: 'Success',
 			},
 			{
 				id: '2',
@@ -62,6 +74,8 @@ const GetModal: React.FC<GetModalProps> = ({
 				amount: '+ 0.00000017',
 				date: '05.05.2025 02:57:36',
 				txId: 'i4...jd',
+				price: '2423.45 USDT',
+				autoValue: 'Success',
 			},
 		],
 	})

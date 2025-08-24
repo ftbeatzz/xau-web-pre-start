@@ -81,7 +81,38 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
 						</button>
 					</div>
 				</div>
+				<div className={styles.gradientLine}></div>
 
+				{/* Support Section */}
+				<div className={styles.section}>
+					<h3 className={styles.sectionTitle}>Аккаунт</h3>
+					<div className={styles.menuItems}>
+						<button
+							className={styles.menuItem}
+							onClick={() => {
+								navigate('/recover/2fa')
+								if (onClose) onClose()
+							}}
+						>
+							<span>2-FA</span>
+							<span className={styles.arrow}>
+								<DropDownArrow />
+							</span>
+						</button>
+						<button
+							className={styles.menuItem}
+							onClick={() => {
+								navigate('/recover/password')
+								if (onClose) onClose()
+							}}
+						>
+							<span>Изменить пароль</span>
+							<span className={styles.arrow}>
+								<DropDownArrow />
+							</span>
+						</button>
+					</div>
+				</div>
 				<div className={styles.gradientLine}></div>
 
 				{/* Support Section */}

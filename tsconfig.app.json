@@ -23,5 +23,5 @@
     "noUncheckedSideEffectImports": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["src"]
+  "include": ["src", "src/icons/SmallXaut copy.tsx"]
 }

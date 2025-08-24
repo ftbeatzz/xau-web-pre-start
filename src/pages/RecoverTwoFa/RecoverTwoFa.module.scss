@@ -1,0 +1,357 @@
+.container {
+	min-height: 60vh;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	align-items: center;
+	justify-content: center;
+	padding: 100px 0;
+
+	@media (max-width: 1023px) {
+		margin: 0 22px;
+	}
+
+	@media (max-width: 767px) {
+		margin: 0 12px;
+		padding: 80px 0;
+	}
+}
+.title {
+	font-family: Unbounded;
+	font-size: 26px;
+	font-weight: 400;
+}
+.progress {
+	font-family: 'Noto Sans';
+	color: #9db2ce;
+}
+.card {
+	border-radius: 20px;
+	background: linear-gradient(
+		180deg,
+		rgba(255, 255, 255, 0.05) 0%,
+		rgba(255, 255, 255, 0) 100%
+	);
+	box-shadow: 0 -2px 10px 0 rgba(255, 227, 75, 0.15),
+		0 -2px 40px 0 rgba(255, 227, 75, 0.15),
+		0 0.5px 0 0 rgba(255, 255, 255, 0.5) inset;
+	padding: 30px 60px;
+	max-width: 680px;
+	width: 100%;
+}
+.headerBlock {
+	text-align: center;
+}
+.headerTitle {
+	color: #ffe34b;
+	text-align: center;
+	font-family: Unbounded;
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 600;
+}
+.headerSubtitle {
+	margin-top: 12px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	justify-content: space-between;
+	span {
+		color: var(--grey, #9db2ce);
+		text-align: center;
+		font-family: 'Noto Sans';
+		font-size: 17px;
+		font-style: normal;
+		font-weight: 300;
+		line-height: normal;
+		letter-spacing: 0.34px;
+	}
+	p {
+		color: #fff;
+		text-align: center;
+		font-family: 'Noto Sans';
+		font-size: 20px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: normal;
+		letter-spacing: 0.4px;
+	}
+	.gradientLine {
+		background: linear-gradient(
+			90deg,
+			rgba(225, 220, 195, 0.1) 0%,
+			#e1dcc3 50%,
+			rgba(239, 233, 207, 0.1) 97.12%
+		);
+		width: 100%;
+		height: 1px;
+		max-width: 20px;
+	}
+}
+.stepTitle {
+	font-family: Unbounded;
+	font-size: 18px;
+}
+.content,
+.content2 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 25px;
+	padding-bottom: 32px;
+	gap: 10px;
+
+	p {
+		color: var(--grey, #9db2ce);
+		text-align: center;
+		font-family: 'Noto Sans';
+		font-size: 17px;
+		font-style: normal;
+		font-weight: 300;
+		line-height: normal;
+		letter-spacing: 0.34px;
+		gap: 10px;
+
+		@media (max-width: 767px) {
+			font-size: 14px;
+		}
+	}
+}
+
+.content2 {
+	padding-bottom: 0;
+}
+.controls {
+	margin-top: 16px;
+	display: flex;
+	justify-content: center;
+}
+.submit {
+	margin-top: 8px;
+	border-radius: 16px;
+	border: 1px solid #fff;
+	background: var(--Primary-color, #ffe34b);
+	padding: 12px 16px;
+	cursor: pointer;
+	color: #000;
+	text-align: center;
+	text-shadow: 0 4px 15px rgba(10, 124, 255, 0.25);
+	font-family: Unbounded;
+	font-size: 16px;
+	font-weight: 400;
+	width: 100%;
+	height: 60px;
+}
+.backLink {
+	color: var(--Primary-color, #ffe34b);
+	text-align: center;
+	font-family: 'Noto Sans';
+	font-size: 16px;
+	font-weight: 400;
+	text-decoration: underline;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 12px;
+
+	@media (max-width: 767px) {
+		font-size: 14px;
+	}
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-top: 32px;
+}
+.label {
+	color: #fff;
+	font-family: Unbounded;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: 20px;
+
+	@media (max-width: 767px) {
+		font-size: 13px;
+	}
+}
+.input {
+	border-radius: 12px;
+	border: 1px solid rgba(255, 255, 255, 0.8);
+	background: radial-gradient(
+			70.71% 70.71% at 50% 50%,
+			rgba(255, 255, 255, 0.08) 0%,
+			rgba(255, 255, 255, 0) 100%
+		),
+		rgba(255, 255, 255, 0);
+	box-shadow: 0 4px 25px 0 rgba(255, 255, 255, 0.12),
+		0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+	padding: 0 16px;
+	height: 50px;
+	color: #fff;
+	font-family: Unbounded;
+	font-size: 14px;
+	font-weight: 300;
+	line-height: 20px;
+	width: 100%;
+	&:focus {
+		outline: none;
+	}
+}
+.resendRow {
+	margin-top: 12px;
+	display: flex;
+	gap: 6px;
+	align-items: center;
+	justify-content: center;
+
+	@media (max-width: 767px) {
+		flex-direction: column;
+		gap: 2px;
+	}
+
+	span {
+		color: #9db2ce;
+		font-family: 'Noto Sans';
+
+		@media (max-width: 767px) {
+			font-size: 14px;
+		}
+	}
+}
+.linkBtn {
+	color: var(--Primary-color, #ffe34b);
+	font-family: 'Noto Sans';
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: normal;
+	letter-spacing: 0.32px;
+	text-decoration-line: underline;
+	text-decoration-style: solid;
+	text-decoration-skip-ink: none;
+	text-decoration-thickness: auto;
+	text-underline-offset: auto;
+	text-underline-position: from-font;
+	cursor: pointer;
+
+	@media (max-width: 767px) {
+		font-size: 14px;
+	}
+}
+.keyRow {
+	display: flex;
+	align-items: center;
+	position: relative;
+	margin-top: 8px;
+}
+.copyBtn {
+	border-radius: 8px;
+	border: 1px solid #fff;
+	background: var(--Primary-color, #ffe34b);
+	cursor: pointer;
+	position: absolute;
+	right: 16px;
+	top: 8px;
+	width: 84px;
+	height: 34px;
+}
+.qrBox {
+	border-radius: 12px;
+	border: 1px solid rgba(255, 255, 255, 0.8);
+	background: radial-gradient(
+			70.71% 70.71% at 50% 50%,
+			rgba(255, 255, 255, 0.08) 0%,
+			rgba(255, 255, 255, 0) 100%
+		),
+		rgba(255, 255, 255, 0);
+	box-shadow: 0 4px 25px 0 rgba(255, 255, 255, 0.12),
+		0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 14px 16px;
+	margin-top: 18px;
+
+	img {
+		max-width: 150px;
+	}
+}
+
+/* ========= Responsive ========= */
+@media (max-width: 1023px) {
+	.container {
+		padding: 80px 0;
+	}
+	.card {
+		padding: 26px 40px;
+		max-width: 600px;
+	}
+	.headerTitle {
+		font-size: 28px;
+	}
+	.headerSubtitle {
+		p {
+			font-size: 18px;
+		}
+		span {
+			font-size: 16px;
+		}
+	}
+	.input {
+		height: 48px;
+	}
+	.submit {
+		height: 56px;
+		font-size: 15px;
+	}
+	.qrBox img {
+		max-width: 140px;
+	}
+}
+
+@media (max-width: 767px) {
+	.container {
+		padding: 60px 0;
+	}
+	.card {
+		padding: 20px 12px;
+		max-width: 100%;
+	}
+	.headerTitle {
+		font-size: 22px;
+	}
+	.headerSubtitle {
+		gap: 8px;
+		p {
+			font-size: 16px;
+		}
+		span {
+			font-size: 15px;
+		}
+	}
+	.form {
+		margin-top: 20px;
+	}
+	.input {
+		height: 46px;
+		font-size: 13px;
+	}
+	.copyBtn {
+		right: 12px;
+		width: 72px;
+		height: 32px;
+	}
+	.submit {
+		height: 52px;
+		font-size: 14px;
+	}
+	.qrBox {
+		padding: 12px;
+		img {
+			max-width: 120px;
+		}
+	}
+}

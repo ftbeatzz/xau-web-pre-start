@@ -35,7 +35,9 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 				type: 'Вывод',
 				amount: '- 0.00000017',
 				date: '05.05.2025 02:57:36',
-				txId: 'i4...jd',
+				txId: undefined,
+				price: '3356.68 USDT',
+				autoValue: '29м:30с',
 			},
 			{
 				id: '2',
@@ -43,6 +45,8 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 				amount: '- 0.00000017',
 				date: '05.05.2025 02:57:36',
 				txId: 'i4...jd',
+				price: '3356.68 USDT',
+				autoValue: 'Success',
 			},
 			{
 				id: '3',
@@ -50,6 +54,8 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 				amount: '- 0.00000017',
 				date: '05.05.2025 02:57:36',
 				txId: 'i4...jd',
+				price: '3356.68 USDT',
+				autoValue: 'Success',
 			},
 			{
 				id: '4',
@@ -57,6 +63,8 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 				amount: '- 0.00000017',
 				date: '05.05.2025 02:57:36',
 				txId: 'i4...jd',
+				price: '3356.68 USDT',
+				autoValue: 'Success',
 			},
 			{
 				id: '5',
@@ -64,6 +72,8 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 				amount: '- 0.00000017',
 				date: '05.05.2025 02:57:36',
 				txId: 'i4...jd',
+				price: '3356.68 USDT',
+				autoValue: 'Success',
 			},
 			{
 				id: '6',
@@ -71,6 +81,8 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 				amount: '- 0.00000017',
 				date: '05.05.2025 02:57:36',
 				txId: 'i4...jd',
+				price: '3356.68 USDT',
+				autoValue: 'Success',
 			},
 			{
 				id: '7',
@@ -78,6 +90,8 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 				amount: '- 0.00000017',
 				date: '05.05.2025 02:57:36',
 				txId: 'i4...jd',
+				price: '3356.68 USDT',
+				autoValue: 'Success',
 			},
 		],
 	})
@@ -136,11 +150,7 @@ const MarketingSendModal: React.FC<MarketingSendModalProps> = ({
 	}
 
 	return (
-		<Modal
-			isOpen={isOpen}
-			onClose={onClose}
-			title={``}
-		>
+		<Modal isOpen={isOpen} onClose={onClose} title={``}>
 			<div className={styles.wrapper}>
 				<div className={styles.tabContent}>
 					<div className={styles.getHeader}>

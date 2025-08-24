@@ -379,8 +379,6 @@
 						justify-content: space-between;
 						gap: 12px;
 
-						
-
 						.silverButton {
 							position: relative;
 							display: flex;
@@ -664,6 +662,10 @@
 				box-shadow: 0px 4px 12px 0px rgba(255, 243, 176, 0.12);
 				padding: 15px 10px;
 				justify-content: space-between;
+
+				@media (max-width: 1360px) {
+					flex-direction: column;
+				}
 
 				@media (max-width: 1023px) {
 					display: grid;

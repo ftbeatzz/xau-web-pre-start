@@ -43,6 +43,7 @@
 	backdrop-filter: blur(10px);
 	box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
 	padding: 16px;
+	position: relative;
 
 	@media (max-width: 767px) {
 		width: calc(100% - 32px);
@@ -225,7 +226,7 @@
 	color: #fff;
 	font-size: 16px;
 	font-weight: 300;
-	transform: rotate(270deg);	
+	transform: rotate(270deg);
 }
 
 .logoutIcon {

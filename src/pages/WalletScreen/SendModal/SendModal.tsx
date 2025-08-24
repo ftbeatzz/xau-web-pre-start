@@ -43,14 +43,15 @@ const SendModal: React.FC<SendModalProps> = ({
 	const [address, setAddress] = useState('')
 	const [code, setCode] = useState('')
 	const [history] = useState<{ [key: string]: OperationRow[] }>({
-		xaut: [],
-		paxg: [
+		xaut: [
 			{
 				id: '1',
 				type: 'Вывод',
 				amount: '- 0.00000017',
 				date: '05.05.2025 02:57:36',
-				txId: 'i4...jd',
+				txId: undefined,
+				price: '3356.68 USDT',
+				autoValue: '29м:30с',
 			},
 			{
 				id: '2',
@@ -58,6 +59,28 @@ const SendModal: React.FC<SendModalProps> = ({
 				amount: '- 0.00000017',
 				date: '05.05.2025 02:57:36',
 				txId: 'i4...jd',
+				price: '3356.68 USDT',
+				autoValue: 'Success',
+			},
+		],
+		paxg: [
+			{
+				id: '1',
+				type: 'Вывод',
+				amount: '- 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+				price: '2423.45 USDT',
+				autoValue: 'Success',
+			},
+			{
+				id: '2',
+				type: 'Вывод',
+				amount: '- 0.00000017',
+				date: '05.05.2025 02:57:36',
+				txId: 'i4...jd',
+				price: '2423.45 USDT',
+				autoValue: 'Success',
 			},
 		],
 	})

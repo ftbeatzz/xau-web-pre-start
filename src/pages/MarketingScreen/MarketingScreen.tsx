@@ -400,7 +400,7 @@ const MarketingScreen: React.FC = () => {
 		},
 		{
 			id: 'n4',
-			partnerName: 'Закрытый объем',
+			partnerName: 'Недоступный объем',
 			volume: '0.75561934',
 			dateTime: 'Недополученная прибыль',
 			profit: '0.00251217',
@@ -630,7 +630,8 @@ const MarketingScreen: React.FC = () => {
 				onClose={handleCloseOperationsModal}
 				type={operationsModal.type || 'sell'}
 				data={operationsModal.data}
-				initialToken={operationsModal.initialToken}
+				initialToken={'xaut'}
+				hideTokenTabs={true}
 			/>
 			<LimitsModal
 				isOpen={limitsModalState.isOpen}

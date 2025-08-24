@@ -74,6 +74,10 @@
 		width: 100%;
 		max-width: 1000px;
 
+		@media (max-width: 1200px) {
+			display: none;
+		}
+
 		@media (max-width: 1240px) {
 			padding: 0 16px;
 		}
@@ -391,7 +395,7 @@
 	display: none;
 	cursor: pointer;
 	z-index: 120;
-	@media (max-width: 1023px) {
+	@media (max-width: 1200px) {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -402,7 +406,7 @@
 	display: none;
 	align-items: center;
 	gap: 12px;
-	@media (max-width: 1023px) {
+	@media (max-width: 1200px) {
 		display: flex;
 		margin-left: auto;
 	}
@@ -436,7 +440,7 @@
 
 .mobileMenu {
 	display: none;
-	@media (max-width: 1023px) {
+	@media (max-width: 1200px) {
 		display: flex;
 		flex-direction: column;
 		position: fixed;

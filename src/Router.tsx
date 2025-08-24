@@ -7,6 +7,7 @@ import FreeScreen from './pages/FreeScreen/FreeScreen'
 import FaqScreen from './pages/FaqScreen/FaqScreen'
 import LoginScreen from './pages/LoginScreen/LoginScreen'
 import RegScreen from './pages/RegScreen/RegScreen'
+import RoadMapScreen from './pages/RoadMapScreen/RoadMapScreen'
 
 // Trade dropdown pages
 import TradeStatistics from './pages/TradeScreen/TradeStatistics/TradeStatistics'
@@ -21,6 +22,8 @@ import ProceduralModel from './pages/CommerceScreen/ProceduralModel/ProceduralMo
 import ArbStatistics from './pages/ArbScreen/ArbStatistics/ArbStatistics'
 import ArbLoan from './pages/ArbScreen/ArbLoan/ArbLoan'
 import ArbProceduralModel from './pages/ArbScreen/ProceduralModel/ProceduralModel'
+import RecoverTwoFa from './pages/RecoverTwoFa/RecoverTwoFa'
+import RecoverPassword from './pages/RecoverPassword/RecoverPassword'
 
 const Router: React.FC = () => {
 	return (
@@ -32,6 +35,7 @@ const Router: React.FC = () => {
 					<Route path='marketing' element={<MarketingScreen />} />
 					<Route path='free' element={<FreeScreen />} />
 					<Route path='faq' element={<FaqScreen />} />
+					<Route path='roadmap' element={<RoadMapScreen />} />
 					<Route path='login' element={<LoginScreen />} />
 					<Route path='registration' element={<RegScreen />} />
 
@@ -49,6 +53,9 @@ const Router: React.FC = () => {
 					<Route path='arb/statistics' element={<ArbStatistics />} />
 					<Route path='arb/loan' element={<ArbLoan />} />
 					<Route path='arb/model' element={<ArbProceduralModel />} />
+					{/* Profile related */}
+					<Route path='recover/2fa' element={<RecoverTwoFa />} />
+					<Route path='recover/password' element={<RecoverPassword />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

@@ -78,6 +78,8 @@ const BuyModal: React.FC<BuyModalProps> = ({
 				amount: '+ 0.00000017',
 				date: '05.05.2025 02:57:36',
 				txId: 'i4...jd',
+				price: `${prices.paxg} USDT`,
+				autoValue: '29м:30с',
 			},
 			{
 				id: '2',
@@ -85,6 +87,8 @@ const BuyModal: React.FC<BuyModalProps> = ({
 				amount: '+ 0.00000017',
 				date: '05.05.2025 02:57:36',
 				txId: 'i4...jd',
+				price: `${prices.paxg} USDT`,
+				autoValue: 'Success',
 			},
 		],
 	})
