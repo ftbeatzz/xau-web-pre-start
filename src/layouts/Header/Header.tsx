@@ -1,28 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import styles from './Header.module.scss'
 import LogoHeader from '../../icons/LogoHeader'
 import CloseIcon from '../../icons/CloseIcon'
 import LanguageSwitcher from '../../components/LanguageSwitcher'
-import DropDownArrow from '../../icons/DropDownArrow'
 import ProfileIcon from '../../icons/ProfileIcon'
 import { ProfileModal } from '../../components/ProfileModal/ProfileModal'
 
 const Header: React.FC = () => {
 	const { t } = useTranslation()
-	const location = useLocation()
 	const [scrolled, setScrolled] = useState(false)
 	const [menuOpen, setMenuOpen] = useState(false)
 	const [menuVisible, setMenuVisible] = useState(false)
 	const [menuAnim, setMenuAnim] = useState<'open' | 'close' | null>(null)
-	const [tradeDropdownOpen, setTradeDropdownOpen] = useState(false)
-	const [commerceDropdownOpen, setCommerceDropdownOpen] = useState(false)
-	const [arbDropdownOpen, setArbDropdownOpen] = useState(false)
-	const [mobileTradeDropdownOpen, setMobileTradeDropdownOpen] = useState(false)
-	const [mobileCommerceDropdownOpen, setMobileCommerceDropdownOpen] =
-		useState(false)
-	const [mobileArbDropdownOpen, setMobileArbDropdownOpen] = useState(false)
 	const [profileModalOpen, setProfileModalOpen] = useState(false)
 	const [profileIconAnim, setProfileIconAnim] = useState<
 		'profile' | 'close' | null
@@ -69,20 +60,10 @@ const Header: React.FC = () => {
 		}
 	}, [menuVisible])
 
-	// Закрытие dropdown при клике вне их
+	// Закрытие модалки профиля при клике вне
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			const target = event.target as Element
-			if (!target.closest(`.${styles.dropdown}`)) {
-				setTradeDropdownOpen(false)
-				setCommerceDropdownOpen(false)
-				setArbDropdownOpen(false)
-			}
-			if (!target.closest(`.${styles.mobileDropdown}`)) {
-				setMobileTradeDropdownOpen(false)
-				setMobileCommerceDropdownOpen(false)
-				setMobileArbDropdownOpen(false)
-			}
 			if (!target.closest(`.${styles.profileBtn}`)) {
 				setProfileModalOpen(false)
 				setTimeout(() => setProfileIconAnim('profile'), 300)
@@ -92,43 +73,6 @@ const Header: React.FC = () => {
 		document.addEventListener('mousedown', handleClickOutside)
 		return () => document.removeEventListener('mousedown', handleClickOutside)
 	}, [])
-
-	const toggleTradeDropdown = (e: React.MouseEvent) => {
-		e.preventDefault()
-		setTradeDropdownOpen(!tradeDropdownOpen)
-		setCommerceDropdownOpen(false)
-	}
-
-	const toggleCommerceDropdown = (e: React.MouseEvent) => {
-		e.preventDefault()
-		setCommerceDropdownOpen(!commerceDropdownOpen)
-		setTradeDropdownOpen(false)
-		setArbDropdownOpen(false)
-	}
-
-	const toggleArbDropdown = (e: React.MouseEvent) => {
-		e.preventDefault()
-		setArbDropdownOpen(!arbDropdownOpen)
-		setTradeDropdownOpen(false)
-		setCommerceDropdownOpen(false)
-	}
-
-	const toggleMobileTradeDropdown = () => {
-		setMobileTradeDropdownOpen(!mobileTradeDropdownOpen)
-		setMobileCommerceDropdownOpen(false)
-	}
-
-	const toggleMobileCommerceDropdown = () => {
-		setMobileCommerceDropdownOpen(!mobileCommerceDropdownOpen)
-		setMobileTradeDropdownOpen(false)
-		setMobileArbDropdownOpen(false)
-	}
-
-	const toggleMobileArbDropdown = () => {
-		setMobileArbDropdownOpen(!mobileArbDropdownOpen)
-		setMobileTradeDropdownOpen(false)
-		setMobileCommerceDropdownOpen(false)
-	}
 
 	const toggleProfileModal = () => {
 		if (profileModalOpen) {
@@ -174,189 +118,35 @@ const Header: React.FC = () => {
 								isActive ? styles.active : styles.navLink
 							}
 						>
-							{t('wallet')}
+							{t('Предстарт')}
 						</NavLink>
 
 						<div className={styles.tradeCommerceWrapper}>
-							{/* Trade Dropdown */}
-							<div
-								className={`${styles.dropdown} ${
-									tradeDropdownOpen ? styles.dropdownOpen : ''
-								}`}
+							<NavLink
+								to='/trade/hft'
+								className={({ isActive }) =>
+									isActive ? styles.active : styles.navLink
+								}
 							>
-								<button
-									className={
-										`${styles.dropdownButton} ` +
-										(location.pathname.startsWith('/trade')
-											? styles.active
-											: '')
-									}
-									onClick={toggleTradeDropdown}
-								>
-									{t('trade')}
-									<span
-										className={`${styles.dropdownArrow} ${
-											tradeDropdownOpen ? styles.dropdownArrowUp : ''
-										}`}
-									>
-										<DropDownArrow />
-									</span>
-								</button>
-								{tradeDropdownOpen && (
-									<div className={styles.dropdownMenu}>
-										<NavLink
-											to='/trade/statistics'
-											className={styles.dropdownItem}
-											onClick={() => {
-												setTimeout(() => setTradeDropdownOpen(false), 0)
-											}}
-										>
-											{t('companyStatistics')}
-										</NavLink>
-										<NavLink
-											to='/trade/loan'
-											className={styles.dropdownItem}
-											onClick={() => {
-												setTimeout(() => setTradeDropdownOpen(false), 0)
-											}}
-										>
-											{t('tradeLoan')}
-										</NavLink>
-										<NavLink
-											to='/trade/hft'
-											className={styles.dropdownItem}
-											onClick={() => {
-												setTimeout(() => setTradeDropdownOpen(false), 0)
-											}}
-										>
-											{t('hftTrading')}
-										</NavLink>
-									</div>
-								)}
-							</div>
-
-							{/* Commerce Dropdown */}
-							<div
-								className={`${styles.dropdown} ${
-									commerceDropdownOpen ? styles.dropdownOpen : ''
-								}`}
+								{t('trade')}
+							</NavLink>
+							<NavLink
+								to='/commerce/model'
+								className={({ isActive }) =>
+									isActive ? styles.active : styles.navLink
+								}
 							>
-								<button
-									className={
-										`${styles.dropdownButton} ` +
-										(location.pathname.startsWith('/commerce')
-											? styles.active
-											: '')
-									}
-									onClick={toggleCommerceDropdown}
-								>
-									{t('commerce')}
-									<span
-										className={`${styles.dropdownArrow} ${
-											commerceDropdownOpen ? styles.dropdownArrowUp : ''
-										}`}
-									>
-										<DropDownArrow />
-									</span>
-								</button>
-								{commerceDropdownOpen && (
-									<div className={styles.dropdownMenu}>
-										<NavLink
-											to='/commerce/statistics'
-											className={styles.dropdownItem}
-											onClick={() => {
-												setTimeout(() => setCommerceDropdownOpen(false), 0)
-											}}
-										>
-											{t('companyStatistics')}
-										</NavLink>
-										<NavLink
-											to='/commerce/loan'
-											className={styles.dropdownItem}
-											onClick={() => {
-												setTimeout(() => setCommerceDropdownOpen(false), 0)
-											}}
-										>
-											{t('commerceLoan')}
-										</NavLink>
-										<NavLink
-											to='/commerce/model'
-											className={styles.dropdownItem}
-											onClick={() => {
-												setTimeout(() => setCommerceDropdownOpen(false), 0)
-											}}
-										>
-											{t('proceduralModel')}
-										</NavLink>
-									</div>
-								)}
-							</div>
-
-							{/* ARB Dropdown */}
-							<div
-								className={`${styles.dropdown} ${
-									arbDropdownOpen ? styles.dropdownOpen : ''
-								}`}
+								{t('commerce')}
+							</NavLink>
+							<NavLink
+								to='/arb/model'
+								className={({ isActive }) =>
+									isActive ? styles.active : styles.navLink
+								}
 							>
-								<button
-									className={
-										`${styles.dropdownButton} ` +
-										(location.pathname.startsWith('/arb') ? styles.active : '')
-									}
-									onClick={toggleArbDropdown}
-								>
-									XAU ARB
-									<span
-										className={`${styles.dropdownArrow} ${
-											arbDropdownOpen ? styles.dropdownArrowUp : ''
-										}`}
-									>
-										<DropDownArrow />
-									</span>
-								</button>
-								{arbDropdownOpen && (
-									<div className={styles.dropdownMenu}>
-										<NavLink
-											to='/arb/statistics'
-											className={styles.dropdownItem}
-											onClick={() => {
-												setTimeout(() => setArbDropdownOpen(false), 0)
-											}}
-										>
-											{t('companyStatistics')}
-										</NavLink>
-										<NavLink
-											to='/arb/loan'
-											className={styles.dropdownItem}
-											onClick={() => {
-												setTimeout(() => setArbDropdownOpen(false), 0)
-											}}
-										>
-											{t('commerceLoan')}
-										</NavLink>
-										<NavLink
-											to='/arb/model'
-											className={styles.dropdownItem}
-											onClick={() => {
-												setTimeout(() => setArbDropdownOpen(false), 0)
-											}}
-										>
-											{t('proceduralModel')}
-										</NavLink>
-									</div>
-								)}
-							</div>
+								XAU ARB
+							</NavLink>
 						</div>
-
-						<NavLink
-							to='/marketing'
-							className={({ isActive }) =>
-								isActive ? styles.active : styles.navLink
-							}
-						>
-							{t('marketing')}
-						</NavLink>
-
 						<NavLink
 							to='/roadmap'
 							className={({ isActive }) =>
@@ -364,6 +154,14 @@ const Header: React.FC = () => {
 							}
 						>
 							{t('Дорожная карта')}
+						</NavLink>
+						<NavLink
+							to='/about-us'
+							className={({ isActive }) =>
+								isActive ? styles.active : styles.navLink
+							}
+						>
+							{t('О нас')}
 						</NavLink>
 					</div>
 				</nav>
@@ -394,6 +192,19 @@ const Header: React.FC = () => {
 							onClose={closeProfileModal}
 						/>
 					</div>
+
+					<div className={styles.logoMobile}>
+						<NavLink
+							to='/'
+							className={({ isActive }) =>
+								isActive ? styles.logoLink : styles.activeLogo
+							}
+						>
+							<LogoHeader />
+							<span>Xau</span>
+						</NavLink>
+					</div>
+
 					<div className={styles.burgerLangContainer}>
 						<div
 							className={
@@ -450,197 +261,54 @@ const Header: React.FC = () => {
 								{t('wallet')}
 							</NavLink>
 
-							{/* Trade Dropdown в мобильном меню */}
-							<div className={styles.mobileDropdown}>
-								<button
-									onClick={toggleMobileTradeDropdown}
-									className={`${styles.mobileDropdownButton} ${
-										location.pathname.startsWith('/trade') ? styles.active : ''
-									}`}
-								>
-									{t('trade')}
-									<span
-										className={`${styles.mobileDropdownArrow} ${
-											mobileTradeDropdownOpen
-												? styles.mobileDropdownArrowUp
-												: ''
-										}`}
-									>
-										<DropDownArrow />
-									</span>
-								</button>
-								{mobileTradeDropdownOpen && (
-									<div className={styles.mobileDropdownMenu}>
-										<NavLink
-											to='/trade/statistics'
-											className={({ isActive }) =>
-												isActive ? styles.active : styles.mobileDropdownItem
-											}
-											onClick={() => {
-												setMobileTradeDropdownOpen(false)
-												setMenuOpen(false)
-											}}
-										>
-											{t('companyStatistics')}
-										</NavLink>
-										<NavLink
-											to='/trade/loan'
-											className={({ isActive }) =>
-												isActive ? styles.active : styles.mobileDropdownItem
-											}
-											onClick={() => {
-												setMobileTradeDropdownOpen(false)
-												setMenuOpen(false)
-											}}
-										>
-											{t('tradeLoan')}
-										</NavLink>
-										<NavLink
-											to='/trade/hft'
-											className={({ isActive }) =>
-												isActive ? styles.active : styles.mobileDropdownItem
-											}
-											onClick={() => {
-												setMobileTradeDropdownOpen(false)
-												setMenuOpen(false)
-											}}
-										>
-											{t('hftTrading')}
-										</NavLink>
-									</div>
-								)}
-							</div>
-
-							{/* Commerce Dropdown в мобильном меню */}
-							<div className={styles.mobileDropdown}>
-								<button
-									onClick={toggleMobileCommerceDropdown}
-									className={`${styles.mobileDropdownButton} ${
-										location.pathname.startsWith('/commerce')
-											? styles.active
-											: ''
-									}`}
-								>
-									{t('commerce')}
-									<span
-										className={`${styles.mobileDropdownArrow} ${
-											mobileCommerceDropdownOpen
-												? styles.mobileDropdownArrowUp
-												: ''
-										}`}
-									>
-										<DropDownArrow />
-									</span>
-								</button>
-								{mobileCommerceDropdownOpen && (
-									<div className={styles.mobileDropdownMenu}>
-										<NavLink
-											to='/commerce/statistics'
-											className={({ isActive }) =>
-												isActive ? styles.active : styles.mobileDropdownItem
-											}
-											onClick={() => {
-												setMobileCommerceDropdownOpen(false)
-												setMenuOpen(false)
-											}}
-										>
-											{t('companyStatistics')}
-										</NavLink>
-										<NavLink
-											to='/commerce/loan'
-											className={({ isActive }) =>
-												isActive ? styles.active : styles.mobileDropdownItem
-											}
-											onClick={() => {
-												setMobileCommerceDropdownOpen(false)
-												setMenuOpen(false)
-											}}
-										>
-											{t('commerceLoan')}
-										</NavLink>
-										<NavLink
-											to='/commerce/model'
-											className={({ isActive }) =>
-												isActive ? styles.active : styles.mobileDropdownItem
-											}
-											onClick={() => {
-												setMobileCommerceDropdownOpen(false)
-												setMenuOpen(false)
-											}}
-										>
-											{t('proceduralModel')}
-										</NavLink>
-									</div>
-								)}
-							</div>
-
-							{/* ARB Dropdown в мобильном меню */}
-							<div className={styles.mobileDropdown}>
-								<button
-									onClick={toggleMobileArbDropdown}
-									className={`${styles.mobileDropdownButton} ${
-										location.pathname.startsWith('/arb') ? styles.active : ''
-									}`}
-								>
-									XAU ARB
-									<span
-										className={`${styles.mobileDropdownArrow} ${
-											mobileArbDropdownOpen ? styles.mobileDropdownArrowUp : ''
-										}`}
-									>
-										<DropDownArrow />
-									</span>
-								</button>
-								{mobileArbDropdownOpen && (
-									<div className={styles.mobileDropdownMenu}>
-										<NavLink
-											to='/arb/statistics'
-											className={({ isActive }) =>
-												isActive ? styles.active : styles.mobileDropdownItem
-											}
-											onClick={() => {
-												setMobileArbDropdownOpen(false)
-												setMenuOpen(false)
-											}}
-										>
-											{t('companyStatistics')}
-										</NavLink>
-										<NavLink
-											to='/arb/loan'
-											className={({ isActive }) =>
-												isActive ? styles.active : styles.mobileDropdownItem
-											}
-											onClick={() => {
-												setMobileArbDropdownOpen(false)
-												setMenuOpen(false)
-											}}
-										>
-											{t('commerceLoan')}
-										</NavLink>
-										<NavLink
-											to='/arb/model'
-											className={({ isActive }) =>
-												isActive ? styles.active : styles.mobileDropdownItem
-											}
-											onClick={() => {
-												setMobileArbDropdownOpen(false)
-												setMenuOpen(false)
-											}}
-										>
-											{t('proceduralModel')}
-										</NavLink>
-									</div>
-								)}
-							</div>
-
 							<NavLink
-								to='/marketing'
+								to='/trade/hft'
 								onClick={() => setMenuOpen(false)}
 								className={({ isActive }) =>
 									isActive ? styles.active : styles.navLink
 								}
 							>
-								{t('marketing')}
+								{t('trade')}
+							</NavLink>
+
+							<NavLink
+								to='/commerce/model'
+								onClick={() => setMenuOpen(false)}
+								className={({ isActive }) =>
+									isActive ? styles.active : styles.navLink
+								}
+							>
+								{t('commerce')}
+							</NavLink>
+
+							<NavLink
+								to='/arb/model'
+								onClick={() => setMenuOpen(false)}
+								className={({ isActive }) =>
+									isActive ? styles.active : styles.navLink
+								}
+							>
+								XAU ARB
+							</NavLink>
+
+							<NavLink
+								to='/roadmap'
+								onClick={() => setMenuOpen(false)}
+								className={({ isActive }) =>
+									isActive ? styles.active : styles.navLink
+								}
+							>
+								{t('Дорожная карта')}
+							</NavLink>
+
+							<NavLink
+								to='/about-us'
+								onClick={() => setMenuOpen(false)}
+								className={({ isActive }) =>
+									isActive ? styles.active : styles.navLink
+								}
+							>
+								{t('О нас')}
 							</NavLink>
 
 							{/* Language Switcher в мобильном меню */}

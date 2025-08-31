@@ -9,10 +9,11 @@ interface ModalProps {
 	title: React.ReactNode
 	children: React.ReactNode
 	zIndex?: number // Добавляем поддержку кастомного z-index
+	maxWidth?: number // Кастомная максимальная ширина модального окна (px)
 }
 
 const Modal: React.FC<ModalProps> = React.memo(
-	({ isOpen, onClose, title, children, zIndex = 1000 }) => {
+	({ isOpen, onClose, title, children, zIndex = 1000, maxWidth }) => {
 		// Закрытие по Escape
 		useEffect(() => {
 			const handleEscape = (event: KeyboardEvent) => {
@@ -47,7 +48,10 @@ const Modal: React.FC<ModalProps> = React.memo(
 				onClick={handleBackdropClick}
 				style={{ zIndex }}
 			>
-				<div className={styles.modal}>
+				<div
+					className={styles.modal}
+					style={maxWidth ? { maxWidth } : undefined}
+				>
 					<div className={styles.modalHeader}>
 						<h3 className={styles.modalTitle}>{title}</h3>
 						<button className={styles.closeButton} onClick={onClose}>
