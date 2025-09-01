@@ -280,9 +280,9 @@ const PreStartScreen: React.FC = () => {
 							<div className={styles.network}>
 								<div className={styles.row}>
 									<div className={styles.column}>
-										<h2>YOUR PARTNER ACCOUNT</h2>
+										<h2>YOUR NETWORK ACCOUNT</h2>
 										<p>12</p>
-										<span>Личных партнеров</span>
+										<span>Сеть</span>
 									</div>
 									<div className={styles.levelDropdown} ref={levelRef}>
 										<button
