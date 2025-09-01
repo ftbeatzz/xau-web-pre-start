@@ -28,8 +28,23 @@ const LanguageSwitcher: React.FC = () => {
 		setIsOpen(false)
 	}
 
+	const languages = [
+		{ code: 'ru', short: 'RU', full: 'Русский' },
+		{ code: 'en', short: 'EN', full: 'English' },
+		{ code: 'es', short: 'ES', full: 'Español' },
+		{ code: 'pt', short: 'PT', full: 'Português' },
+		{ code: 'de', short: 'DE', full: 'Deutsch' },
+		{ code: 'it', short: 'IT', full: 'Italiano' },
+		{ code: 'fr', short: 'FR', full: 'Français' },
+		{ code: 'kk', short: 'KK', full: 'Қазақша' },
+		{ code: 'tr', short: 'TR', full: 'Türkçe' },
+		{ code: 'pl', short: 'PL', full: 'Polski' },
+		{ code: 'cs', short: 'CS', full: 'Češtина' },
+	]
+
 	const getLanguageDisplay = (lang: string) => {
-		return lang.toUpperCase()
+		const found = languages.find(l => l.code === lang)
+		return found ? found.short : lang.toUpperCase()
 	}
 
 	return (
@@ -51,22 +66,17 @@ const LanguageSwitcher: React.FC = () => {
 
 			{isOpen && (
 				<div className={styles.dropdown}>
-					<button
-						className={`${styles.dropdownItem} ${
-							currentLanguage === 'ru' ? styles.active : ''
-						}`}
-						onClick={() => handleLanguageChange('ru')}
-					>
-						RU
-					</button>
-					<button
-						className={`${styles.dropdownItem} ${
-							currentLanguage === 'en' ? styles.active : ''
-						}`}
-						onClick={() => handleLanguageChange('en')}
-					>
-						EN
-					</button>
+					{languages.map(({ code, full }) => (
+						<button
+							key={code}
+							className={`${styles.dropdownItem} ${
+								currentLanguage === code ? styles.active : ''
+							}`}
+							onClick={() => handleLanguageChange(code)}
+						>
+							{full}
+						</button>
+					))}
 				</div>
 			)}
 		</div>

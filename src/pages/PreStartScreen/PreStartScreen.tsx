@@ -10,11 +10,12 @@ import RefModal from '../../components/RefModal/RefModal'
 import Modal from '../../components/Modal/Modal'
 import { FreeContent } from '../FreeScreen/FreeScreen'
 import WalletInfoModal from '../../components/WalletInfoModal/WalletInfoModal'
+import { useTranslation } from 'react-i18next'
 
 const PreStartScreen: React.FC = () => {
 	const COUNTDOWN_KEY = 'prestart_countdown_end'
 	const DURATION_MS = 18 * 24 * 60 * 60 * 1000
-
+	const { t } = useTranslation()
 	const computeTimeLeft = (endTs: number) => {
 		const now = Date.now()
 		const diff = Math.max(0, endTs - now)
@@ -112,21 +113,25 @@ const PreStartScreen: React.FC = () => {
 		{ id: '9', email: 'alex...mail.com', amount: '0.00000017 PaxG' },
 		{ id: '10', email: 'alex...mail.com', amount: '0.00000017 PaxG' },
 	]
-
+	const tokenLabel = activeTab === 'xaut' ? 'Xaut' : 'PaxG'
 	const networkData: TableItem[] = []
 
 	const renderTable = (items: TableItem[]) => (
 		<div className={styles.table}>
 			<div className={styles.tableHeader}>
-				<span className={styles.cell}>Email/Никнейм</span>
-				<span className={styles.cell}>Объем Xaut/PaxG</span>
+				<span className={styles.cell}>
+					Email/{t('pre_start_table_header_nickname')}
+				</span>
+				<span className={styles.cell}>
+					{t('pre_start_table_header_amount')} Xaut/PaxG
+				</span>
 			</div>
 			{items.length === 0 ? (
 				<div className={styles.empty}>
 					<div className={styles.emptyIcon}>
 						<NoDataIcon />
 					</div>
-					<h4>Данный аккаунт пока не имеет партнеров сети</h4>
+					<h4>{t('pre_start_no_partners')}</h4>
 				</div>
 			) : (
 				<div className={styles.tableBody}>
@@ -147,7 +152,9 @@ const PreStartScreen: React.FC = () => {
 				<div className={styles.top}>
 					<div className={styles.left}>
 						<div className={styles.tabWrapper}>
-							<h2 className={styles.blockTitle}>Выбор криптовалюты</h2>
+							<h2 className={styles.blockTitle}>
+								{t('pre_start_choose_currency')}
+							</h2>
 							<div className={styles.tab}>
 								<Tabs
 									tabs={tabs}
@@ -159,23 +166,28 @@ const PreStartScreen: React.FC = () => {
 						</div>
 						<div className={styles.accInfo}>
 							<div className={styles.row}>
-								<h3>My main account</h3>
+								<h3>{t('pre_start_my_main_account')}</h3>
 								<span>{activeTab === 'xaut' ? 'Xaut' : 'PaxG'}</span>
 							</div>
 							<div className={styles.row}>
-								<p>Коммерческий период</p>
-								<p>72ч:00м:00c</p>
+								<p>{t('pre_start_commercial_period')}</p>
+								<p>
+									72{t('pre_start_timer_h')}:00{t('pre_start_timer_m')}:00
+									{t('pre_start_timer_s')}
+								</p>
 							</div>
 							<div className={styles.row}>
 								<p className={styles.balance}>0.00001246$</p>
 								<button onClick={() => setIsWalletInfoOpen(true)}>
-									Информация
+									{t('pre_start_info')}
 								</button>
 							</div>
 							<div className={styles.row}>
-								<h3 className={styles.balanceXaut}>0.00000017 XAUT</h3>
+								<h3 className={styles.balanceXaut}>
+									0.00000017 {activeTab === 'xaut' ? 'Xaut' : 'PaxG'}
+								</h3>
 								<p>
-									Цена 1{' '}
+									{t('pre_start_price_prefix')}{' '}
 									<span>
 										{activeTab === 'xaut' ? <XautIcon /> : <PaxgIcon />}
 									</span>{' '}
@@ -187,24 +199,24 @@ const PreStartScreen: React.FC = () => {
 					<div className={styles.right}>
 						<div className={styles.topInfo}>
 							<div className={styles.timerWrapper}>
-								<h2>ПРЕДСТАРТ</h2>
-								<p>СТАРТ ПРОЕКТА ЧЕРЕЗ</p>
+								<h2>{t('pre_start_title')}</h2>
+								<p>{t('pre_start_start_in')}</p>
 								<div className={styles.timer}>
 									<div className={styles.timerItem}>
 										<p>{String(timeLeft.days)}</p>
-										<p>d</p>
+										<p>{t('pre_start_timer_d')}</p>
 									</div>
 									<div className={styles.timerItem}>
 										<p>{format2(timeLeft.hours)}</p>
-										<p>h</p>
+										<p>{t('pre_start_timer_h')}</p>
 									</div>
 									<div className={styles.timerItem}>
 										<p>{format2(timeLeft.minutes)}</p>
-										<p>m</p>
+										<p>{t('pre_start_timer_m')}</p>
 									</div>
 									<div className={styles.timerItem}>
 										<p>{format2(timeLeft.seconds)}</p>
-										<p>s</p>
+										<p>{t('pre_start_timer_s')}</p>
 									</div>
 								</div>
 							</div>
@@ -220,8 +232,8 @@ const PreStartScreen: React.FC = () => {
 						</p>
 						<div className={styles.platformSwitcher}>
 							<div className={styles.switcher}>
-								<button>Веб-версия</button>
-								<button>Мини-приложение Telegram</button>
+								<button>{t('pre_start_platform_web')}</button>
+								<button>{t('pre_start_platform_tg')}</button>
 							</div>
 						</div>
 					</div>
@@ -230,31 +242,31 @@ const PreStartScreen: React.FC = () => {
 				<div className={styles.bottom}>
 					<div className={styles.left}>
 						<div className={styles.bonus}>
-							<h2>БОНУС</h2>
-							<h3>Бонус за регистрацию</h3>
+							<h2>{t('pre_start_bonus_title')}</h2>
+							<h3>{t('pre_start_bonus_registration')}</h3>
 							<p>
-								Вы успешно прошли регистрацию в проекте Xau, получите
-								вознаграждение в размере 15 USDT в эквиваленте{' '}
-								{activeTab === 'xaut' ? 'Xaut' : 'PaxG'}.
+								{t('pre_start_bonus_registration_p', { activeTab: tokenLabel })}
 							</p>
+
 							<button
 								className={isRegBonusClaimed ? styles.bonusBtnClaimed : ''}
 								onClick={() => setIsRegBonusClaimed(true)}
 								disabled={isRegBonusClaimed}
 							>
-								{isRegBonusClaimed ? 'Токен зачислен' : 'Получить'}
+								{isRegBonusClaimed
+									? t('pre_start_bonus_claimed')
+									: t('pre_start_bonus_get')}
 							</button>
 						</div>
 						<div className={styles.bonus}>
-							<h2>БОНУС</h2>
-							<h3>Получите подарочные токены</h3>
+							<h2>{t('pre_start_bonus_title')}</h2>
+							<h3>{t('pre_start_gift_tokens_title')}</h3>
 							<p>
-								Выполните подписку на наш Telegram канал и Telegram чат,
-								получите на счет 25 USDT в эквиваленте{' '}
-								{activeTab === 'xaut' ? 'Xaut' : 'PaxG'}. Подключитесь к
-								коммерческим сделкам и получайте прибыль.
+								<p>{t('pre_start_gift_tokens_p', { activeTab: tokenLabel })}</p>
 							</p>
-							<button onClick={() => setIsFreeOpen(true)}>Получить</button>
+							<button onClick={() => setIsFreeOpen(true)}>
+								{t('pre_start_bonus_get')}
+							</button>
 						</div>
 					</div>
 					<div className={styles.right}>
@@ -263,14 +275,14 @@ const PreStartScreen: React.FC = () => {
 								<div className={styles.column}>
 									<h2>YOUR PARTNER ACCOUNT</h2>
 									<p>12</p>
-									<span>Личных партнеров</span>
+									<span>{t('pre_start_personal_partners')}</span>
 								</div>
 								<div className={styles.row}>
 									<span>0.00000017 XAUT</span>
 									<span>0.00000017 PaxG</span>
 								</div>
 								<div className={styles.row}>
-									<span>Общий объем</span>
+									<span>{t('pre_start_total_volume')}</span>
 									<span>0.012 USDT</span>
 								</div>
 								<div className={styles.tableContainer}>
@@ -282,16 +294,20 @@ const PreStartScreen: React.FC = () => {
 									<div className={styles.column}>
 										<h2>YOUR NETWORK ACCOUNT</h2>
 										<p>12</p>
-										<span>Сеть</span>
+										<span>{t('pre_start_network')}</span>
 									</div>
 									<div className={styles.levelDropdown} ref={levelRef}>
 										<button
 											className={styles.levelBtn}
 											onClick={() => setIsLevelOpen(v => !v)}
 										>
-											<p className={styles.lvl}>Уровень 1 </p>
+											<p className={styles.lvl}>
+												{t('pre_start_level_label')} 1{' '}
+											</p>
 											<p className={styles.count}>7</p>
-											<p className={styles.partners}>Партнеров</p>
+											<p className={styles.partners}>
+												{t('pre_start_partners')}
+											</p>
 										</button>
 										{isLevelOpen && (
 											<div className={styles.levelMenu}>
@@ -301,7 +317,8 @@ const PreStartScreen: React.FC = () => {
 														className={styles.levelMenuItem}
 													>
 														<span>
-															Уровень {item.level} - {item.partners} партнеров
+															{t('pre_start_level_label')} {item.level} -{' '}
+															{item.partners} {t('pre_start_partners')}
 														</span>
 													</div>
 												))}
@@ -314,7 +331,7 @@ const PreStartScreen: React.FC = () => {
 									<span>0.00000017 PaxG</span>
 								</div>
 								<div className={styles.row}>
-									<span>Общий объем</span>
+									<span>{t('pre_start_total_volume')}</span>
 									<span>0.012 USDT</span>
 								</div>
 								<div className={styles.tableContainer}>
@@ -326,7 +343,7 @@ const PreStartScreen: React.FC = () => {
 							className={styles.linkBtn}
 							onClick={() => setIsRefOpen(true)}
 						>
-							Ваша партнерская ссылка
+							{t('pre_start_ref_link')}
 						</button>
 					</div>
 				</div>

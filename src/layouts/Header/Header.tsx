@@ -118,7 +118,7 @@ const Header: React.FC = () => {
 								isActive ? styles.active : styles.navLink
 							}
 						>
-							{t('Предстарт')}
+							{t('pre_start')}
 						</NavLink>
 
 						<div className={styles.tradeCommerceWrapper}>
@@ -128,7 +128,7 @@ const Header: React.FC = () => {
 									isActive ? styles.active : styles.navLink
 								}
 							>
-								{t('trade')}
+								XAU Trade
 							</NavLink>
 							<NavLink
 								to='/commerce/model'
@@ -136,7 +136,7 @@ const Header: React.FC = () => {
 									isActive ? styles.active : styles.navLink
 								}
 							>
-								{t('commerce')}
+								XAU Commerce
 							</NavLink>
 							<NavLink
 								to='/arb/model'
@@ -153,7 +153,7 @@ const Header: React.FC = () => {
 								isActive ? styles.active : styles.navLink
 							}
 						>
-							{t('Дорожная карта')}
+							{t('roadmap')}
 						</NavLink>
 						<NavLink
 							to='/about-us'
@@ -161,7 +161,7 @@ const Header: React.FC = () => {
 								isActive ? styles.active : styles.navLink
 							}
 						>
-							{t('О нас')}
+							{t('about_us')}
 						</NavLink>
 					</div>
 				</nav>

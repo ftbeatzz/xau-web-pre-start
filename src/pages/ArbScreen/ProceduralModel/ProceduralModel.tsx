@@ -8,9 +8,11 @@ import LocationIcon from '../../../icons/LocationIcon'
 import FiltresIcon from '../../../icons/FiltresIcon'
 import CheckListIcon from '../../../icons/CheckListIcon'
 import SettingsIcon from '../../../icons/SettingsIcon'
+import { useTranslation, Trans } from 'react-i18next'
 
 // Временная компоновка: переиспользуем Commerce ProceduralModel
 const ArbProceduralModel: React.FC = () => {
+	const { t } = useTranslation()
 	return (
 		<div className={styles.main}>
 			<div className={styles.heroSection}>
@@ -18,36 +20,21 @@ const ArbProceduralModel: React.FC = () => {
 					<div className={styles.heroContent}>
 						<div className={styles.heroTitle}>
 							<h1>XAU ARB</h1>
-							<h2>Арбитражная операционная модель</h2>
+							<h2>{t('arb_hero_h2')}</h2>
 						</div>
-						<p>
-							Здесь мы с вами рассмотрим еще один вариант стратегии, которая
-							применяется компанией XAU TRADERZ в рамках коммерческих стратегий
-							для извлечения прибыли.
-						</p>
+						<p>{t('arb_hero_p1')}</p>
 						<ul>
 							<li>
 								<div>
 									<CandlesIcon />
 								</div>
-								<span>
-									Данная модель используется в те периоды, когда на DEX биржах
-									нет необходимой ликвидности для обмена объёма одного типа
-									токена на другой и последующей продажи его по принципу
-									основной процессуальной модели коммерческих операций.
-								</span>
+								<span>{t('arb_hero_li1')}</span>
 							</li>
 							<li>
 								<div>
 									<CandlesIcon />
 								</div>
-								<span>
-									А также, когда и на CEX биржах, где одновременно торгуются два
-									токена XAUТ и PAXG, таких как: Gate, Ourbit, CoinW, Bitrue и
-									других, мы не можем провести такой обмен в паре PAXG/XAUt или
-									XAUt/PAXG по причине того, что обмен будет не выгодным и в
-									итог коммерческой операции не принесет прибыль.
-								</span>
+								<span>{t('arb_hero_li2')}</span>
 							</li>
 						</ul>
 					</div>
@@ -58,17 +45,8 @@ const ArbProceduralModel: React.FC = () => {
 				<div className={styles.modelWrapper}>
 					<div className={styles.modelContent}>
 						<div className={styles.left}>
-							<p>
-								Это процессуальная модель арбитражного обмена с использованием
-								разных централизованных торговых платформ, стейблкоинов XAUТ,
-								PAXG и USDT, с фиксацией прибыли на спреде, образованного за
-								счет разницы в ценах на активы XAUТ или PAXG.
-							</p>
-							<p>
-								На всех биржах, которые применяются в этой стратегии, XAU
-								TRADERZ имеет корпоративные счета с объёмами криптоактивов, в
-								том числе валютные счета для расчета в государственных валютах.
-							</p>
+							<p>{t('arb_model_p1')}</p>
+							<p>{t('arb_model_p2')}</p>
 						</div>
 						<div className={styles.right}>
 							<img src='/img/exchUI.png' alt='xau-arb-model' />
@@ -80,45 +58,39 @@ const ArbProceduralModel: React.FC = () => {
 			<div className={styles.strategySection}>
 				<div className={styles.strategyWrapper}>
 					<div className={styles.strategyContent}>
-						<h2>АРБИТРАЖНАЯ СТРАТЕГИЯ</h2>
+						<h2>{t('arb_strategy_h2')}</h2>
 						<div className={styles.blocksWrapper}>
 							<div className={styles.block}>
 								<div className={styles.heading}>
 									<span>
 										<ArbModelIcon />
 									</span>
-									<h3>Готовая арбитражная модель</h3>
+									<h3>{t('arb_strategy_block1_h3')}</h3>
 								</div>
-								<p>
-									Вы можете индивидуально повторить и использовать эту
-									стратегию, как готовую арбитражную схему работы в таком
-									порядке, как работают торговые аналитики компании XAU TRADERZ.
-								</p>
+								<p>{t('arb_strategy_block1_p')}</p>
 							</div>
 							<div className={styles.block}>
 								<div className={styles.heading}>
 									<span>
 										<ProfitIcon />
 									</span>
-									<h3>Доходность</h3>
+									<h3>{t('arb_strategy_block2_h3')}</h3>
 								</div>
-								<h4>50%</h4>
-								<p>
-									Эта стратегия гарантированно может обеспечить профит 50% в
-									месяц.
-								</p>
+								<h4>{t('arb_strategy_block2_h4')}</h4>
+								<p>{t('arb_strategy_block2_p')}</p>
 							</div>
 							<div className={styles.block}>
 								<div className={styles.heading}>
 									<span>
 										<ArrowListIcon />
 									</span>
-									<h3>Важно!</h3>
+									<h3>{t('arb_strategy_block3_h3')}</h3>
 								</div>
 								<p>
-									Минимальный объём токенов для получения выгодной арбитражной
-									операции, с учетом комиссий, составляет{' '}
-									<span>- 10 XAUt, 10 PAXG и 25 000 USDT.</span>
+									<Trans
+										i18nKey='arb_strategy_block3_p'
+										components={{ span: <span /> }}
+									/>
 								</p>
 							</div>
 						</div>
@@ -127,13 +99,9 @@ const ArbProceduralModel: React.FC = () => {
 								<span>
 									<LocationIcon />
 								</span>
-								<h3>Необходимый объем для старта</h3>
+								<h3>{t('arb_required_h3')}</h3>
 							</div>
-							<p>
-								На кошельках криптобирж всегда необходимо держать активы в XAUТ,
-								PAXG и USDT, чтобы иметь возможность в любой момент использовать
-								их в качестве стартового токена.
-							</p>
+							<p>{t('arb_required_p')}</p>
 						</div>
 					</div>
 				</div>
@@ -142,19 +110,10 @@ const ArbProceduralModel: React.FC = () => {
 			<div className={styles.optimizeTokensSection}>
 				<div className={styles.optimizeTokensWrapper}>
 					<div className={styles.optimizeTokensContent}>
-						<h2>Поиск оптимального токена перед сделкой</h2>
-						<p>
-							Перед началом слелки XAU ARB, мы определяем какой из токенов XAUТ
-							или PAXG нам выгоднее всего использовать в данный момент.
-						</p>
-						<p>
-							Мы можем проводить арбитражный обмен одновременно двумя токенами,
-							если высокие арбитражные спреды обнаружены по двум позициям.
-						</p>
-						<p>
-							Для этого, мониторим цену покупки и продажи каждого из токенов на
-							разных биржевых платформах.
-						</p>
+						<h2>{t('arb_optimize_h2')}</h2>
+						<p>{t('arb_optimize_p1')}</p>
+						<p>{t('arb_optimize_p2')}</p>
+						<p>{t('arb_optimize_p3')}</p>
 					</div>
 				</div>
 			</div>
@@ -164,8 +123,8 @@ const ArbProceduralModel: React.FC = () => {
 					<div className={styles.priceContent}>
 						<div className={styles.left}>
 							<div className={styles.title}>
-								<span>ТОКЕН</span>
-								<h2>PAX Gold (PAXG)</h2>
+								<span>{t('arb_price_token_label')}</span>
+								<h2>{t('arb_price_paxg_title')}</h2>
 							</div>
 							<div className={styles.img}>
 								<img src='/img/paxPrice.png' alt='paxg' />
@@ -173,8 +132,8 @@ const ArbProceduralModel: React.FC = () => {
 						</div>
 						<div className={styles.right}>
 							<div className={styles.title}>
-								<span>ТОКЕН</span>
-								<h2>Tether Gold (XAUt)</h2>
+								<span>{t('arb_price_token_label')}</span>
+								<h2>{t('arb_price_xaut_title')}</h2>
 							</div>
 							<div className={styles.img}>
 								<img src='/img/xauPrice.png' alt='paxg' />
@@ -187,15 +146,11 @@ const ArbProceduralModel: React.FC = () => {
 			<div className={styles.stepSection}>
 				<div className={styles.stepWrapper}>
 					<div className={styles.title}>
-						<p>
-							Для примера этой арбитражной стратегии будем использовать
-							криптоактив PAX Gold (PAXG) и лучшее предложение по его продаже и
-							покупке.
-						</p>
+						<p>{t('arb_step_intro_p')}</p>
 					</div>
 					<div className={styles.stepContent}>
 						<div className={styles.stepItem}>
-							<h2>Шаг 1</h2>
+							<h2>{t('arb_step1_h2')}</h2>
 							<div className={styles.step}>
 								<div className={styles.img}>
 									<img src='/img/arbStep1.png' alt='step1' />
@@ -220,11 +175,7 @@ const ArbProceduralModel: React.FC = () => {
 									</div>
 									<div className={styles.right}>
 										<div className={styles.top}>
-											<p>
-												Зафиксируем данные: выбранные криптобиржи, цены продажи
-												и покупки по маркету бирж и объёмы криптоактивов,
-												которые будем использовать в арбитражной операции.
-											</p>
+											<p>{t('arb_step1_top_p')}</p>
 											<div className={styles.block}>
 												<h3>
 													Биржа: <span>CoinEx</span>
@@ -243,117 +194,96 @@ const ArbProceduralModel: React.FC = () => {
 											</div>
 										</div>
 										<div className={styles.middle}>
-											<p>Применяем в арбитражной операции объём:</p>
+											<p>{t('arb_step1_middle_p')}</p>
 											<div className={styles.block}>
 												<span>20 PAX Gold (PAXG)</span>
-												<h3>
-													Выделяется с корпоративного на счета биржи CoinEx.
-												</h3>
+												<h3>{t('arb_step1_middle_h3')}</h3>
 											</div>
 										</div>
 										<div className={styles.bottom}>
-											<p>
-												Авто ботом стратегии рассчитывается необходимый объём
-												актива в USDT (с учетом торговых комиссий и применимых
-												индексов), который будет выделен с общего объёма
-												корпоративного счета биржи Latoken для проведения этой
-												операции ~ 67643 USDT.
-											</p>
-											<p>
-												Активы готовы для одновременной сделки продажи и покупки
-												PAX Gold (PAXG) по маркету криптобирж.
-											</p>
+											<p>{t('arb_step1_bottom_p1')}</p>
+											<p>{t('arb_step1_bottom_p2')}</p>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div className={styles.arrow}>
-							<div className={styles.img}>
-								<img src='/img/arbStepsArrow1.png' alt='step2' />
+							<div className={styles.arrow}>
+								<div className={styles.img}>
+									<img src='/img/arbStepsArrow1.png' alt='step2' />
+								</div>
 							</div>
-						</div>
-						<div className={styles.stepItem}>
-							<h2>Шаг 2</h2>
-							<div className={styles.step}>
-								<div className={styles.content}>
-									<div className={styles.right}>
-										<div className={styles.top}>
-											<p>Поводим продажу PAXG на бирже CoinEx.</p>
-											<p>
-												На всех биржах, которые применяются в этой стратегии,
-												XAU TRADERZ имеет корпоративные счета с объёмами
-												криптоактивов, в том числе валютные счета для расчета в
-												государственных валютах.
-											</p>
-											<div className={styles.block}>
-												<h3>
-													Пара: <span>PAXG/ USDT.</span>
-												</h3>
-												<h3>
-													Объём: <span>20 PAXG.</span>
-												</h3>
-												<h3>
-													Цена: <span>3,384.82 USDT.</span>
-												</h3>
-												<h3>
-													Комиссия за обмен: <span>0.08%</span>
-												</h3>
-												<span className={styles.grayTxt}>
-													(зависит от выторгованного объёма за последние 30
-													дней).
-												</span>
-												<h3>
-													Получено:{' '}
-													<span className={styles.goldTxt}>
-														67, 642.24 USDT.
+							<div className={styles.stepItem}>
+								<h2>{t('arb_step2_h2')}</h2>
+								<div className={styles.step}>
+									<div className={styles.content}>
+										<div className={styles.right}>
+											<div className={styles.top}>
+												<p>{t('arb_step2_top_p1')}</p>
+												<p>{t('arb_step2_top_p2')}</p>
+												<div className={styles.block}>
+													<h3>
+														{t('arb_step_pair')} <span>PAXG/ USDT.</span>
+													</h3>
+													<h3>
+														{t('arb_step_volume')} <span>20 PAXG.</span>
+													</h3>
+													<h3>
+														{t('arb_step_price')} <span>3,384.82 USDT.</span>
+													</h3>
+													<h3>
+														{t('arb_step_fee')} <span>0.08%</span>
+													</h3>
+													<span className={styles.grayTxt}>
+														{t('arb_step_gray')}
 													</span>
-												</h3>
+													<h3>
+														{t('arb_step_claimed')}
+														<span className={styles.goldTxt}>
+															67, 642.24 USDT.
+														</span>
+													</h3>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+							</div>
+							<div className={styles.arrow}>
 								<div className={styles.img}>
-									<img src='/img/arbStep2.png' alt='step1' />
+									<img src='/img/arbStepsArrow2.png' alt='step3' />
 								</div>
 							</div>
-						</div>
-						<div className={styles.arrow}>
-							<div className={styles.img}>
-								<img src='/img/arbStepsArrow2.png' alt='step3' />
-							</div>
-						</div>
-						<div className={styles.stepItem}>
-							<h2>Шаг 3</h2>
-							<div className={styles.step}>
-								<div className={styles.img}>
-									<img src='/img/arbStep3.png' alt='step3' />
-								</div>
-								<div className={styles.content}>
-									<div className={styles.right}>
-										<div className={styles.top}>
-											<p>Проводим покупку PAXG на бирже Latoken. </p>
-											<div className={styles.block}>
-												<h3>
-													Пара: <span>USDT/PAXG.</span>
-												</h3>
-												<h3>
-													Объём: <span>67642.24 USDT.</span>
-												</h3>
-												<h3>
-													Цена: <span>3,366.07 USDT.</span>
-												</h3>
-												<h3>
-													Комиссия за обмен: <span>0.1%</span>
-												</h3>
-												<span className={styles.grayTxt}>
-													(зависит от выторгованного объёма за последние 30
-													дней).
-												</span>
-												<h3>
-													Получено:{' '}
-													<span className={styles.goldTxt}>20.075 PAXG.</span>
-												</h3>
+							<div className={styles.stepItem}>
+								<h2>{t('arb_step3_h2')}</h2>
+								<div className={styles.step}>
+									<div className={styles.img}>
+										<img src='/img/arbStep3.png' alt='step3' />
+									</div>
+									<div className={styles.content}>
+										<div className={styles.right}>
+											<div className={styles.top}>
+												<p>{t('arb_step3_top_p1')}</p>
+												<div className={styles.block}>
+													<h3>
+														{t('arb_step_pair')} <span>USDT/PAXG.</span>
+													</h3>
+													<h3>
+														{t('arb_step_volume')} <span>67642.24 USDT.</span>
+													</h3>
+													<h3>
+														{t('arb_step_price')} <span>3,366.07 USDT.</span>
+													</h3>
+													<h3>
+														{t('arb_step_fee')} <span>0.1%</span>
+													</h3>
+													<span className={styles.grayTxt}>
+														{t('arb_step_gray')}
+													</span>
+													<h3>
+														{t('arb_step_claimed')}
+														<span className={styles.goldTxt}>20.075 PAXG.</span>
+													</h3>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -367,16 +297,16 @@ const ArbProceduralModel: React.FC = () => {
 			<div className={styles.conclusiaSection}>
 				<div className={styles.conclusiaWrapper}>
 					<div className={styles.conclusiaContent}>
-						<h2>Итог арбитражной сделки</h2>
+						<h2>{t('arb_result_h2')}</h2>
 						<div className={styles.blocksWrapper}>
 							<div className={styles.block}>
 								<h3>0.075 PAXG</h3>
-								<p>Чистой прибыли</p>
+								<p>{t('arb_result_profit_label')}</p>
 							</div>
 							<img src='/img/yellowArrow.png' alt='arrow' />
 							<div className={styles.block}>
 								<h3>250 USDT</h3>
-								<p>Чистой прибыли</p>
+								<p>{t('arb_result_profit_label')}</p>
 							</div>
 						</div>
 					</div>
@@ -386,25 +316,14 @@ const ArbProceduralModel: React.FC = () => {
 			<div className={styles.finalSection}>
 				<div className={styles.finalWrapper}>
 					<div className={styles.finalContent}>
+						<p>{t('arb_final_p1')}</p>
+						<span>{t('arb_final_span')}</span>
+						<p>{t('arb_final_p2')}</p>
 						<p>
-							По стратегии, которая открыта выше, средний оборот арбитражных
-							операций компании XAU, с одним или одновременно двумя токенами
-							цифрового золота, за 24 часа может достигать 15-20- ти сделок.
-						</p>
-						<span>
-							При общем обороте объёма в PAXG и USDT около 140 000 USDT, с
-							учетом погрешностей и операционных затрат, прибыль за 24 часа
-							может составить около 2-6 % от объёма или более 50% в месяц.
-						</span>
-						<p>
-							Чем выше объём оборотного актива, тем существеннее прибыль от
-							арбитражных спредов.
-						</p>
-						<p>
-							<b>
-								Рекомендовано! Стабильно увеличивать капитализацию оборотного
-								актива портфеля и прирост финансового капитала.
-							</b>
+							<Trans
+								i18nKey='arb_final_recommendation'
+								components={{ b: <b /> }}
+							/>
 						</p>
 					</div>
 				</div>

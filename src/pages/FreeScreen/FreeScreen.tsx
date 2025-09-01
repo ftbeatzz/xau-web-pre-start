@@ -6,9 +6,11 @@ import { useTabs } from '../../hooks/useTabs'
 import type { TabItem } from '../../components/Tabs/Tabs'
 import styles from './FreeScreen.module.scss'
 import TgIconSilver from '../../icons/TgIconSilver'
+import { useTranslation } from 'react-i18next'
 
 export const FreeContent: FC = () => {
 	const location = useLocation()
+	const { t } = useTranslation()
 
 	// Табы токена (используются только для роли Пользователь)
 	const tokenTabsConfig: TabItem[] = [
@@ -61,20 +63,19 @@ export const FreeContent: FC = () => {
 						}
 					>
 						<div className={styles.topTxtBlock}>
-							<h2>Получитье подарочные токены</h2>
+							<h2>{t('free_title')}</h2>
 							<p>
-								Выполните подписку на наш Telegram канал и Telegram чат,
-								получите на счет 25 USDT в эквиваленте{' '}
-								{activeTokenTab === 'xaut' ? 'Xaut' : 'PaxG'}. Подключитесь к
-								коммерческим сделкам и получайте прибыль.
+								{t('free_paragraph', {
+									activeTab: activeTokenTab === 'xaut' ? 'Xaut' : 'PaxG',
+								})}
 							</p>
 						</div>
 
 						{/* Telegram канал */}
 						<div className={styles.socialsBlock}>
 							<div className={styles.socialsHeader}>
-								<span>Telegram канал</span>
-								<p>Xau Official Channel</p>
+								<span>{t('free_telegram_channel')}</span>
+								<p>{t('free_official_channel')}</p>
 							</div>
 							<div className={styles.socialsContent}>
 								<div className={styles.socialsLeft}>
@@ -82,9 +83,9 @@ export const FreeContent: FC = () => {
 										<span className={styles.socialsIcon}>
 											<TgIconSilver />
 										</span>
-										<span>Russian</span>
+										<span>{t('free_language_russian')}</span>
 									</p>
-									<button className={styles.socialBtn}>Перейти</button>
+									<button className={styles.socialBtn}>{t('free_go')}</button>
 								</div>
 								<div className={styles.socialsLine}></div>
 								<div className={styles.socialsRight}>
@@ -92,9 +93,9 @@ export const FreeContent: FC = () => {
 										<span className={styles.socialsIcon}>
 											<TgIconSilver />
 										</span>
-										<span>English</span>
+										<span>{t('free_language_english')}</span>
 									</p>
-									<button className={styles.socialBtn}>Перейти</button>
+									<button className={styles.socialBtn}>{t('free_go')}</button>
 								</div>
 							</div>
 						</div>
@@ -102,8 +103,8 @@ export const FreeContent: FC = () => {
 						{/* Telegram чат */}
 						<div className={styles.socialsBlock}>
 							<div className={styles.socialsHeader}>
-								<span>Telegram чат</span>
-								<p>Xau Official Chat</p>
+								<span>{t('free_telegram_chat')}</span>
+								<p>{t('free_official_chat')}</p>
 							</div>
 							<div className={styles.socialsContent}>
 								<div className={styles.socialsLeft}>
@@ -111,9 +112,9 @@ export const FreeContent: FC = () => {
 										<span className={styles.socialsIcon}>
 											<TgIconSilver />
 										</span>
-										<span>Russian</span>
+										<span>{t('free_language_russian')}</span>
 									</p>
-									<button className={styles.socialBtn}>Перейти</button>
+									<button className={styles.socialBtn}>{t('free_go')}</button>
 								</div>
 								<div className={styles.socialsLine}></div>
 								<div className={styles.socialsRight}>
@@ -121,9 +122,9 @@ export const FreeContent: FC = () => {
 										<span className={styles.socialsIcon}>
 											<TgIconSilver />
 										</span>
-										<span>English</span>
+										<span>{t('free_language_english')}</span>
 									</p>
-									<button className={styles.socialBtn}>Перейти</button>
+									<button className={styles.socialBtn}>{t('free_go')}</button>
 								</div>
 							</div>
 						</div>
@@ -132,7 +133,7 @@ export const FreeContent: FC = () => {
 						{!isCompleted && (
 							<>
 								<button className={styles.doneBtn} onClick={handleDone}>
-									Выполнено
+									{t('free_done')}
 								</button>
 							</>
 						)}
@@ -140,7 +141,7 @@ export const FreeContent: FC = () => {
 							<>
 								<div className={styles.btns2Step}>
 									<button className={styles.tokenBtn} disabled>
-										Токен зачислен
+										{t('free_token_credited')}
 									</button>
 								</div>
 							</>
